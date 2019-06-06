@@ -100,7 +100,7 @@
   </div>
 
   	<div class="text-center my-5">
-		<i class="fas fa-arrow-down fa-5x" style="text-align: center;"></i>
+		<i class="fas fa-arrow-down fa-5x" style="text-align: center; color: skyblue;"></i>
 	</div>
 <!-- <img src="mark_arrow_down.png" class="mx-auto" style="width: 200px;"> -->
 
