@@ -30,6 +30,7 @@ function clearData(){
 	chatDiv.innerHTML = result;
 }
 
+
 //chatRestore = setInterval(communicate, 200, sentence);
 
 //chatGreeting = setInterval(communicate, 200, <%= bean.getStr() %>);
