@@ -1,9 +1,7 @@
-INSERT INTO users(UserID, Password,  UserName,   Sex,    Birthday, TargetAmount, PresentAmount,    LastLogin, RunningDays, FeelingLevel, Honorific) 
+INSERT INTO users(UserID, Password,  UserName,   Sex,    Birthday, TargetAmount, PresentAmount,    LastLogin, RunningDays, FeelingLevel, Honorific)
 VALUES (    1,   'pass', 'テスト太郎', 'Man','1990-05-12',      3000000,        100000, '2019-06-01',           3,            2,     'さん');
-INSERT INTO users(UserID, Password,  UserName,    Sex,    Birthday, TargetAmount, PresentAmount,    LastLogin, RunningDays, FeelingLevel, Honorific) 
+INSERT INTO users(UserID, Password,  UserName,    Sex,    Birthday, TargetAmount, PresentAmount,    LastLogin, RunningDays, FeelingLevel, Honorific)
 VALUES (    2,   'abcd', 'テスト花子','Woman','1999-06-07',       200000,           5000, '2019-06-05',         10,            5,    'ちゃん');
-INSERT INTO users(UserID, Password,  UserName,    Sex,    Birthday, TargetAmount, PresentAmount,    LastLogin, RunningDays, FeelingLevel, Honorific) 
-VALUES    (    2,   'abcd', 'テスト花子','Woman','1999-06-07',       200000,           5000, '2019-06-05',         10,            5,    'ちゃん');
 
 INSERT INTO products(ProductID,ProductName) VALUES (1,'パン');
 INSERT INTO products(ProductID,ProductName) VALUES (2,'トイレットペーパー');
