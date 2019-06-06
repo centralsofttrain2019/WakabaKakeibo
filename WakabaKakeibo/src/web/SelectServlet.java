@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.MessageBean;
-import bean.MessageEnum;
+import domain.MessageEnum;
+import domain.MessageTypeEnum;
 
 
 /**
@@ -71,11 +72,13 @@ public class SelectServlet extends HttpServlet {
 			break;
 		}
 
+
+		MessageTypeEnum tEnum = MessageTypeEnum.like;
 		//MessageEnumの生成
 //		MessageEnum mEnum = MessageEnum.morning;
 
 		//MessageBeanの生成
-		MessageBean mBean = new MessageBean(mEnum);
+		MessageBean mBean = new MessageBean(mEnum, tEnum);
 
 		//beanをリクエストにセット キー名は「bean」とする
 		request.setAttribute("bean", mBean);

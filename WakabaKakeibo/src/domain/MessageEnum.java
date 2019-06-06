@@ -1,4 +1,4 @@
-package bean;
+package domain;
 
 public enum MessageEnum{
 	morning,
