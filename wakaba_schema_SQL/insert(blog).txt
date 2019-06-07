@@ -1,0 +1,8 @@
+-- Dumping data for table `blogs`
+--
+
+LOCK TABLES `blogs` WRITE;
+/*!40000 ALTER TABLE `blogs` DISABLE KEYS */;
+INSERT INTO `blogs` VALUES (1,1,'2019-05-12','テスト１：BBQ','テスト1:バーベキュー行きました。','1',NULL),(2,2,'2019-05-30','テスト2:中間ミーティング','テスト2:中間ミーティングがありました。','1',NULL),(3,1,'2019-06-13','テスト3:宅呑み','テスト3：誰かの家で宅呑みします。','1',NULL);
+/*!40000 ALTER TABLE `blogs` ENABLE KEYS */;
+UNLOCK TABLES;
