@@ -26,9 +26,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="#">チャット<span class="sr-only">(現位置)</span></a>
-      <a class="nav-item nav-link" href="#">復元確認</a>
-      <a class="nav-item nav-link" href="#">設定</a>
-      <a class="nav-link nav-link" href="#">ミニブログ一覧</a>
+      <a class="nav-item nav-link" href="RestoreConfirmation.jsp">復元確認</a>
+      <a class="nav-item nav-link" href="">設定</a>
+      <a class="nav-link nav-link" href="allblog">ミニブログ一覧</a>
       <a class="nav-link nav-link" href="#">ミニブログ編集</a>
       <a class="nav-link nav-link" href="#">シミュレーション</a>
       <a class="nav-link nav-link" href="#">グラフ・履歴</a>
@@ -37,9 +37,17 @@
 </nav>
 
 <div class="bg-light my-5 h-50 text-center">
-	<video src="normal.mp4" autoplay style="height: 50vh;"></video>
+<!-- 	<video autoplay style="height: 50vh;"> -->
+<!-- 		<source src="normal.mp4"> -->
+<!-- 	</video> -->
+	<div class="embed-responsive embed-responsive-16by9">
+  		<video autoplay style="height: 50vh;" loop>
+			<source src="normal.mp4">
+		</video>
+	</div>
+
 <!-- 	<div class="embed-responsive embed-responsive-16by9"> -->
-<!--   <iframe class="embed-responsive-item" src="normal.mp4" allowfullscreen></iframe> -->
+<!--   		<iframe class="embed-responsive-item" src="normal.mp4" allowfullscreen></iframe> -->
 <!-- 	</div> -->
 </div>
 
@@ -48,6 +56,10 @@
 <div class="bg-light mt-5 h-25" id="chat" >チャット
 </div>
 <div id="select" class="mt-5 h-10"></div>
+
+<!-- <div class="embed-responsive embed-responsive-16by9"> -->
+<!--   <iframe class="embed-responsive-item" src="normal.mp4" allowfullscreen></iframe> -->
+<!-- </div> -->
 
 </div>
 <script type="text/javascript" src="chat.js"></script>

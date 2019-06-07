@@ -18,14 +18,14 @@ import domain.MessageTypeEnum;
 /**
  * Servlet implementation class IndexStartServlet
  */
-@WebServlet("/SelectServlet")
-public class SelectServlet extends HttpServlet {
+@WebServlet("/IndexServlet")
+public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectServlet() {
+    public IndexServlet() {
         super();
     }
 
@@ -84,7 +84,7 @@ public class SelectServlet extends HttpServlet {
 		request.setAttribute("bean", mBean);
 
 		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/chat.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
 		disp.forward(request, response);
 	}
 
