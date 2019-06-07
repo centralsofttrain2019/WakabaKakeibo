@@ -10,17 +10,17 @@
 </head>
 <body>
 <div class="container">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success mb-5">
   <a class="navbar-brand" href="#">わかばカケイボ</a>
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="ナビゲーションの切替">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">チャット<span class="sr-only">(現位置)</span></a>
+      <a class="nav-item nav-link" href="IndexServlet">チャット<span class="sr-only">(現位置)</span></a>
       <a class="nav-item nav-link active" href="#">復元確認</a>
       <a class="nav-item nav-link" href="#">設定</a>
-      <a class="nav-link nav-link" href="#">ミニブログ一覧</a>
+      <a class="nav-link nav-link" href="MBListServlet">ミニブログ一覧</a>
       <a class="nav-link nav-link" href="#">ミニブログ編集</a>
       <a class="nav-link nav-link" href="#">シミュレーション</a>
       <a class="nav-link nav-link" href="#">グラフ・履歴</a>
@@ -39,34 +39,51 @@
 <!--   <caption>テーブルの表題</caption> -->
 		  <thead>
 		    <tr>
+		      <th scope="col">日</th>
 		      <th scope="col">月</th>
 		      <th scope="col">火</th>
 		      <th scope="col">水</th>
 		      <th scope="col">木</th>
 		      <th scope="col">金</th>
+		      <th scope="col">土</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>	</td>
+		      <td>おにぎり	</td>
+		      <td>	</td>
+		      <td>卵	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      </tr>
+		    <tr>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>卵<br>トイレットペーパー	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
 		    </tr>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>卵	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
 		    </tr>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>おにぎり	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
 		    </tr>
 		  </tbody>
 		</table>
@@ -83,16 +100,20 @@
 		  </thead>
 		  <tbody>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>卵</td>
+		      <td>180</td>
 		    </tr>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>卵</td>
+		      <td>180</td>
 		    </tr>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>トイレットペーパー</td>
+		      <td>450</td>
+		    </tr>
+		    <tr>
+		      <td>卵</td>
+		      <td>180</td>
 		    </tr>
 		  </tbody>
 		</table>
@@ -112,34 +133,51 @@
 <!--   <caption>テーブルの表題</caption> -->
 		  <thead>
 		    <tr>
+		      <th scope="col">日</th>
 		      <th scope="col">月</th>
 		      <th scope="col">火</th>
 		      <th scope="col">水</th>
 		      <th scope="col">木</th>
 		      <th scope="col">金</th>
+		      <th scope="col">日</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		  	<tr>
+		      <td>	</td>
+		      <td>おにぎり	</td>
+		      <td>	</td>
+		      <td>卵	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
 		    </tr>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>卵<br>トイレットペーパー	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      </tr>
+		    <tr>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>卵	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
 		    </tr>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>おにぎり	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td style="color:red">卵<br>トイレットペーパー	</td>
+		      <td>	</td>
+		      <td>	</td>
+		      <td>	</td>
 		    </tr>
 		  </tbody>
 		</table>
@@ -156,23 +194,37 @@
 		  </thead>
 		  <tbody>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>卵</td>
+		      <td>180</td>
 		    </tr>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>卵</td>
+		      <td>180</td>
 		    </tr>
 		    <tr>
-		      <td>テーブルのセル</td>
-		      <td>テーブルのセル</td>
+		      <td>トイレットペーパー</td>
+		      <td>450</td>
 		    </tr>
+		    <tr>
+		      <td>卵</td>
+		      <td>180</td>
+		    </tr>
+		    <tr>
+		      <td style="color:red">卵</td>
+		      <td style="color:red">180</td>
+		    </tr>
+		    <tr>
+		      <td style="color:red">トイレットペーパー</td>
+		      <td style="color:red">450</td>
+		    </tr>
+
 		  </tbody>
 		</table>
     </div>
   </div>
 
 <div class="text-center my-5">
+	変更を適用しますか？<br>
 	<button type="button" class="btn btn-primary mx-5">はい</button>
 	<button type="button" class="btn btn-danger mx-5">いいえ</button>
 
