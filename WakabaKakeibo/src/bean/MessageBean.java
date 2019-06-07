@@ -1,13 +1,16 @@
 package bean;
+import domain.MessageEnum;
+import domain.MessageTypeEnum;
 
 public class MessageBean {
 
 	private MessageEnum mes;
-	public String str = "hello";
+	private MessageTypeEnum type;
 
-	public MessageBean(MessageEnum mes) {
+	public MessageBean(MessageEnum mes, MessageTypeEnum type) {
 		super();
 		this.mes = mes;
+		this.type = type;
 	}
 
 	public MessageBean() {
@@ -17,13 +20,29 @@ public class MessageBean {
 	public String say() {
 		switch(this.mes) {
 		case morning:
-			return "おはよう";
+
+			switch(this.type) {
+			case like:
+				return "おはよう すき";
+			case normal:
+				return "おはよう";
+			case unlike:
+				return "おはよう　きらい";
+			}
+
 
 		case noon:
 			return "こんにちは";
 
 		case night:
-			return "こんばんわ";
+			switch(this.type) {
+			case like:
+				return "こんばんわ すき";
+			case normal:
+				return "こんばんわ";
+			case unlike:
+				return "こんばんわ　きらい";
+			}
 
 		default:
 			throw new RuntimeException("存在しません");
