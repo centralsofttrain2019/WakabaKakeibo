@@ -2,31 +2,35 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
-import bean.MoneyNoteBean;
+import bean.MoneyNotesBean;
 import dao.Dao;
+import dao.HistoryDao;
+import dto.MoneyNotesDto;
 
 public class KakeiboService
 {
-	public MoneyNoteBean findByKey()
+	public MoneyNotesBean findByKey()
 	{
-		MoneyNoteBean bean = new MoneyNoteBean();
+		MoneyNotesBean bean = new MoneyNotesBean();
 
 
 		//オートクローズ
 				try( Connection con= Dao.getConnection() )
 				{
-//					Dao dao = new Dao( con );
-//					List<MoneyNoteBean> historyList = dao.findByKey();
+					HistoryDao dao = new HistoryDao(con);
+					List<MoneyNotesDto> historyList = dao.selectAll();
+					System.out.println("接続mess");
 
-					System.out.println("接続成功2");
-	//				bean.setHistoryList( historyList );
+					bean.setDtoList( historyList );
 				}
 				catch( SQLException | ClassNotFoundException e )
 				{
 					e.printStackTrace();
 					throw new RuntimeException( e );
 				}
+
 
 				return bean;
 

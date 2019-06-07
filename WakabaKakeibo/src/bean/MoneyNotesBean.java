@@ -1,10 +1,13 @@
 package bean;
 
 import java.time.LocalDate;
+import java.util.List;
 
-public class MoneyNoteBean
+import dto.MoneyNotesDto;
+
+public class MoneyNotesBean
 {
-
+	private List<MoneyNotesDto>dtoList;
 	private LocalDate PurchaseDate;
 	private int Type;
 	private int CategoryID;
@@ -39,6 +42,12 @@ public class MoneyNoteBean
 	}
 	public void setCategoryName(String categoryName) {
 		CategoryName = categoryName;
+	}
+	public List<MoneyNotesDto> getDtoList() {
+		return dtoList;
+	}
+	public void setDtoList(List<MoneyNotesDto> dtoList) {
+		this.dtoList = dtoList;
 	}
 
 

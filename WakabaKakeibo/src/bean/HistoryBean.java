@@ -4,14 +4,14 @@ import java.util.List;
 
 public class HistoryBean
 {
-	private List<MoneyNoteBean>historyList;
+	private List<MoneyNotesBean>historyList;
 	private String message;
 
-	public List<MoneyNoteBean> getHistoryList() {
+	public List<MoneyNotesBean> getHistoryList() {
 		return historyList;
 	}
 
-	public void setHistoryList(List<MoneyNoteBean> historyList)
+	public void setHistoryList(List<MoneyNotesBean> historyList)
 	{
 		this.historyList = historyList;
 	}
@@ -26,8 +26,3 @@ public class HistoryBean
 
 
 }
-
-
-
-
-

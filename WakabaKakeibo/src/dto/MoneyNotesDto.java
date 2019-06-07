@@ -7,11 +7,17 @@ public class MoneyNotesDto
 	private int MoneyNoteID;
 	private int UserID;
 	private int ProductID;
+	private int CategoryID;
+	private int NumberOfPurchase;
 	private LocalDate PurchaseDate;
-	private int Type;
+	private String Type;
 	private int PurchaseNumber;
 	private int Amount;
 	private int PurchaseIntervalDays;
+
+
+
+
 	public int getMoneyNoteID() {
 		return MoneyNoteID;
 	}
@@ -36,10 +42,10 @@ public class MoneyNotesDto
 	public void setPurchaseDate(LocalDate purchaseDate) {
 		PurchaseDate = purchaseDate;
 	}
-	public int getType() {
+	public String getType() {
 		return Type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		Type = type;
 	}
 	public int getPurchaseNumber() {
@@ -59,6 +65,18 @@ public class MoneyNotesDto
 	}
 	public void setPurchaseIntervalDays(int purchaseIntervalDays) {
 		PurchaseIntervalDays = purchaseIntervalDays;
+	}
+	public int getCategoryID() {
+		return CategoryID;
+	}
+	public void setCategoryID(int categoryID) {
+		CategoryID = categoryID;
+	}
+	public int getNumberOfPurchase() {
+		return NumberOfPurchase;
+	}
+	public void setNumberOfPurchase(int numberOfPurchase) {
+		NumberOfPurchase = numberOfPurchase;
 	}
 
 

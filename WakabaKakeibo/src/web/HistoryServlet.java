@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.MoneyNoteBean;
-import service.KakeiboService;
+import bean.HistoryBean;
 
 /**
  * Servlet implementation class HistoryServlet
@@ -34,10 +33,13 @@ public class HistoryServlet extends HttpServlet {
 
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		KakeiboService service = new KakeiboService();
+		//KakeiboService service = new KakeiboService();
 
-		MoneyNoteBean historybean = service.findByKey();
-//		historybean.setMessage("aaa");
+		//MoneyNotesBean historybean = service.findByKey();
+
+		HistoryBean historybean = new HistoryBean();
+
+		historybean.setMessage("aaa");
 
 		request.setAttribute("bean", historybean);
 
