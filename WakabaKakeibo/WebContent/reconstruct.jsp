@@ -10,17 +10,17 @@
 </head>
 <body>
 <div class="container">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success mb-5">
   <a class="navbar-brand" href="#">わかばカケイボ</a>
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="ナビゲーションの切替">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">チャット<span class="sr-only">(現位置)</span></a>
+      <a class="nav-item nav-link" href="IndexServlet">チャット<span class="sr-only">(現位置)</span></a>
       <a class="nav-item nav-link active" href="#">復元確認</a>
       <a class="nav-item nav-link" href="#">設定</a>
-      <a class="nav-link nav-link" href="#">ミニブログ一覧</a>
+      <a class="nav-link nav-link" href="MBListServlet">ミニブログ一覧</a>
       <a class="nav-link nav-link" href="#">ミニブログ編集</a>
       <a class="nav-link nav-link" href="#">シミュレーション</a>
       <a class="nav-link nav-link" href="#">グラフ・履歴</a>
@@ -224,6 +224,7 @@
   </div>
 
 <div class="text-center my-5">
+	変更を適用しますか？<br>
 	<button type="button" class="btn btn-primary mx-5">はい</button>
 	<button type="button" class="btn btn-danger mx-5">いいえ</button>
 

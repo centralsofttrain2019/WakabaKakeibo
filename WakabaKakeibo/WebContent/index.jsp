@@ -18,7 +18,7 @@
 <body>
 <div class="container" style="height: 500px">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
   <a class="navbar-brand" href="#">わかばカケイボ</a>
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="ナビゲーションの切替">
     <span class="navbar-toggler-icon"></span>
@@ -28,10 +28,10 @@
       <a class="nav-item nav-link active" href="#">チャット<span class="sr-only">(現位置)</span></a>
       <a class="nav-item nav-link" href="ReconstructServlet">復元確認</a>
       <a class="nav-item nav-link" href="">設定</a>
-      <a class="nav-link nav-link" href="allblog">ミニブログ一覧</a>
+      <a class="nav-link nav-link" href="MBListServlet">ミニブログ一覧</a>
       <a class="nav-link nav-link" href="#">ミニブログ編集</a>
-      <a class="nav-link nav-link" href="#">シミュレーション</a>
-      <a class="nav-link nav-link" href="#">グラフ・履歴</a>
+      <a class="nav-link nav-link" href="simulation.html">シミュレーション</a>
+      <a class="nav-link nav-link" href="history.html">グラフ・履歴</a>
     </div>
   </div>
 </nav>
