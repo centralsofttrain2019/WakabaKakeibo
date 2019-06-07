@@ -26,7 +26,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="#">チャット<span class="sr-only">(現位置)</span></a>
-      <a class="nav-item nav-link" href="RestoreConfirmation.jsp">復元確認</a>
+      <a class="nav-item nav-link" href="ReconstructServlet">復元確認</a>
       <a class="nav-item nav-link" href="">設定</a>
       <a class="nav-link nav-link" href="allblog">ミニブログ一覧</a>
       <a class="nav-link nav-link" href="#">ミニブログ編集</a>
