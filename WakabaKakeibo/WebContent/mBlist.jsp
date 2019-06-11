@@ -8,27 +8,16 @@
 <link rel="stylesheet" href="css/bootstrap-arrows.css" data-angle="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Insert title here</title>
+
+<!-- javascript読み込み -->
+<script type="text/javascript" src="inner.js"></script>
 </head>
 <body>
 <div class="container" style="height: 500px">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-  <a class="navbar-brand" href="#">わかばカケイボ</a>
-  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="ナビゲーションの切替">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="IndexServlet">チャット<span class="sr-only">(現位置)</span></a>
-      <a class="nav-item nav-link" href="ReconstructServlet">復元確認</a>
-      <a class="nav-item nav-link" href="#">設定</a>
-      <a class="nav-link nav-link active" href="#">ミニブログ一覧</a>
-      <a class="nav-link nav-link" href="#">ミニブログ編集</a>
-      <a class="nav-link nav-link" href="#">シミュレーション</a>
-      <a class="nav-link nav-link" href="#">グラフ・履歴</a>
-    </div>
-  </div>
-</nav>
+<!-- ヘッダー部 -->
+<div id="header"></div>
+<script type="text/javascript">header("mBListNav");</script>
 
 <div class="my-3" style="display: flex; align-items: center;">
 	<h3 class="my-3">ミニブログ一覧</h3>

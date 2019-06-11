@@ -7,26 +7,16 @@
 <link rel="stylesheet" href="css/bootstrap-arrows.css" data-angle="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Insert title here</title>
+
+<!-- javascript読み込み -->
+<script type="text/javascript" src="inner.js"></script>
 </head>
 <body>
 <div class="container">
-<nav class="navbar navbar-expand-lg navbar-dark bg-success mb-5">
-  <a class="navbar-brand" href="#">わかばカケイボ</a>
-  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="ナビゲーションの切替">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="IndexServlet">チャット<span class="sr-only">(現位置)</span></a>
-      <a class="nav-item nav-link active" href="#">復元確認</a>
-      <a class="nav-item nav-link" href="#">設定</a>
-      <a class="nav-link nav-link" href="MBListServlet">ミニブログ一覧</a>
-      <a class="nav-link nav-link" href="#">ミニブログ編集</a>
-      <a class="nav-link nav-link" href="#">シミュレーション</a>
-      <a class="nav-link nav-link" href="#">グラフ・履歴</a>
-    </div>
-  </div>
-</nav>
+
+<!-- ヘッダー部 -->
+<div id="header"></div>
+<script type="text/javascript">header("reconstructNav");</script>
 
 
 
@@ -227,6 +217,8 @@
 	変更を適用しますか？<br>
 	<button type="button" class="btn btn-primary mx-5">はい</button>
 	<button type="button" class="btn btn-danger mx-5">いいえ</button>
+
+</div>
 
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
