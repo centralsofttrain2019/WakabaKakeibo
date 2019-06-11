@@ -32,7 +32,7 @@ public class HistoryListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//サービスを取得
 		MoneyNotesService service = new MoneyNotesService();
-		HistoryListBean bean = service.findAllHistoryList();
+		HistoryListBean bean = service.findAllHistoryList(1); //引数にユーザID
 
 		//JSPに遷移
 		RequestDispatcher disp = request.getRequestDispatcher("/history.jsp");
