@@ -18,118 +18,22 @@
 <div id="header"></div>
 <script type="text/javascript">header("reconstructNav");</script>
 
-
-
-<h2>今週の家計簿</h2>
-
-<div class="row align-items-start">
-    <div class="col">
-    今週の家計簿
-     <table class="table table-bordered">
-<!--   <caption>テーブルの表題</caption> -->
-		  <thead>
-		    <tr>
-		      <th scope="col">日</th>
-		      <th scope="col">月</th>
-		      <th scope="col">火</th>
-		      <th scope="col">水</th>
-		      <th scope="col">木</th>
-		      <th scope="col">金</th>
-		      <th scope="col">土</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td>	</td>
-		      <td>おにぎり	</td>
-		      <td>	</td>
-		      <td>卵	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      </tr>
-		    <tr>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>卵<br>トイレットペーパー	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		    </tr>
-		    <tr>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>卵	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		    </tr>
-		    <tr>
-		      <td>おにぎり	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		    </tr>
-		  </tbody>
-		</table>
-    </div>
-    <div class="col">
-     総合
-     <table class="table table-bordered">
-		<!--   <caption>テーブルの表題</caption> -->
-		  <thead>
-		    <tr>
-		      <th scope="col">品名</th>
-		      <th scope="col">金額</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td>卵</td>
-		      <td>180</td>
-		    </tr>
-		    <tr>
-		      <td>卵</td>
-		      <td>180</td>
-		    </tr>
-		    <tr>
-		      <td>トイレットペーパー</td>
-		      <td>450</td>
-		    </tr>
-		    <tr>
-		      <td>卵</td>
-		      <td>180</td>
-		    </tr>
-		  </tbody>
-		</table>
-    </div>
-  </div>
-
-  	<div class="text-center my-5">
-		<i class="fas fa-arrow-down fa-5x" style="text-align: center;"></i>
-	</div>
 <!-- <img src="mark_arrow_down.png" class="mx-auto" style="width: 200px;"> -->
 
 <h2>予想される今週の家計簿</h2>
-<div class="row align-items-start">
-    <div class="col">
+
     予想される家計簿
      <table class="table table-bordered">
 <!--   <caption>テーブルの表題</caption> -->
 		  <thead>
 		    <tr>
-		      <th scope="col">日</th>
-		      <th scope="col">月</th>
-		      <th scope="col">火</th>
-		      <th scope="col">水</th>
-		      <th scope="col">木</th>
-		      <th scope="col">金</th>
-		      <th scope="col">日</th>
+		      <th whidth="400" scope="col">日</th>
+		      <th whidth="400" scope="col">月</th>
+		      <th whidth="400" scope="col">火</th>
+		      <th whidth="400" scope="col">水</th>
+		      <th whidth="400" scope="col">木</th>
+		      <th whidth="400" scope="col">金</th>
+		      <th whidth="400" scope="col">日</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -178,40 +82,46 @@
 		<!--   <caption>テーブルの表題</caption> -->
 		  <thead>
 		    <tr>
-		      <th scope="col">品名</th>
-		      <th scope="col">金額</th>
+		      <th style="width:100px" scope="col">品名</th>
+		      <th style="width:30px" scope="col">個数</th>
+		      <th style="width:30px" scope="col">金額</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		    <tr>
 		      <td>卵</td>
+		      <td>1</td>
 		      <td>180</td>
 		    </tr>
 		    <tr>
 		      <td>卵</td>
+		      <td>1</td>
 		      <td>180</td>
 		    </tr>
 		    <tr>
 		      <td>トイレットペーパー</td>
+		      <td>1</td>
 		      <td>450</td>
 		    </tr>
 		    <tr>
 		      <td>卵</td>
+		      <td>1</td>
 		      <td>180</td>
 		    </tr>
 		    <tr>
 		      <td style="color:red">卵</td>
+		      <td style="color:red">1</td>
 		      <td style="color:red">180</td>
 		    </tr>
 		    <tr>
 		      <td style="color:red">トイレットペーパー</td>
+		      <td style="color:red">1</td>
 		      <td style="color:red">450</td>
 		    </tr>
 
 		  </tbody>
 		</table>
-    </div>
-  </div>
+
 
 <div class="text-center my-5">
 	変更を適用しますか？<br>
