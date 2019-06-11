@@ -2,6 +2,8 @@ package web;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.MessageBean;
-import domain.MessageEnum;
-import domain.MessageTypeEnum;
+import bean.MessageListBean;
+import service.UsersService;
 
 
 /**
@@ -34,58 +36,62 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println("StartServletが実行されました。");
+		//ユーザの好感度の取得
+				//ここではユーザの好感度は0－2を考えている
+				//とりあえず0を代入する
+				int userFeelingLevel = 0;
 
-		//画面から入力したデータを取得する
-//		String num1str = request.getParameter("num1");
-//		//String num2str = request.getParameter("num2");
-//
-//		//計算のために数値に変換する
-//		int num1 = Integer.parseInt(num1str);
+				//Userの好感度をMessageIdへ代入
+				//0:嫌い 1:好き 2:普通
+				int messageId = 0;
 
+				//時間の取得
+				LocalDateTime ld = LocalDateTime.now();
 
-//		//次の画面で表示するための入れ物を準備する
-//		EmployeeBean bean = new EmployeeBean();
-//
-//		Employee eList = Main2.main(num1);
-//
-//		//計算結果と表示するメッセージを入れ物（bean)にセットする
-//		bean.setMessage("ID情報");
-//		bean.setRs(eList);
-//
-//		//beanをリクエストにセット キー名は「bean」とする
-//		request.setAttribute("bean", bean);
+				//MessageListBeanの生成
+				MessageListBean mListBean = new MessageListBean();
 
-		LocalDateTime ld = LocalDateTime.now();
-		int hour = ld.getHour() / 8;
+				//Message用のListの生成
+				List<MessageBean> mList = new ArrayList();
 
-		MessageEnum mEnum = null;
-		switch(hour) {
-		case 0:
-			mEnum = MessageEnum.morning;
-			break;
-		case 1:
-			mEnum = MessageEnum.noon;
-			break;
-		case 2:
-			mEnum = MessageEnum.night;
-			break;
-		}
+				//朝、昼、夜によって、messageIdの値を変える
+				//朝1－3、昼4－6、夜7－9
+				if(6 < ld.getHour() && ld.getHour() < 12) {
+					messageId += 0;
+				}else if(12 < ld.getHour() && ld.getHour() < 18) {
+					messageId += 3;
+				}else{
+					messageId += 6;
+				};
 
+				//サービスを取得
+				UsersService service = new UsersService();
 
-		MessageTypeEnum tEnum = MessageTypeEnum.like;
-		//MessageEnumの生成
-//		MessageEnum mEnum = MessageEnum.morning;
+				//ユーザーの誕生日の取り出し
+				//Dtoからユーザの誕生日を取り出す
+				LocalDateTime userBirthDay = LocalDateTime.now();
 
-		//MessageBeanの生成
-		MessageBean mBean = new MessageBean(mEnum, tEnum);
+				//今日がユーザの誕生日ならば誕生日コメントを取得
+				if(userBirthDay.getDayOfMonth() == ld.getDayOfMonth() &&
+						userBirthDay.getMonth() == ld.getMonth()) {
 
-		//beanをリクエストにセット キー名は「bean」とする
-		request.setAttribute("bean", mBean);
+					//誕生日メッセージのIDが10－12のため10を足す
+					MessageBean beanBirth = service.findById(userFeelingLevel + 10);
+					mList.add(beanBirth);
+				}
 
-		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-		disp.forward(request, response);
+				//挨拶メッセージの取得
+				MessageBean beanGreeting = service.findById(messageId);
+				mList.add(beanGreeting);
+
+				//MessageBeanのListをMessageListBeanへset
+				mListBean.setmBeanList(mList);
+
+				request.setAttribute("bean", mListBean);
+
+				//JSPに遷移する
+				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+				disp.forward(request, response);
 	}
 
 	/**

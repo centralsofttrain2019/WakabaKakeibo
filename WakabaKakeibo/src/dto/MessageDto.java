@@ -1,34 +1,23 @@
-package bean;
+package dto;
 
-import dto.MessageDto;
-
-public class MessageBean {
-
+public class MessageDto {
 	private int MessageId;
-	private String MessageContent;
+	private String MessageCount;
 	private String MessageType;
 	private String EventType;
 
 
 
-	public MessageBean(int messageId, java.lang.String messageCount, java.lang.String string,
+	public MessageDto(int messageId, java.lang.String messageCount, java.lang.String string,
 			java.lang.String eventType) {
 		super();
 		this.MessageId = messageId;
-		MessageContent = messageCount;
+		MessageCount = messageCount;
 		MessageType = string;
 		EventType = eventType;
 	}
 
-	//Dtoの値をBeanに移す
-	public void setDto(MessageDto mDto) {
-		this.MessageId = mDto.getMessageId();
-		this.MessageContent = mDto.getMessageCount();
-		this.MessageType = mDto.getMessageType();
-		this.EventType = mDto.getEventType();
-	}
-
-	public MessageBean() {
+	public MessageDto() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
@@ -38,11 +27,11 @@ public class MessageBean {
 	public void setMessageId(int messageId) {
 		this.MessageId = messageId;
 	}
-	public String getMessageContent() {
-		return MessageContent;
+	public String getMessageCount() {
+		return MessageCount;
 	}
-	public void setMessageContent(String messageCount) {
-		MessageContent = messageCount;
+	public void setMessageCount(String messageCount) {
+		MessageCount = messageCount;
 	}
 	public String getMessageType() {
 		return MessageType;
@@ -59,7 +48,7 @@ public class MessageBean {
 
 	@Override
 	public String toString() {
-		return "MessageBean [MessageId=" + MessageId + ", MessageContent=" + MessageContent + ", MessageType=" + MessageType
+		return "MessageDto [MessageId=" + MessageId + ", MessageCount=" + MessageCount + ", MessageType=" + MessageType
 				+ ", EventType=" + EventType + "]";
 	}
 

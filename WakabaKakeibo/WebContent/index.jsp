@@ -3,9 +3,10 @@
 <%-- <%@ page import="bean.MessageBean" %> --%>
 <jsp:useBean
   		id="bean"
-  		class="bean.MessageBean"
+  		class="bean.MessageListBean"
   		scope="request" />
 
+<%@ page import="bean.MessageBean" %>
 
 <!DOCTYPE html>
 <html>
@@ -54,7 +55,15 @@
 </div>
 <!-- javascriptの読み込み -->
 <script type="text/javascript" src="chat.js"></script>
-<script>chatGreeting = setInterval(communicate, 200, '<%= bean.say() %>');</script>
+<%-- <script>chatGreeting = setInterval(communicate, 200, '<%= bean.say() %>');</script> --%>
+
+<% for(MessageBean b : bean.getmBeanList()){ %>
+		<script>
+<%-- 			setInterval(communicate, 200, '<%= b.getMessageContent() %>'); --%>
+		</script>
+		<%= b.getMessageContent() %>
+<% } %>
+
 
 <!-- bootstrapのためのjqueryの読み込み -->
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>

@@ -22,6 +22,22 @@ INSERT INTO products(ProductID,ProductName) VALUES (2,'トイレットペーパ�
 INSERT INTO products(ProductID,ProductName) VALUES (3,'ティッシュボックス');
 INSERT INTO products(ProductID,ProductName) VALUES (4,'シャンプー');
 
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (1,'おはよう like', 'like', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (2,'おはよう normal', 'normal', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (3,'おはよう dislike', 'dislike', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'こんにちは like', 'like', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'こんにちは normal', 'normal', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'こんにちは dislike', 'dislike', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'こんばんわ like', 'like', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'こんばんわ normal', 'normal', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'こんばんわ dislike', 'dislike', 'greeting');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'誕生日おめでとう like', 'like', 'brithday');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'誕生日おめでとう normal', 'normal', 'brithday');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'誕生日おめでとう dislike', 'dislike', 'brithday');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'復元漏れがあるよ like', 'like', 'reconstruct');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'復元漏れがあるよ normal', 'normal', 'reconstruct');
+INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES (4,'復元漏れがあるよ dislike', 'dislike', 'reconstruct');
+
 INSERT INTO MoneyCategorys(moneycategorysID, categoryName) VALUES (1,'食費');
 INSERT INTO MoneyCategorys(moneycategorysID, categoryName) VALUES (2,'日用品');
 INSERT INTO MoneyCategorys(moneycategorysID, categoryName) VALUES (3,'交通費');
