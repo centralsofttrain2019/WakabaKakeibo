@@ -17,19 +17,19 @@ var navigation = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-success\">
                    + "</nav>";
 
 var tab = "<ul class=\"nav nav-tabs my-3\">"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link active \">全員</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">自分</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">お気に入り</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">旅行</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">政治</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">料理</a></li>"
+			  + "<li class=\"nav-item\"><a id=\"allTab\" href=\"#\" class=\"nav-link \">全員</a></li>"
+			  + "<li class=\"nav-item\"><a id=\"myTab\" href=\"#\" class=\"nav-link \">自分</a></li>"
+			  + "<li class=\"nav-item\"><a id=\"allTab\" href=\"#\" class=\"nav-link \">お気に入り</a></li>"
+			  + "<li class=\"nav-item\"><a id=\"travelTab\" href=\"#\" class=\"nav-link \">旅行</a></li>"
+			  + "<li class=\"nav-item\"><a id=\"politicsTab\" href=\"#\" class=\"nav-link \">政治</a></li>"
+			  + "<li class=\"nav-item\"><a id=\"cookTab\" href=\"#\" class=\"nav-link \">料理</a></li>"
 			+ "</ul>";
 
-function makeTab(){
+function makeTab(id){
 	var h = document.getElementById("tab");
 	h.innerHTML += tab;
-//    var navElement = document.getElementById(id);
-//    navElement.classList.add("active");
+    var navElement = document.getElementById(id);
+    navElement.classList.add("active");
 }
 
 function header(id){

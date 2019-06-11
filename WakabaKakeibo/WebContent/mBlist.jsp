@@ -28,7 +28,7 @@
 </div>
 
 <div id="tab"></div>
-<script>makeTab();</script>
+<script>makeTab("myTab");</script>
 <!-- <ul class="nav nav-tabs my-3"> -->
 <!--   <li class="nav-item"><a href="#" class="nav-link active">全員</a></li> -->
 <!--   <li class="nav-item"><a href="#" class="nav-link">自分</a></li> -->
