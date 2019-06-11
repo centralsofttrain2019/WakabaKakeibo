@@ -2,12 +2,14 @@ package bean;
 
 import java.time.LocalDate;
 
+import dto.MoneyNotesDto;
+
 public class HistoryBean
 {
 	private String productName;
 	private int productID;
 	private LocalDate purchaseDate;
-	private int type;
+	private String type;
 	private int categoryID;
 	private int amount;
 	private String categoryName;
@@ -24,10 +26,10 @@ public class HistoryBean
 	public void setPurchaseDate(LocalDate purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
-	public int getType() {
+	public String getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public int getCategoryID() {
@@ -49,7 +51,15 @@ public class HistoryBean
 		this.categoryName = categoryName;
 	}
 
-
+	public void setValueFromDto(MoneyNotesDto dto) {
+		this.productID = dto.getProductID();
+		this.productName = dto.getProductName();
+		this.purchaseDate = dto.getPurchaseDate();
+		this.type = dto.getType();
+		this.categoryID = dto.getCategoryID();
+		this.amount = dto.getAmount();
+		this.categoryName = dto.getCategoryName();
+	}
 
 
 

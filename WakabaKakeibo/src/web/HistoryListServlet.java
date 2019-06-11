@@ -30,16 +30,9 @@ public class HistoryListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		//サービスを取得
 		MoneyNotesService service = new MoneyNotesService();
-		HistoryListBean bean = service.findAll();
-
-		//HistoryBean historybean = new HistoryBean();
-
-		//request.setAttribute("bean", bean);
-		
+		HistoryListBean bean = service.findAllHistoryList();
 
 		//JSPに遷移
 		RequestDispatcher disp = request.getRequestDispatcher("/history.jsp");
