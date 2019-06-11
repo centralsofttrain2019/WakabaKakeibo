@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.MessageBean2;
 import bean.MessageListBean;
-import domain.MessageEnum;
+import domain.EventTypeEnum;
 import domain.MessageTypeEnum;
 import service.UsersService;
 
@@ -47,21 +47,21 @@ public class IndexServlet2 extends HttpServlet {
 		LocalDateTime ld = LocalDateTime.now();
 		int hour = ld.getHour() / 8;
 
-		MessageEnum mEnum = null;
+		EventTypeEnum mEnum = null;
 		switch(hour) {
 		case 0:
-			mEnum = MessageEnum.morning;
+			mEnum = EventTypeEnum.MORNING;
 			break;
 		case 1:
-			mEnum = MessageEnum.noon;
+			mEnum = EventTypeEnum.NOON;
 			break;
 		case 2:
-			mEnum = MessageEnum.night;
+			mEnum = EventTypeEnum.NIGHT;
 			break;
 		}
 
 
-		MessageTypeEnum tEnum = MessageTypeEnum.like;
+		MessageTypeEnum tEnum = MessageTypeEnum.LIKE;
 		//MessageEnumの生成
 //		MessageEnum mEnum = MessageEnum.morning;
 

@@ -1,18 +1,21 @@
 package bean;
 
+import domain.EventTypeEnum;
+import domain.MessageTypeEnum;
 import dto.MessageDto;
 
 public class MessageBean {
 
 	private int MessageId;
 	private String MessageContent;
-	private String MessageType;
-	private String EventType;
+	private MessageTypeEnum MessageType;
+	private EventTypeEnum EventType;
 
 
 
-	public MessageBean(int messageId, java.lang.String messageCount, java.lang.String string,
-			java.lang.String eventType) {
+	public MessageBean(int messageId, java.lang.String messageCount,
+			MessageTypeEnum string,
+			EventTypeEnum eventType) {
 		super();
 		this.MessageId = messageId;
 		MessageContent = messageCount;
@@ -44,16 +47,23 @@ public class MessageBean {
 	public void setMessageContent(String messageCount) {
 		MessageContent = messageCount;
 	}
-	public String getMessageType() {
+	public MessageTypeEnum getMessageType()
+	{
 		return MessageType;
 	}
-	public void setMessageType(String string) {
-		MessageType = string;
+
+	public void setMessageType(MessageTypeEnum messageType)
+	{
+		MessageType = messageType;
 	}
-	public String getEventType() {
+
+	public EventTypeEnum getEventType()
+	{
 		return EventType;
 	}
-	public void setEventType(String eventType) {
+
+	public void setEventType(EventTypeEnum eventType)
+	{
 		EventType = eventType;
 	}
 

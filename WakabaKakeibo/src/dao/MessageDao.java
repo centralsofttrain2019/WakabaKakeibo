@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.EventTypeEnum;
+import domain.MessageTypeEnum;
 import dto.MessageDto;
 
 public class MessageDao {
@@ -42,8 +44,8 @@ public class MessageDao {
 				MessageDto md = new MessageDto();
 				md.setMessageId(rs.getInt("MessageID"));
 				md.setMessageCount(rs.getString("MessageContent"));
-				md.setMessageType(rs.getString("MessageType"));
-				md.setEventType(rs.getString("EventType"));
+				md.setMessageType(MessageTypeEnum.valueOf(rs.getString("MessageType")));
+				md.setEventType(EventTypeEnum.valueOf(rs.getString("EventType")));
 
 
 				dtoList.add(md);
@@ -74,8 +76,8 @@ public class MessageDao {
 
 				ret.setMessageId(rs.getInt("MessageID"));
 				ret.setMessageCount(rs.getString("MessageContent"));
-				ret.setMessageType(rs.getString("MessageType"));
-				ret.setEventType(rs.getString("EventType"));
+				ret.setMessageType(MessageTypeEnum.valueOf(rs.getString("MessageType")));
+				ret.setEventType(EventTypeEnum.valueOf(rs.getString("EventType")));
 			}
 		}
 

@@ -1,15 +1,19 @@
 package dto;
 
+import domain.EventTypeEnum;
+import domain.MessageTypeEnum;
+
 public class MessageDto {
 	private int MessageId;
 	private String MessageCount;
-	private String MessageType;
-	private String EventType;
+	private MessageTypeEnum MessageType;
+	private EventTypeEnum EventType;
 
 
 
-	public MessageDto(int messageId, java.lang.String messageCount, java.lang.String string,
-			java.lang.String eventType) {
+	public MessageDto(int messageId, java.lang.String messageCount,
+			MessageTypeEnum string,
+			EventTypeEnum eventType) {
 		super();
 		this.MessageId = messageId;
 		MessageCount = messageCount;
@@ -33,16 +37,25 @@ public class MessageDto {
 	public void setMessageCount(String messageCount) {
 		MessageCount = messageCount;
 	}
-	public String getMessageType() {
+
+
+	public MessageTypeEnum getMessageType()
+	{
 		return MessageType;
 	}
-	public void setMessageType(String string) {
-		MessageType = string;
+
+	public void setMessageType(MessageTypeEnum messageType)
+	{
+		MessageType = messageType;
 	}
-	public String getEventType() {
+
+	public EventTypeEnum getEventType()
+	{
 		return EventType;
 	}
-	public void setEventType(String eventType) {
+
+	public void setEventType(EventTypeEnum eventType)
+	{
 		EventType = eventType;
 	}
 

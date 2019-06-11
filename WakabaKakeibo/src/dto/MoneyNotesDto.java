@@ -2,12 +2,14 @@ package dto;
 
 import java.time.LocalDate;
 
+import domain.MoneyNoteTypeEnum;
+
 public class MoneyNotesDto
 {
 	private int moneyNoteID;
 	private int userID;
 	private LocalDate purchaseDate;
-	private String type;
+	private MoneyNoteTypeEnum type;
 	private int productID;
 	private String productName;
 	private int categoryID;
@@ -40,11 +42,12 @@ public class MoneyNotesDto
 	{
 		this.purchaseDate = purchaseDate;
 	}
-	public String getType()
+
+	public MoneyNoteTypeEnum getType()
 	{
 		return type;
 	}
-	public void setType(String type)
+	public void setType(MoneyNoteTypeEnum type)
 	{
 		this.type = type;
 	}

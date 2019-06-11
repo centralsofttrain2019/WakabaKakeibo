@@ -42,10 +42,14 @@ public class MoneyNotesService
 		try( Connection con= Dao.getConnection() )
 		{
 			MoneyNotesDao mnDao = new MoneyNotesDao(con);
-			List<MoneyNotesDto> notes = mnDao.findByUserIDWithIDName(userID);
+			List<MoneyNotesDto> mnList = mnDao.findByUserIDWithIDName(userID);
 
 			PurchasePatternsDao ppDao = new PurchasePatternsDao(con);
 			List<PurchasePatternsDto> ppList = ppDao.findByUserID(userID);
+
+			List<MoneyNotesDto> reconsList = createReconstructList(mnList,ppList);
+
+			bean.setValueFromDto(mnList, reconsList);
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
@@ -56,14 +60,16 @@ public class MoneyNotesService
 	}
 
 	//家計簿の復元予想した後のデータを作成する
-	public List<MoneyNotesDto> createReconstructList()
+	public List<MoneyNotesDto> createReconstructList(List<MoneyNotesDto> mnList, List<PurchasePatternsDto> ppList)
 	{
-		List<MoneyNotesDto> mnlist = new ArrayList<MoneyNotesDto>();
+		List<MoneyNotesDto> reconsList = new ArrayList<MoneyNotesDto>();
+		
+		for(PurchasePatternsDto pp: ppList)
+		{
+			 pp.getProductID();
+		}
 
-
-
-
-		return mnlist;
+		return reconsList;
 	}
 
 }

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.MoneyNoteTypeEnum;
 import dto.MoneyNotesDto;
 
 public class MoneyNotesDao {
@@ -31,7 +32,7 @@ public class MoneyNotesDao {
 			mnd.setMoneyNoteID(rs.getInt("moneyNoteID"));
 			mnd.setUserID(rs.getInt("userID"));
 			mnd.setPurchaseDate(rs.getDate("purchaseDate").toLocalDate());
-			mnd.setType(rs.getString("type"));
+			mnd.setType(MoneyNoteTypeEnum.valueOf(rs.getString("type")));
 			mnd.setProductID(rs.getInt("productID"));
 			mnd.setCategoryID(rs.getInt("categoryID"));
 			mnd.setNumberOfPurchase(rs.getInt("NumberOfParchase"));
@@ -59,7 +60,7 @@ public class MoneyNotesDao {
 			mnd.setMoneyNoteID(rs.getInt("moneyNoteID"));
 			mnd.setUserID(rs.getInt("userID"));
 			mnd.setPurchaseDate(rs.getDate("purchaseDate").toLocalDate());
-			mnd.setType(rs.getString("type"));
+			mnd.setType(MoneyNoteTypeEnum.valueOf(rs.getString("type")));
 			mnd.setProductID(rs.getInt("productID"));
 			mnd.setCategoryID(rs.getInt("categoryID"));
 			mnd.setNumberOfPurchase(rs.getInt("NumberOfParchase"));
@@ -90,7 +91,7 @@ public class MoneyNotesDao {
 			mnd.setMoneyNoteID(rs.getInt("moneyNoteID"));
 			mnd.setUserID(rs.getInt("userID"));
 			mnd.setPurchaseDate(rs.getDate("purchaseDate").toLocalDate());
-			mnd.setType(rs.getString("type"));
+			mnd.setType(MoneyNoteTypeEnum.valueOf(rs.getString("type")));
 			mnd.setProductID(rs.getInt("productID"));
 			mnd.setCategoryID(rs.getInt("categoryID"));
 			mnd.setNumberOfPurchase(rs.getInt("NumberOfParchase"));

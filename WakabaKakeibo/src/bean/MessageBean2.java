@@ -1,13 +1,13 @@
 package bean;
-import domain.MessageEnum;
+import domain.EventTypeEnum;
 import domain.MessageTypeEnum;
 
 public class MessageBean2 {
 
-	private MessageEnum mes;
+	private EventTypeEnum mes;
 	private MessageTypeEnum type;
 
-	public MessageBean2(MessageEnum mes, MessageTypeEnum type) {
+	public MessageBean2(EventTypeEnum mes, MessageTypeEnum type) {
 		super();
 		this.mes = mes;
 		this.type = type;
@@ -19,28 +19,28 @@ public class MessageBean2 {
 
 	public String say() {
 		switch(this.mes) {
-		case morning:
+		case MORNING:
 
 			switch(this.type) {
-			case like:
+			case LIKE:
 				return "おはよう すき";
-			case normal:
+			case NORMAL:
 				return "おはよう";
-			case unlike:
+			case DISLIKE:
 				return "おはよう　きらい";
 			}
 
 
-		case noon:
+		case NOON:
 			return "こんにちは";
 
-		case night:
+		case NIGHT:
 			switch(this.type) {
-			case like:
+			case LIKE:
 				return "こんばんわ すき";
-			case normal:
+			case NORMAL:
 				return "こんばんわ";
-			case unlike:
+			case DISLIKE:
 				return "こんばんわ　きらい";
 			}
 

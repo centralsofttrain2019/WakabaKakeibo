@@ -56,9 +56,23 @@ public class ReconstructListBean
 		this.reconstructList = reconstructList;
 	}
 
-	public void setValueFromDto(List<MoneyNotesDto> dto)
+	public void setValueFromDto(List<MoneyNotesDto> mnList, List<MoneyNotesDto> reconsList)
 	{
-		
+		for(MoneyNotesDto dto: mnList)
+		{
+			ReconstructBean bean = new ReconstructBean();
+			bean.setValueFromDto(dto);
+			this.purchaseList.add(bean);
+		}
+
+		for(MoneyNotesDto dto: reconsList)
+		{
+			ReconstructBean bean = new ReconstructBean();
+			bean.setValueFromDto(dto);
+			this.reconstructList.add(bean);
+		}
+
+		//TODO カレンダー用のデータセットを後で作る
 	}
 
 }

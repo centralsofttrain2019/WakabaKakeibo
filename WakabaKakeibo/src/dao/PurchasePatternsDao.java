@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.DatePatternTypeEnum;
 import dto.PurchasePatternsDto;
 
 public class PurchasePatternsDao
@@ -37,7 +38,7 @@ public class PurchasePatternsDao
 			dto.setPurchasePatternID(rs.getInt("PurchasePatternID"));
 			dto.setUserID(rs.getInt("UserID"));
 			dto.setProductID(rs.getInt("Products.ProductID"));
-			dto.setDatePatternType(rs.getString("DatePatternType"));
+			dto.setDatePatternType(DatePatternTypeEnum.valueOf(rs.getString("DatePatternType")));
 			dto.setLastPurchaseDate(rs.getDate("LastPurchaseDate").toLocalDate());
 			dto.setNumberPattern(rs.getInt("NumberPattern"));
 			dto.setAmountPattern(rs.getInt("AmountPattern"));

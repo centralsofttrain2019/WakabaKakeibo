@@ -2,6 +2,8 @@ package dto;
 
 import java.time.LocalDate;
 
+import domain.BlogCategoryEnum;
+
 public class BlogsDto
 {
 	private int blogID;
@@ -9,7 +11,7 @@ public class BlogsDto
 	private LocalDate createDate;
 	private String title;
 	private String content;
-	private String categoryID;
+	private BlogCategoryEnum category;
 	private int reblogID;
 	public int getBlogID()
 	{
@@ -42,11 +44,22 @@ public class BlogsDto
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getCategoryID() {
-		return categoryID;
+
+	public BlogCategoryEnum getCategory()
+	{
+		return category;
 	}
-	public void setCategoryID(String categoryID) {
-		this.categoryID = categoryID;
+	public void setCategory(BlogCategoryEnum category)
+	{
+		this.category = category;
+	}
+	public int getReblogID()
+	{
+		return reblogID;
+	}
+	public void setReblogID(int reblogID)
+	{
+		this.reblogID = reblogID;
 	}
 	public int getReblog() {
 		return reblogID;
@@ -54,15 +67,5 @@ public class BlogsDto
 	public void setReblog(int reblogID) {
 		this.reblogID = reblogID;
 	}
-
-
-
-
-
-
-
-
-
-
 
 }

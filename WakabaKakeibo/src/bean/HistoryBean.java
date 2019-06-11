@@ -2,13 +2,14 @@ package bean;
 
 import java.time.LocalDate;
 
+import domain.MoneyNoteTypeEnum;
 import dto.MoneyNotesDto;
 
 public class HistoryBean
 {
 	private String productName;
 	private LocalDate purchaseDate;
-	private String type;
+	private MoneyNoteTypeEnum type;
 	private int categoryID;
 	private int amount;
 	private String categoryName;
@@ -19,10 +20,21 @@ public class HistoryBean
 	public void setPurchaseDate(LocalDate purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
-	public String getType() {
+
+	public String getProductName()
+	{
+		return productName;
+	}
+	public void setProductName(String productName)
+	{
+		this.productName = productName;
+	}
+	public MoneyNoteTypeEnum getType()
+	{
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(MoneyNoteTypeEnum type)
+	{
 		this.type = type;
 	}
 	public int getCategoryID() {
