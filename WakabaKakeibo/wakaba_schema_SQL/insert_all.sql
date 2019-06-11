@@ -48,6 +48,27 @@ VALUES			      (          8,      1, '2019-05-23', 'Expense',          2,       
 INSERT INTO PurchasePatterns(purchasepatternID, userID, productID, DatePatternType, LastPurchaseDate, NumberPattern, AmountPattern)
 VALUES		                 (                  1,     1,         4,       'OneWeek',     '2019-05-31',             1,           300);
 
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	1	,'2019-04-01'	,	10000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	2	,'2019-05-01'	,	30000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	3	,'2019-06-01'	,	40000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	4	,'2019-07-01'	,	50000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	5	,'2019-08-01'	,	90000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	6	,'2019-09-01'	,	110000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	7	,'2019-10-01'	,	120000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	8	,'2019-11-01'	,	130000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	9	,'2019-12-01'	,	140000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	10	,'2020-01-01'	,	190000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	11	,'2020-02-01'	,	200000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	12	,'2019-05-01'	,	200000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	13	,'2019-04-01'	,	210000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	14	,'2019-05-01'	,	230000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	15	,'2019-04-01'	,	240000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	16	,'2019-05-01'	,	260000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	17	,'2019-04-01'	,	310000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	18	,'2019-05-01'	,	320000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	19	,'2019-04-01'	,	340000	,	1	);
+INSERT INTO deposits(DepositID, Date, Balance, UserID) VALUES (	20	,'2019-05-01'	,	350000	,	1	);
+
 
 LOCK TABLES `blogs` WRITE;
 /*!40000 ALTER TABLE `blogs` DISABLE KEYS */;
