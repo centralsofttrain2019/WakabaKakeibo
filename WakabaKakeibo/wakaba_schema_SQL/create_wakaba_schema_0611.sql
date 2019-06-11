@@ -205,14 +205,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `wakaba_schema`.`PurchasePatterns` ;
 
 CREATE TABLE IF NOT EXISTS `wakaba_schema`.`PurchasePatterns` (
-  `PurcheasePatternID` INT NOT NULL,
+  `PurchasePatternID` INT NOT NULL,
   `UserID` INT NULL,
   `ProductID` INT NULL,
   `DatePatternType` VARCHAR(20) NULL,
   `LastPurchaseDate` DATE NULL,
   `NumberPattern` INT NULL,
   `AmountPattern` INT NULL,
-  PRIMARY KEY (`PurcheasePatternID`),
+  PRIMARY KEY (`PurchasePatternID`),
   INDEX `fk_PurcheasePattern_userID_idx` (`UserID` ASC) VISIBLE,
   INDEX `fk_PurcheasePattern_productID_idx` (`ProductID` ASC) VISIBLE,
   CONSTRAINT `fk_PurcheasePattern_userID`

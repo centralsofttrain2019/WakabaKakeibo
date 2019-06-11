@@ -1,2 +1,0 @@
-INSERT INTO PurcheasePatterns(purcheasepatternID, userID, productID, DatePatternType, LastPurchaseDate, NumberPattern, AmountPattern)
-VALUES		                 (                  1,     1,         4,       'OneWeek',     '2019-05-31',             1,           300);
