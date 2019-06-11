@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.HistoryBean;
+import bean.HistoryListBean;
+import service.MoneyNotesService;
 
 /**
  * Servlet implementation class HistoryServlet
  */
 @WebServlet("/HistoryServlet")
-public class HistoryServlet extends HttpServlet {
+public class HistoryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HistoryServlet() {
+    public HistoryListServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,18 +31,15 @@ public class HistoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		//サービスを取得
+		MoneyNotesService service = new MoneyNotesService();
+		HistoryListBean bean = service.findAll();
 
-		//KakeiboService service = new KakeiboService();
+		//HistoryBean historybean = new HistoryBean();
 
-		//MoneyNotesBean historybean = service.findByKey();
-
-		HistoryBean historybean = new HistoryBean();
-
-		historybean.setMessage("aaa");
-
-		request.setAttribute("bean", historybean);
-
+		//request.setAttribute("bean", bean);
+		
 
 		//JSPに遷移
 		RequestDispatcher disp = request.getRequestDispatcher("/history.jsp");
@@ -54,7 +51,7 @@ public class HistoryServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 

@@ -15,8 +15,6 @@ public class MoneyNotesDto
 	private int PurchaseIntervalDays;
 
 
-
-
 	public int getMoneyNoteID() {
 		return MoneyNoteID;
 	}
