@@ -16,21 +16,17 @@ var navigation = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-success\">
                    + "</div>"
                    + "</nav>";
 
-var tab = "<ul class=\"nav nav-tabs my-3\">"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link active \">全員</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">自分</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">お気に入り</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">旅行</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">政治</a></li>"
-			  + "<li class=\"nav-item\"><a href=\"#\" class=\"nav-link \">料理</a></li>"
-			+ "</ul>";
+var blogModal = "";
 
-function makeTab(){
-	var h = document.getElementById("tab");
-	h.innerHTML += tab;
-//    var navElement = document.getElementById(id);
-//    navElement.classList.add("active");
-}
+var commentCard = "<div class=\"card my-3\">"
+					+	"<div class=\"card-body\">"
+					+		"<small>by tarou</small><br>"
+					+		"コンテンツ"
+					+	"</div>"
+					+	"<div class=\"card-footer\">フッタ</div>"
+					+"</div>";
+
+
 
 function header(id){
 		var h = document.getElementById("header");
@@ -39,12 +35,12 @@ function header(id){
         navElement.classList.add("active");
 	}
 
-function innerReply(replyUser, blogId, thisModalId){
-	var replyModal = "<div class=\"modal fade\" id=" + thisModalId + " tabinex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">"
+function innerReply(replyUser, blogId){
+	var replyModal = "<div class=\"modal fade\" id=\"myModal\" tabinex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">"
 	    + "<div class=\"modal-dialog\" role=\"document\">"
 		+   "<div class=\"modal-content\">"
 		+		"<div class=\"modal-header\">"
-		+			"<h5 class=\"modal-title\" id=\"exampleModalLabel\">コメント先：" + replyUser + "</h5>"
+		+			"<h5 class=\"modal-title\" id=\"exampleModalLabel\">返信先：" + replyUser + "</h5>"
 		+			"<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"閉じる\">"
 		+				"<span aria-hidden=\"true\">&times;</span>"
 		+			"</button>"
@@ -58,51 +54,20 @@ function innerReply(replyUser, blogId, thisModalId){
 		+			"</div>"
 		+			"<div class=\"modal-footer\">"
 		+				"<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">閉じる</button>"
-		+				"<button type=\"button\" class=\"btn btn-primary\">コメント</button>"
+		+				"<button type=\"button\" class=\"btn btn-primary\">返信</button>"
 		+			"</div>"
 		+		"</div>"
 		+	"</div>"
 		+"</div>";
 
 
-	var h = document.getElementById("replyModal");
+	var h = document.getElementById("commentModal");
 	h.innerHTML += replyModal;
 }
 
-function innerComment(user, content){
-	var commentCard = "<div class=\"card my-3\">"
-		+   "<h5 class=\"card-header\">"
-		+   user + "<br>"
-		+   "</h5>"
-		+	"<div class=\"card-body\">"
-		+		content
-		+	"</div>";
-
+function innerComment(){
 	var c = document.getElementById("commentBlog");
 	c.innerHTML += commentCard;
-}
-
-function innerMainBlog(title, userName, category, month, day, hour, minute, content, likeNum, thisId, replyId){
-	var mainBlogCard = "<div class=\"card my-3\">"
-		+	"<h5 class=\"card-header\">"
-		+		title
-		+		"<div class=\"float-right\">"
-		+			"<small class=\"text-muted\">" + month + "月" + day + "日" + hour + ":" + day + "</small><br>"
-		+		"</div>"
-		+		"<br>"
-		+		"<small>by" + userName + "</small>"
-		+		"<span class=\"badge badge-secondary mx-3\">" + category + "</span>"
-		+		"</h5>"
-		+	"<div class=\"card-body\" >"
-		+		content
-		+	"</div>"
-		+	"<div class=\"card-footer\">"
-		+		"<button class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#" + replyId + "\">コメント</button>"
-		+		"<i class=\"far fa-thumbs-up fa-2x align-middle mx-4\" style=\"color:skyblue\"></i>"
-		+       "<b style=\"color: skyblue;\">" + likeNum + "</b>"
-		+	"</div>"
-		+"</div>";
-
-	var c = document.getElementById("mainBlog");
-	c.innerHTML += mainBlogCard;
+//    var navElement = document.getElementById(id);
+//    navElement.classList.add("active");
 }
