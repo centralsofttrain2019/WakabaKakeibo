@@ -28,7 +28,6 @@ public class MoneyNotesDao {
 		PreparedStatement stmt = con.prepareStatement( FIND_ALL );
 
 		System.out.println("hisdao-1");
-
 		try {
 			ResultSet rs = stmt.executeQuery();
 
@@ -49,7 +48,6 @@ public class MoneyNotesDao {
 
 				dtoList.add(mnd);
 			}
-
 			return dtoList;
 		}
 		finally
@@ -58,5 +56,4 @@ public class MoneyNotesDao {
 				stmt.close();
 		}
 	}
-
 }

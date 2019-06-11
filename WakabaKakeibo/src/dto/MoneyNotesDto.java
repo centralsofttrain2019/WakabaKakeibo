@@ -6,12 +6,11 @@ public class MoneyNotesDto
 {
 	private int MoneyNoteID;
 	private int UserID;
+	private LocalDate PurchaseDate;
+	private String Type;
 	private int ProductID;
 	private int CategoryID;
 	private int NumberOfPurchase;
-	private LocalDate PurchaseDate;
-	private String Type;
-	private int PurchaseNumber;
 	private int Amount;
 	private int PurchaseIntervalDays;
 
@@ -48,12 +47,7 @@ public class MoneyNotesDto
 	public void setType(String type) {
 		Type = type;
 	}
-	public int getPurchaseNumber() {
-		return PurchaseNumber;
-	}
-	public void setPurchaseNumber(int purchaseNumber) {
-		PurchaseNumber = purchaseNumber;
-	}
+
 	public int getAmount() {
 		return Amount;
 	}

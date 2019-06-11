@@ -6,20 +6,18 @@ import java.util.List;
 
 import bean.MoneyNotesBean;
 import dao.Dao;
-import dao.HistoryDao;
+import dao.MoneyNotesDao;
 import dto.MoneyNotesDto;
 
-public class KakeiboService
+public class MoneyNotesService
 {
-	public MoneyNotesBean findByKey()
+	public MoneyNotesBean findAll()
 	{
 		MoneyNotesBean bean = new MoneyNotesBean();
-
-
 		//オートクローズ
 				try( Connection con= Dao.getConnection() )
 				{
-					HistoryDao dao = new HistoryDao(con);
+					MoneyNotesDao dao = new MoneyNotesDao(con);
 					List<MoneyNotesDto> historyList = dao.selectAll();
 					System.out.println("接続mess");
 
