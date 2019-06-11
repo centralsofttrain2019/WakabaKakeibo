@@ -11,25 +11,24 @@ import dto.MoneyNotesDto;
 
 public class MoneyNotesService
 {
-	public HistoryListBean findAll()
+	public HistoryListBean findAllHistoryList()
 	{
 		HistoryListBean bean = new HistoryListBean();
 		//オートクローズ
-				try( Connection con= Dao.getConnection() )
-				{
-					MoneyNotesDao dao = new MoneyNotesDao(con);
-					List<MoneyNotesDto> historyList = dao.selectAll();
+		try( Connection con= Dao.getConnection() )
+		{
+			MoneyNotesDao dao = new MoneyNotesDao(con);
+			List<MoneyNotesDto> historyList = dao.selectAllWithIDName();
 
-				}
-				catch( SQLException | ClassNotFoundException e )
-				{
-					e.printStackTrace();
-					throw new RuntimeException( e );
-				}
+			bean.setValueFromDto(historyList);
 
-
-				return bean;
-
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+		return bean;
 	}
 
 

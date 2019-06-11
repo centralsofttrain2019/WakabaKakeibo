@@ -4,73 +4,106 @@ import java.time.LocalDate;
 
 public class MoneyNotesDto
 {
-	private int MoneyNoteID;
-	private int UserID;
-	private LocalDate PurchaseDate;
-	private String Type;
-	private int ProductID;
-	private int CategoryID;
-	private int NumberOfPurchase;
-	private int Amount;
-	private int PurchaseIntervalDays;
+	private int moneyNoteID;
+	private int userID;
+	private LocalDate purchaseDate;
+	private String type;
+	private int productID;
+	private String productName;
+	private int categoryID;
+	private int numberOfPurchase;
+	private int amount;
+	private int purchaseIntervalDays;
+	private String categoryName;
 
-
-	public int getMoneyNoteID() {
-		return MoneyNoteID;
+	public int getMoneyNoteID()
+	{
+		return moneyNoteID;
 	}
-	public void setMoneyNoteID(int moneyNoteID) {
-		MoneyNoteID = moneyNoteID;
+	public void setMoneyNoteID(int moneyNoteID)
+	{
+		this.moneyNoteID = moneyNoteID;
 	}
-	public int getUserID() {
-		return UserID;
+	public int getUserID()
+	{
+		return userID;
 	}
-	public void setUserID(int userID) {
-		UserID = userID;
+	public void setUserID(int userID)
+	{
+		this.userID = userID;
 	}
-	public int getProductID() {
-		return ProductID;
+	public LocalDate getPurchaseDate()
+	{
+		return purchaseDate;
 	}
-	public void setProductID(int productID) {
-		ProductID = productID;
+	public void setPurchaseDate(LocalDate purchaseDate)
+	{
+		this.purchaseDate = purchaseDate;
 	}
-	public LocalDate getPurchaseDate() {
-		return PurchaseDate;
+	public String getType()
+	{
+		return type;
 	}
-	public void setPurchaseDate(LocalDate purchaseDate) {
-		PurchaseDate = purchaseDate;
+	public void setType(String type)
+	{
+		this.type = type;
 	}
-	public String getType() {
-		return Type;
+	public int getProductID()
+	{
+		return productID;
 	}
-	public void setType(String type) {
-		Type = type;
+	public void setProductID(int productID)
+	{
+		this.productID = productID;
 	}
-
-	public int getAmount() {
-		return Amount;
+	public String getProductName()
+	{
+		return productName;
 	}
-	public void setAmount(int amount) {
-		Amount = amount;
+	public void setProductName(String productName)
+	{
+		this.productName = productName;
 	}
-	public int getPurchaseIntervalDays() {
-		return PurchaseIntervalDays;
+	public int getCategoryID()
+	{
+		return categoryID;
 	}
-	public void setPurchaseIntervalDays(int purchaseIntervalDays) {
-		PurchaseIntervalDays = purchaseIntervalDays;
+	public void setCategoryID(int categoryID)
+	{
+		this.categoryID = categoryID;
 	}
-	public int getCategoryID() {
-		return CategoryID;
+	public int getNumberOfPurchase()
+	{
+		return numberOfPurchase;
 	}
-	public void setCategoryID(int categoryID) {
-		CategoryID = categoryID;
+	public void setNumberOfPurchase(int numberOfPurchase)
+	{
+		this.numberOfPurchase = numberOfPurchase;
 	}
-	public int getNumberOfPurchase() {
-		return NumberOfPurchase;
+	public int getAmount()
+	{
+		return amount;
 	}
-	public void setNumberOfPurchase(int numberOfPurchase) {
-		NumberOfPurchase = numberOfPurchase;
+	public void setAmount(int amount)
+	{
+		this.amount = amount;
 	}
-
+	public int getPurchaseIntervalDays()
+	{
+		return purchaseIntervalDays;
+	}
+	public void setPurchaseIntervalDays(int purchaseIntervalDays)
+	{
+		this.purchaseIntervalDays = purchaseIntervalDays;
+	}
+	public String getCategoryName()
+	{
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName)
+	{
+		this.categoryName = categoryName;
+	}
 
 
 

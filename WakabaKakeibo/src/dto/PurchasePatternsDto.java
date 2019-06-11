@@ -7,11 +7,11 @@ public class PurchasePatternsDto
 	private int purchasePatternID ;
 	private int userID;
 	private int productID;
+	private String productName;
 	private String datePatternType;
 	private LocalDate lastPurchaseDate;
 	private int numberPattern;
 	private int amountPattern;
-
 	public int getPurchasePatternID()
 	{
 		return purchasePatternID;
@@ -35,6 +35,14 @@ public class PurchasePatternsDto
 	public void setProductID(int productID)
 	{
 		this.productID = productID;
+	}
+	public String getProductName()
+	{
+		return productName;
+	}
+	public void setProductName(String productName)
+	{
+		this.productName = productName;
 	}
 	public String getDatePatternType()
 	{
@@ -68,7 +76,5 @@ public class PurchasePatternsDto
 	{
 		this.amountPattern = amountPattern;
 	}
-
-
 
 }
