@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
+import dto.MoneyNotesDto;
+
 public class ReconstructListBean
 {
 	private LocalDate todaysDate;
@@ -54,6 +56,9 @@ public class ReconstructListBean
 		this.reconstructList = reconstructList;
 	}
 
-
+	public void setValueFromDto(List<MoneyNotesDto> dto)
+	{
+		
+	}
 
 }

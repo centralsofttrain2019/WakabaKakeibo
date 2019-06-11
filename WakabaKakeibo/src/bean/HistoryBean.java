@@ -7,19 +7,12 @@ import dto.MoneyNotesDto;
 public class HistoryBean
 {
 	private String productName;
-	private int productID;
 	private LocalDate purchaseDate;
 	private String type;
 	private int categoryID;
 	private int amount;
 	private String categoryName;
 
-	public int getProductID() {
-		return productID;
-	}
-	public void setProductID(int productID) {
-		this.productID = productID;
-	}
 	public LocalDate getPurchaseDate() {
 		return purchaseDate;
 	}
@@ -52,7 +45,6 @@ public class HistoryBean
 	}
 
 	public void setValueFromDto(MoneyNotesDto dto) {
-		this.productID = dto.getProductID();
 		this.productName = dto.getProductName();
 		this.purchaseDate = dto.getPurchaseDate();
 		this.type = dto.getType();
