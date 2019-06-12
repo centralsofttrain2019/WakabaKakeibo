@@ -35,7 +35,7 @@
 <!-- 	</video> -->
 	<div class="embed-responsive embed-responsive-16by9">
   		<video autoplay style="height: 50vh;" loop>
-			<source src="normal.mp4">
+			<source src="logIn.mp4">
 		</video>
 	</div>
 
@@ -66,10 +66,6 @@
 <% } %>
 
 <script>setInterval(communicate, 200, strArray); </script>
-=======
-
-
->>>>>>> branch 'master' of https://github.com/centralsofttrain2019/WakabaKakeibo
 
 <!-- bootstrapのためのjqueryの読み込み -->
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
