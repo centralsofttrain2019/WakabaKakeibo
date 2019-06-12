@@ -5,6 +5,8 @@
   		class="bean.MBListBean"
   		scope="request" />
 
+<%@ page import="bean.MBCommentListBean" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,13 +26,13 @@
 	<script type="text/javascript">header("mBListNav");</script>
 
 
-<%-- <%= bean.toString() %> --%>
+<%= bean.getMbClb().toString() %>
 
-<% for(bean.MBBean b : bean.getbBeanList()){ %>
+<%-- <% for(bean.MBCommentBean b : bean.getMbClb().getMbCList()){ %> --%>
 
-			<%= b.getUserName() %>
+<%-- 			<%= b.getContent() %> --%>
 
-<% } %>
+<%-- <% } %> --%>
 
 
 </div>

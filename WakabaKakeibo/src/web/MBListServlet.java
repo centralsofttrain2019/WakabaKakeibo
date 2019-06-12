@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.MBCommentListBean;
 import bean.MBListBean;
 import service.UsersService;
 
@@ -34,14 +35,20 @@ public class MBListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		//CommentServletからのbeanを取得
+		MBCommentListBean mbCList = (MBCommentListBean) request.getAttribute("bean");
+
 		//サービスを取得
 		UsersService service = new UsersService();
 		MBListBean mbBeanList = service.findAllBlog();
 
+		//MBListBeanにMBCommentListBeanを持たせる
+		mbBeanList.setMbClb(mbCList);
+
 		request.setAttribute("bean", mbBeanList);
 
 		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/mBlist.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/test.jsp");
 		disp.forward(request, response);
 	}
 

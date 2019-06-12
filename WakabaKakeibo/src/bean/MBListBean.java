@@ -5,6 +5,15 @@ import java.util.List;
 public class MBListBean {
 
 	private List<MBBean> bBeanList;
+	private MBCommentListBean mbClb;
+
+	public MBCommentListBean getMbClb() {
+		return mbClb;
+	}
+
+	public void setMbClb(MBCommentListBean mbClb) {
+		this.mbClb = mbClb;
+	}
 
 	public List<MBBean> getbBeanList() {
 		return bBeanList;
@@ -16,7 +25,7 @@ public class MBListBean {
 
 	@Override
 	public String toString() {
-		return "MBListBean [bBeanList=" + bBeanList + "]";
+		return "MBListBean [bBeanList=" + bBeanList + ", mbClb=" + mbClb + "]";
 	}
 
 
