@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<jsp:useBean
+  		id="bean"
+  		class="bean.MBListBean"
+  		scope="request" />
 
 <!DOCTYPE html>
 <html>
@@ -29,39 +33,55 @@
 
 <div id="tab"></div>
 <script>makeTab("myTab");</script>
-<!-- <ul class="nav nav-tabs my-3"> -->
-<!--   <li class="nav-item"><a href="#" class="nav-link active">全員</a></li> -->
-<!--   <li class="nav-item"><a href="#" class="nav-link">自分</a></li> -->
-<!--   <li class="nav-item"><a href="#" class="nav-link">お気に入り</a></li> -->
-<!--   <li class="nav-item"><a href="#" class="nav-link">旅行</a></li> -->
-<!--   <li class="nav-item"><a href="#" class="nav-link">政治</a></li> -->
-<!--   <li class="nav-item"><a href="#" class="nav-link">料理</a></li> -->
-<!-- </ul> -->
 
-<button type="button" class="btn" data-toggle="modal" data-target="#blogModal1">ユーザ名　タイトル</button>
+<% for(bean.MBBean b : bean.getbBeanList()){ %>
+
+<% String blogModalIdTo = "#blogModal" + (b.getBlogID());
+	String blogModalId = "blogModal" + (b.getBlogID());
+	String mainBlogId = "mainBlog" + (b.getBlogID());
+	String replyModalId = "replyModal" + (b.getBlogID());
+	String mainBlogTagId = "mainBlog" + (b.getBlogID());
+	String commentBlogTagId = "commentBlogTagId" + (b.getBlogID());
+	%>
+
+<button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
+	<%= b.getUserName() %>　<%= b.getTitle() %>
+</button>
 
 
 <!--ブログモーダル-->
- <div class="modal fade" id="blogModal1" tabinex="-1" role="dialog" aria-labelledby="myModalLabel">
+ <div class="modal fade" id=<%= blogModalId %> tabinex="-1" role="dialog" aria-labelledby="myModalLabel">
 		   <div class="modal-dialog" role="document">
 			   <div class="modal-content">
 						<div class="modal-body">
 
 							<!--メインブログ-->
-							<div id="mainBlog"></div>
+							<div id=<%= mainBlogTagId %> ></div>
 
 <!-- 							メインのブログカードの生成 -->
 <!-- 							innerMainBlog() -->
-<!-- 					使い方：innerMainBlog('沖縄旅行', 'しんのすけ', '旅行', month, day, hour, day, '楽しい旅行でした', likeNum, このBlogId, "replyModal1") -->
-							<script type="text/javascript">innerMainBlog('沖縄旅行', 'しんのすけ', '旅行', 7, 12, 11, 29, '楽しい旅行でした', 3, "mainBlog1", "replyModal1")</script>
+<!-- 					使い方：innerMainBlog('沖縄旅行', 'しんのすけ', '旅行', month, day, hour, day, '楽しい旅行でした', likeNum, このBlogId, "replyModal1",MainBlogのタグID) -->
+							<script type="text/javascript">innerMainBlog(
+									'<%= b.getTitle() %>',
+									'<%= b.getUserName() %>',
+									'<%= b.getCategory() %>',
+									'<%= b.getCreateDate().getMonth() %>',
+									'<%= b.getCreateDate().getDayOfMonth() %>',
+									11,
+									29,
+									'<%= b.getContent() %>',
+									3,
+									'<%= mainBlogId %>',
+									'<%= replyModalId %>'
+									,'<%= mainBlogTagId %>')</script>
 
 							<!--コメントブログ-->
-							<div id="commentBlog">
+							<div id=<%= commentBlogTagId %>>
 <!-- 							JavaScriptによる挿入 -->
-<!-- 							innerComment('コメントするユーザ名', '内容') -->
-							<script type="text/javascript">innerComment('tarou','hello');</script>
-							<script type="text/javascript">innerComment('tarou','hello');</script>
-							<script type="text/javascript">innerComment('tarou','hello');</script>
+<!-- 							innerComment('コメントするユーザ名', '内容', コメントブログタグID) -->
+							<script type="text/javascript">innerComment('tarou','hello', '<%= commentBlogTagId %>');</script>
+							<script type="text/javascript">innerComment('tarou','hello', '<%= commentBlogTagId %>');</script>
+							<script type="text/javascript">innerComment('tarou','hello', '<%= commentBlogTagId %>');</script>
 
 							</div>
 						</div>
@@ -75,9 +95,9 @@
 <!-- 返信用モーダルの作成 -->
 <!-- 使い方：innerReplay(コメントするユーザー名、コメント先のブログID, 'このモーダルのID') -->
 <div id="replyModal"></div>
-<script type="text/javascript">innerReply('太郎',1,'replyModal1');</script>
+<script type="text/javascript">innerReply('<%= b.getUserName() %>', '<%= b.getBlogID() %>','<%= replyModalId %>');</script>
 
-
+<% } %>
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

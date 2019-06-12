@@ -13,16 +13,16 @@ import bean.MBListBean;
 import service.UsersService;
 
 /**
- * Servlet implementation class MBListServlet
+ * Servlet implementation class Test
  */
-@WebServlet("/MBListServlet")
-public class MBListServlet extends HttpServlet {
+@WebServlet("/Test")
+public class Test extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MBListServlet() {
+    public Test() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,6 +43,7 @@ public class MBListServlet extends HttpServlet {
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/mBlist.jsp");
 		disp.forward(request, response);
+
 	}
 
 	/**

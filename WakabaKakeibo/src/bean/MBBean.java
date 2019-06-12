@@ -1,11 +1,12 @@
-package dto;
+package bean;
 
 import java.time.LocalDate;
 
 import domain.BlogCategoryEnum;
+import dto.BlogsDto;
 
-public class BlogsDto
-{
+public class MBBean {
+
 	private int blogID;
 	private int userId;
 	private LocalDate createDate;
@@ -17,13 +18,6 @@ public class BlogsDto
 	private String image2;
 	private String userName;
 
-
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 	public String getImage1() {
 		return image1;
 	}
@@ -36,6 +30,7 @@ public class BlogsDto
 	public void setImage2(String image2) {
 		this.image2 = image2;
 	}
+
 
 	public int getBlogID()
 	{
@@ -53,8 +48,8 @@ public class BlogsDto
 	public LocalDate getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(LocalDate date) {
-		this.createDate = date;
+	public void setCreateDate(LocalDate createDate) {
+		this.createDate = createDate;
 	}
 	public String getTitle() {
 		return title;
@@ -85,11 +80,41 @@ public class BlogsDto
 	{
 		this.reblogID = reblogID;
 	}
-//	public int getReblog() {
-//		return reblogID;
-//	}
-//	public void setReblog(int reblogID) {
-//		this.reblogID = reblogID;
-//	}
+	public int getReblog() {
+		return reblogID;
+	}
+	public void setReblog(int reblogID) {
+		this.reblogID = reblogID;
+	}
+
+
+
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setDto(BlogsDto bDto) {
+		this.blogID = bDto.getBlogID();
+		this.category = bDto.getCategory();
+		this.content = bDto.getContent();
+		this.createDate = bDto.getCreateDate();
+		this.reblogID = bDto.getReblogID();
+		this.title = bDto.getTitle();
+		this.userId = bDto.getUserId();
+		this.image1 = bDto.getImage1();
+		this.image2 = bDto.getImage2();
+		this.userName = bDto.getUserName();
+	}
+
+	@Override
+	public String toString() {
+		return "MBBean [blogID=" + blogID + ", userId=" + userId + ", createDate=" + createDate + ", title=" + title
+				+ ", content=" + content + ", category=" + category + ", reblogID=" + reblogID + ", image1=" + image1
+				+ ", image2=" + image2 + "]";
+	}
+
 
 }

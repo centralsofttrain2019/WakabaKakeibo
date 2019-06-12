@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import bean.MBBean;
+import bean.MBListBean;
 import bean.MessageBean;
 import bean.MessageListBean;
+import dao.BlogsDao;
 import dao.MessageDao;
 import dto.MessageDto;
 
@@ -67,5 +70,35 @@ public class UsersService {
 
 		return bean;
 	}
+
+	public MBListBean findAllBlog()
+	{
+		MBListBean bean = new MBListBean();
+
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			BlogsDao bDao = new BlogsDao(con);
+			List<MBBean> bList = bDao.selectAll();
+
+			bean.setbBeanList(bList);
+
+			//bean.setEmpList(eList);
+			//System.out.println(mList);
+
+//			System.out.println("従業員の情報は以下です。\n"
+//								+ eList.toString()
+//								);
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+		return bean;
+	}
+
+
 
 }
