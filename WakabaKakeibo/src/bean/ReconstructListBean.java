@@ -1,5 +1,6 @@
 package bean;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +11,8 @@ public class ReconstructListBean
 {
 	private LocalDate todaysDate;
 
-	private HashMap<LocalDate, List<String>> purchaseCalendar;
-	private HashMap<LocalDate, List<String>> reconstructCalendar;
-
+	private HashMap<DayOfWeek, List<String>> purchaseCalendar;
+	private HashMap<DayOfWeek, List<String>> reconstructCalendar;
 	private List<ReconstructBean> purchaseList;
 	private List<ReconstructBean> reconstructList;
 	public LocalDate getTodaysDate()
@@ -23,19 +23,19 @@ public class ReconstructListBean
 	{
 		this.todaysDate = todaysDate;
 	}
-	public HashMap<LocalDate, List<String>> getPurchaseCalendar()
+	public HashMap<DayOfWeek, List<String>> getPurchaseCalendar()
 	{
 		return purchaseCalendar;
 	}
-	public void setPurchaseCalendar(HashMap<LocalDate, List<String>> purchaseCalendar)
+	public void setPurchaseCalendar(HashMap<DayOfWeek, List<String>> purchaseCalendar)
 	{
 		this.purchaseCalendar = purchaseCalendar;
 	}
-	public HashMap<LocalDate, List<String>> getReconstructCalendar()
+	public HashMap<DayOfWeek, List<String>> getReconstructCalendar()
 	{
 		return reconstructCalendar;
 	}
-	public void setReconstructCalendar(HashMap<LocalDate, List<String>> reconstructCalendar)
+	public void setReconstructCalendar(HashMap<DayOfWeek, List<String>> reconstructCalendar)
 	{
 		this.reconstructCalendar = reconstructCalendar;
 	}
