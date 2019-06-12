@@ -81,7 +81,9 @@ public class MoneyNotesDao {
 	public List<MoneyNotesDto> findByUserIDWithIDName(int userID) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_WITH_ID_NAME );
+		stmt.setInt(1, userID);
 		ResultSet rs = stmt.executeQuery();
+
 
 		List<MoneyNotesDto> dtoList = new ArrayList<MoneyNotesDto>();
 		while(rs.next())
@@ -94,11 +96,12 @@ public class MoneyNotesDao {
 			mnd.setType(MoneyNoteTypeEnum.valueOf(rs.getString("type")));
 			mnd.setProductID(rs.getInt("productID"));
 			mnd.setCategoryID(rs.getInt("categoryID"));
-			mnd.setNumberOfPurchase(rs.getInt("NumberOfParchase"));
+			mnd.setNumberOfPurchase(rs.getInt("NumberOfPurchase"));
 			mnd.setAmount(rs.getInt("amount"));
-			mnd.setPurchaseIntervalDays(rs.getInt("PurchaseIntervalID"));
+			mnd.setPurchaseIntervalDays(rs.getInt("PurchaseIntervalDays"));
 			mnd.setCategoryName(rs.getString("MoneyCategorys.CategoryName"));
 			dtoList.add(mnd);
+
 		}
 		if(stmt != null) stmt.close();
 		return dtoList;

@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<!--     pageEncoding="UTF-8"%> -->
 <jsp:useBean
 		id="bean"
-		class="bean.HistoryBean"
+		class="bean.HistoryListBean"
 		scope="request" />
 
 <!DOCTYPE html>
@@ -62,28 +63,18 @@
         2.バランスシート
     </div>
     </div>
-
-
 <br>
 <h1>購入履歴</h1>
 
 <div class="flex_testkabu ">
-    <div class="flex_test-item1 bg-primary "style= width:80%;>
-        履歴1
+<% if(bean.getHistoryList() != null) { %>
+<% for( bean.HistoryBean hd : bean.getHistoryList() ) { %>
+    <div class="flex_test-item1 bg-primary">
+        <%= hd.getPurchaseDate() %>
+        <%= hd.getProductName() %>
+        <%= hd.getAmount() %>
     </div>
-
-    <div class="flex_test-item1 bg-dark"style= width:80%;>
-        履歴2
-    </div>
-
-    <div class="flex_test-item1 bg-primary"style= width:80%;>
-        履歴3
-    </div>
-
-    <div class="flex_test-item1 bg-dark"style= width:80%;>
-        履歴4
-    </div>
-
+<% }} %>
 </div>
 </div>
 

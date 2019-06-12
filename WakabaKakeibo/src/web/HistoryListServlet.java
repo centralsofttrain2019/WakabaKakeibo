@@ -15,7 +15,7 @@ import service.MoneyNotesService;
 /**
  * Servlet implementation class HistoryServlet
  */
-@WebServlet("/HistoryServlet")
+@WebServlet("/HistoryListServlet")
 public class HistoryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,8 +34,10 @@ public class HistoryListServlet extends HttpServlet {
 		MoneyNotesService service = new MoneyNotesService();
 		HistoryListBean bean = service.findAllHistoryList(1); //引数にユーザID
 
+		request.setAttribute("bean",bean);
+
 		//JSPに遷移
-		RequestDispatcher disp = request.getRequestDispatcher("/history.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/historyList.jsp");
 		disp.forward(request, response);
 
 	}
