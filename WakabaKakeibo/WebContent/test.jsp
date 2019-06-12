@@ -14,6 +14,7 @@
 
 </head>
 <body>
+takayamatest
 <div class="container" style="height: 500px">
 
 	<div id="header"></div>
