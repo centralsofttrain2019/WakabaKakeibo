@@ -41,6 +41,19 @@ INSERT INTO messages(MessageID,MessageContent,MessageType,EventType) VALUES
 (14,'復元漏れがあるよ normal', 'NORMAL', 'RECONSTRUCT'),
 (15,'復元漏れがあるよ dislike', 'DISLIKE', 'RECONSTRUCT');
 
+INSERT INTO blogcomments(UserID, BLogID, CommentDate, Content) VALUES
+(1,2,"2019-05-12 15:25:07", "aaaaaaaaaaaaa"),
+(1,2,"2019-05-12 15:25:07", "aaaaaaaaaaaaa"),
+(1,2,"2019-05-12 15:25:07", "aaaaaaaaaaaaa"),
+(2,1,"2019-05-12 15:25:07", "bbbbbbbbbbbb"),
+(2,1,"2019-05-12 15:25:07", "bbbbbbbbbbbb"),
+(2,1,"2019-05-12 15:25:07", "bbbbbbbbbbbb"),
+(2,3,"2019-05-12 15:25:07", "ccccccccccccccc"),
+(2,3,"2019-05-12 15:25:07", "ccccccccccccccc"),
+(2,3,"2019-05-12 15:25:07", "ccccccccccccccc");
+
+
+
 INSERT INTO products(ProductID,ProductName) VALUES
 (101,'パン'),
 (102,'おにぎり'),
