@@ -43,40 +43,27 @@
 		  </thead>
 		  <tbody>
 		  	<tr>
-		      <td>	</td>
-		      <td>おにぎり	</td>
-		      <td>	</td>
-		      <td>卵	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		    </tr>
-		    <tr>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>卵<br>トイレットペーパー	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      </tr>
-		    <tr>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>卵	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
-		    </tr>
-		    <tr>
-		      <td>おにぎり	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td style="color:red">卵<br>トイレットペーパー	</td>
-		      <td>	</td>
-		      <td>	</td>
-		      <td>	</td>
+		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(6)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(5)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(4)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(3)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(2)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(1)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(0)) %>
+		      </td>
 		    </tr>
 		  </tbody>
 		</table>
@@ -93,36 +80,20 @@
 		    </tr>
 		  </thead>
 		  <tbody>
+		    <% for(bean.ReconstructBean rb : bean.getPurchaseList()){ %>
 		    <tr>
-		      <td>卵</td>
-		      <td>1</td>
-		      <td>180</td>
+		    	<td><%= rb.getProductName() %></td>
+		    	<td><%= rb.getNumberOfPurchase() %></td>
+		    	<td><%= rb.getAmount() %></td>
 		    </tr>
+		    <% } %>
+		    <% for(bean.ReconstructBean rb : bean.getReconstructList()){ %>
 		    <tr>
-		      <td>卵</td>
-		      <td>1</td>
-		      <td>180</td>
+		    	<td style="color:red"><%= rb.getProductName() %></td>
+		    	<td style="color:red"><%= rb.getNumberOfPurchase() %></td>
+		    	<td style="color:red"><%= rb.getAmount() %></td>
 		    </tr>
-		    <tr>
-		      <td>トイレットペーパー</td>
-		      <td>1</td>
-		      <td>450</td>
-		    </tr>
-		    <tr>
-		      <td>卵</td>
-		      <td>1</td>
-		      <td>180</td>
-		    </tr>
-		    <tr>
-		      <td style="color:red">卵</td>
-		      <td style="color:red">1</td>
-		      <td style="color:red">180</td>
-		    </tr>
-		    <tr>
-		      <td style="color:red">トイレットペーパー</td>
-		      <td style="color:red">1</td>
-		      <td style="color:red">450</td>
-		    </tr>
+		    <% } %>
 
 		  </tbody>
 		</table>

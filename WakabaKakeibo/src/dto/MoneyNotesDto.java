@@ -18,6 +18,38 @@ public class MoneyNotesDto
 	private int purchaseIntervalDays;
 	private String categoryName;
 
+
+	public MoneyNotesDto()
+	{
+		super();
+	}
+
+	public MoneyNotesDto(
+			int moneyNoteID,
+			int userID,
+			LocalDate purchaseDate,
+			MoneyNoteTypeEnum type,
+			int productID,
+			String productName,
+			int categoryID,
+			int numberOfPurchase,
+			int amount,
+			int purchaseIntervalDays,
+			String categoryName)
+	{
+		super();
+		this.moneyNoteID = moneyNoteID;
+		this.userID = userID;
+		this.purchaseDate = purchaseDate;
+		this.type = type;
+		this.productID = productID;
+		this.productName = productName;
+		this.categoryID = categoryID;
+		this.numberOfPurchase = numberOfPurchase;
+		this.amount = amount;
+		this.purchaseIntervalDays = purchaseIntervalDays;
+		this.categoryName = categoryName;
+	}
 	public int getMoneyNoteID()
 	{
 		return moneyNoteID;

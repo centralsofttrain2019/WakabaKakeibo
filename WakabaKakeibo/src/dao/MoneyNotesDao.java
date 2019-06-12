@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,4 +107,39 @@ public class MoneyNotesDao {
 		if(stmt != null) stmt.close();
 		return dtoList;
 	}
+
+	private static final String FIND_BY_USERID_DATE =
+			"SELECT * FROM MONEYNOTES "
+			+ "INNER JOIN Products ON MoneyNotes.ProductID = Products.ProductID "
+			+ "INNER JOIN MoneyCategorys ON MoneyNotes.CategoryID = MoneyCategorys.MoneyCategorysID "
+			+ "WHERE UserID = ? "
+			+ "AND PurchaseDate >= ? AND PurchaseDate <= ?";
+		public List<MoneyNotesDto> findByDate(int userID,LocalDate sinceDate, LocalDate untilDate) throws SQLException
+		{
+			PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_DATE );
+			stmt.setInt(1, userID);
+			stmt.setString(2, sinceDate.toString());
+			stmt.setString(3, untilDate.toString());
+			ResultSet rs = stmt.executeQuery();
+
+			List<MoneyNotesDto> dtoList = new ArrayList<MoneyNotesDto>();
+			while(rs.next())
+			{
+				MoneyNotesDto mnd = new MoneyNotesDto();
+				mnd.setProductName(rs.getString("Products.ProductName"));
+				mnd.setMoneyNoteID(rs.getInt("moneyNoteID"));
+				mnd.setUserID(rs.getInt("userID"));
+				mnd.setPurchaseDate(rs.getDate("purchaseDate").toLocalDate());
+				mnd.setType(MoneyNoteTypeEnum.valueOf(rs.getString("type")));
+				mnd.setProductID(rs.getInt("productID"));
+				mnd.setCategoryID(rs.getInt("categoryID"));
+				mnd.setNumberOfPurchase(rs.getInt("NumberOfParchase"));
+				mnd.setAmount(rs.getInt("amount"));
+				mnd.setPurchaseIntervalDays(rs.getInt("PurchaseIntervalID"));
+				mnd.setCategoryName(rs.getString("MoneyCategorys.CategoryName"));
+				dtoList.add(mnd);
+			}
+			if(stmt != null) stmt.close();
+			return dtoList;
+		}
 }

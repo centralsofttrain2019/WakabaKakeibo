@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import bean.ReconstructListBean;
 import dao.Dao;
 import dao.MoneyNotesDao;
 import dao.PurchasePatternsDao;
+import domain.MoneyNoteTypeEnum;
 import dto.MoneyNotesDto;
 import dto.PurchasePatternsDto;
 
@@ -41,15 +43,21 @@ public class MoneyNotesService
 		ReconstructListBean bean = new ReconstructListBean();
 		try( Connection con= Dao.getConnection() )
 		{
-			MoneyNotesDao mnDao = new MoneyNotesDao(con);
-			List<MoneyNotesDto> mnList = mnDao.findByUserIDWithIDName(userID);
+			//今日の日付を取得
+			LocalDate today = LocalDate.now();
 
+			//家計簿（全部の）データをテーブルから取得
+			MoneyNotesDao mnDao = new MoneyNotesDao(con);
+			List<MoneyNotesDto> mnList = mnDao.findByDate(userID,today.minusDays(6),today);
+
+			//購入パターンをテーブルから取得
 			PurchasePatternsDao ppDao = new PurchasePatternsDao(con);
 			List<PurchasePatternsDto> ppList = ppDao.findByUserID(userID);
 
-			List<MoneyNotesDto> reconsList = createReconstructList(mnList,ppList);
 
-			bean.setValueFromDto(mnList, reconsList);
+			List<MoneyNotesDto> reconsList = createReconstructList(mnList,ppList,today);
+
+			bean.setValueFromDto(mnList, reconsList, today);
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
@@ -60,13 +68,50 @@ public class MoneyNotesService
 	}
 
 	//家計簿の復元予想した後のデータを作成する
-	public List<MoneyNotesDto> createReconstructList(List<MoneyNotesDto> mnList, List<PurchasePatternsDto> ppList)
+	public List<MoneyNotesDto> createReconstructList(List<MoneyNotesDto> mnList, List<PurchasePatternsDto> ppList, LocalDate today)
 	{
+		//復元すべき商品リスト
 		List<MoneyNotesDto> reconsList = new ArrayList<MoneyNotesDto>();
-		
+		int intervalDays = 0;
+
 		for(PurchasePatternsDto pp: ppList)
 		{
-			 pp.getProductID();
+			LocalDate lastDay = pp.getLastPurchaseDate();
+			LocalDate nextDay = null;
+
+			switch(pp.getDatePatternType()) {
+			case ONEWEEK:
+				nextDay = lastDay.plusDays(7);
+				intervalDays = 7;
+				break;
+			case TWOWEEKS:
+				nextDay = lastDay.plusDays(14);
+				intervalDays = 14;
+				break;
+			case THREEWEEKS:
+				nextDay = lastDay.plusDays(21);
+				intervalDays = 21;
+				break;
+			}
+
+			//
+			if(nextDay.isAfter(today.minusDays(7)) && nextDay.isAfter(today))
+			{
+				MoneyNotesDto reconsData = new MoneyNotesDto(
+						0,  //インサート時に自動採番させる
+						pp.getUserID(),
+						nextDay,
+						MoneyNoteTypeEnum.EXPENSE,
+						pp.getProductID(),
+						"", //商品名は必要ない
+						pp.getProductID()/100 ,
+						pp.getNumberPattern(),
+						pp.getAmountPattern(),
+						intervalDays,
+						"" //カテゴリー名は必要ない
+						);
+				reconsList.add(reconsData);
+			}
 		}
 
 		return reconsList;
