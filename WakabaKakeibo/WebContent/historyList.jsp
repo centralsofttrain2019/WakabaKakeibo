@@ -26,14 +26,14 @@
 
 <h1 class="my-3"> 履歴</h1>
 <hr size="1">
-
+<form>
 <select name="year">
 <option value="">-</option>
 
-<option value="2016">2016</option>
+<option value="2016"  >2016</option>
 <option value="2017">2017</option>
 <option value="2018">2018</option>
-<option value="2019">2019</option>
+<option value="2019" selected>2019</option>
 
 </select>　年
 
@@ -44,7 +44,7 @@
 <option value="3">3</option>
 <option value="4">4</option>
 <option value="5">5</option>
-<option value="6">6</option>
+<option value="6" selected>6</option>
 <option value="7">7</option>
 <option value="8">8</option>
 <option value="9">9</option>
@@ -52,7 +52,7 @@
 <option value="11">11</option>
 <option value="12">12</option>
 </select>　月
-
+</form>
 <br>
 <div class="flex_testjoubu ">
     <div class="flex_test-item bg-secondary "id="graph" style=float:left; >
@@ -69,7 +69,7 @@
 <div class="flex_testkabu ">
 <% if(bean.getHistoryList() != null) { %>
 <% for( bean.HistoryBean hd : bean.getHistoryList() ) { %>
-    <div class="flex_test-item1 bg-primary">
+    <div class="flex_test-item1 bg-primary"style=width:100%;>
         <%= hd.getPurchaseDate() %>
         <%= hd.getProductName() %>
         <%= hd.getAmount() %>
