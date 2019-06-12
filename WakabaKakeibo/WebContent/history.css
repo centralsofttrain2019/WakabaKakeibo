@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+.flex_test-item {
+    padding: 10px;
+    color:  #004080;               /* 文字色 */
+    margin:  10px;              /* 外側の余白 */
+    border-radius:  5px;        /* 角丸指定 */
+}
+
+
+.flex_test-item1 {
+    padding: 10px;
+    color:  #000080;               /* 文字色 */
+    margin:  10px;              /* 外側の余白 */
+    border-radius:  5px;        /* 角丸指定 */
+
+}
+
+.flex_testjoubu {
+/*     background-color:  #c0c0c0; 背景色指定 */
+/*     display: inline-flex; */
+display:flex;
+
+
+}
+
+.flex_testkabu {
+    background-color:  #c0c0c0; /* 背景色指定 */
+}
+
+
+#graph {
+	color: red;
+	width: 800px;
+	height: 400px;
+	}
