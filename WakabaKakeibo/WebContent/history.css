@@ -1,37 +1,36 @@
 @charset "UTF-8";
 
-
-.flex_test-item {
-    padding: 10px;
-    color:  #004080;               /* 文字色 */
-    margin:  10px;              /* 外側の余白 */
-    border-radius:  5px;        /* 角丸指定 */
+.flex_testjoubu
+{
+	background-color: #800080; 背景色指定 */ display : inline-flex;
+	/*  	 display:flex; */
+	padding: 150px;
+	display: inline-block;
 }
 
-
-.flex_test-item1 {
-    padding: 10px;
-    color:  #000080;               /* 文字色 */
-    margin:  10px;              /* 外側の余白 */
-    border-radius:  5px;        /* 角丸指定 */
-
-}
-
-.flex_testjoubu {
-/*     background-color:  #c0c0c0; 背景色指定 */
-/*     display: inline-flex; */
-display:flex;
-
-
+.flex_test-item
+{
+	padding: 150px;
+	color: #004080; /* 文字色 */
+	margin: 10px; /* 外側の余白 */
+	padding: 100px border-radius:  5px; /* 角丸指定 */
+	width: 45%;
+	height: 45%;
+	display: inline-block;
 }
 
 .flex_testkabu {
-    background-color:  #c0c0c0; /* 背景色指定 */
+	background-color: #c0c0c0; /* 背景色指定 */
+	/*     margin:  10px;              外側の余白 */
+	border-radius: 50px; /*角丸指定 */
+	padding: 10px;
+	height: 500px;
 }
 
-
-#graph {
-	color: red;
-	width: 800px;
-	height: 400px;
-	}
+.flex_test-item1 {
+	padding: 30px;
+	margin: 20px; /* 外側の余白 */
+	color: #800040; /* 文字色 */
+	border-radius: 10px; /*角丸指定 */
+	width: 10px;
+}

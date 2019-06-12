@@ -10,7 +10,7 @@
 <head>
 <meta   charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="h41.css">
+ <link rel="stylesheet" type="text/css" href="history.css">
 <title>円グラフと履歴</title>
 
 <!-- javascript読み込み -->
@@ -34,7 +34,6 @@
 <option value="2018">2018</option>
 <option value="2019">2019</option>
 
-
 </select>　年
 
 <select name="month">
@@ -54,37 +53,40 @@
 </select>　月
 
 <br>
-<div class="flex_testjoubu mt-5 ">
-    <div class="flex_test-item bg-primary" id="graph">
-        1.コンテンツが入ります。
+<div class="flex_testjoubu ">
+    <div class="flex_test-item bg-secondary "id="graph" style=float:left; >
+        1.円グラフ
+    </div>
+        <div class="flex_test-item bg-warning " style=float:right;
+         id="shuushi">
+        2.バランスシート
+    </div>
+    </div>
 
+
+<br>
+<h1>購入履歴</h1>
+
+<div class="flex_testkabu ">
+    <div class="flex_test-item1 bg-primary "style= width:80%;>
+        履歴1
     </div>
-        <div class="flex_test-item bg-primary" id="shuushi">
-        2.コンテンツが入ります。
+
+    <div class="flex_test-item1 bg-dark"style= width:80%;>
+        履歴2
     </div>
+
+    <div class="flex_test-item1 bg-primary"style= width:80%;>
+        履歴3
+    </div>
+
+    <div class="flex_test-item1 bg-dark"style= width:80%;>
+        履歴4
+    </div>
+
+</div>
 </div>
 
-
-<div class="flex_testkabu mt-5">
-    <div class="flex_test-item1 bg-primary">
-        3.コンテンツが入ります。
-    </div>
-
-    <div class="flex_test-item1 bg-primary">
-        4.コンテンツが入ります。
-    </div>
-
-    <div class="flex_test-item1 bg-primary">
-        5.コンテンツが入ります。
-    </div>
-
-    <div class="flex_test-item1 bg-primary">
-        6.コンテンツが入ります。
-    </div>
-
-</div>
-
-</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
 
