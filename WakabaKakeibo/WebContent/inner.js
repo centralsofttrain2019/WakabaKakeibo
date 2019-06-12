@@ -69,7 +69,7 @@ function innerReply(replyUser, blogId, thisModalId){
 	h.innerHTML += replyModal;
 }
 
-function innerComment(user, content){
+function innerComment(user, content, commentBlogTagId){
 	var commentCard = "<div class=\"card my-3\">"
 		+   "<h5 class=\"card-header\">"
 		+   user + "<br>"
@@ -78,11 +78,11 @@ function innerComment(user, content){
 		+		content
 		+	"</div>";
 
-	var c = document.getElementById("commentBlog");
+	var c = document.getElementById(commentBlogTagId);
 	c.innerHTML += commentCard;
 }
 
-function innerMainBlog(title, userName, category, month, day, hour, minute, content, likeNum, thisId, replyId){
+function innerMainBlog(title, userName, category, month, day, hour, minute, content, likeNum, thisId, replyId, mainBlogTagId){
 	var mainBlogCard = "<div class=\"card my-3\">"
 		+	"<h5 class=\"card-header\">"
 		+		title
@@ -103,6 +103,6 @@ function innerMainBlog(title, userName, category, month, day, hour, minute, cont
 		+	"</div>"
 		+"</div>";
 
-	var c = document.getElementById("mainBlog");
+	var c = document.getElementById(mainBlogTagId);
 	c.innerHTML += mainBlogCard;
 }

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<jsp:useBean
+  		id="bean"
+  		class="bean.MBListBean"
+  		scope="request" />
 
 <!DOCTYPE html>
 <html>
@@ -19,81 +23,15 @@
 	<div id="header"></div>
 	<script type="text/javascript">header("mBListNav");</script>
 
-<div class="my-3" style="display: flex; align-items: center;">
-	<h3 class="my-3">ミニブログ一覧</h3>
-	<div>
-		<button type="button" class="btn btn-primary mx-5">追加</button>
-	</div>
-</div>
 
-<button type="button" class="btn" data-toggle="modal" data-target="#blog1">ユーザ名　タイトル</button>
+<%-- <%= bean.toString() %> --%>
 
-<div id="commentModal"></div>
-<script type="text/javascript">innerReply('太郎',1);</script>
+<% for(bean.MBBean b : bean.getbBeanList()){ %>
 
-<!--ブログモーダル-->
- <div class="modal fade" id="blog1" tabinex="-1" role="dialog" aria-labelledby="myModalLabel">
-		   <div class="modal-dialog" role="document">
-			   <div class="modal-content">
-						<div class="modal-body">
+			<%= b.getUserName() %>
 
-							<!--メインブログ-->
-							<div class="card my-3" data-toggle="modal" data-target="#blog1">
-								<h5 class="card-header">
-									最近の家計簿について
-									<div class="float-right">
-										<small class="text-muted">11月12日11:22</small><br>
-									</div>
-									<br>
-									<small>by tarou</small>
-									<span class="badge badge-secondary mx-3">国</span>
-									</h5>
-								<div class="card-body" >
-									コンテンツコンテンツコンテンツコンテンツコンテンツコンテンツコンテンツ
-								</div>
-								<div class="card-footer">
-									<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">返信</button>
-									<i class="far fa-thumbs-up fa-2x align-middle mx-4" style="color:skyblue"></i>
-								</div>
-							</div>
+<% } %>
 
-							<!--返信ブログ-->
-							<div id="commentBlog">
-							<script type="text/javascript">innerComment();</script>
-							<div class="card my-3">
-								<!--<h5 class="card-header">
-									最近の家計簿について <br>
-
-									<span class="badge badge-secondary mx-3">国</span>
-									</h5>-->
-								<div class="card-body">
-									<small>by tarou</small><br>
-									コンテンツ
-								</div>
-								<div class="card-footer">フッタ</div>
-							</div>
-							<div class="card my-3">
-								<h5 class="card-header">
-									最近の家計簿について <br>
-									<small>by tarou</small>
-									<span class="badge badge-secondary mx-3">国</span>
-									</h5>
-								<div class="card-body">
-									コンテンツ
-								</div>
-								<div class="card-footer">フッタ</div>
-							</div>
-
-							</div>
-						</div>
-						<div class="modal-footer">
-
-
-
-						</div>
-					</div>
-				</div>
-			</div>
 
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
