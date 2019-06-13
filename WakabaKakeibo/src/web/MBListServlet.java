@@ -1,6 +1,8 @@
 package web;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.MBCommentListBean;
+import bean.MBCommentBean;
 import bean.MBListBean;
 import service.UsersService;
 
@@ -36,19 +38,19 @@ public class MBListServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		//CommentServletからのbeanを取得
-		MBCommentListBean mbCList = (MBCommentListBean) request.getAttribute("bean");
+		Map<Integer, List<MBCommentBean>> map = (Map<Integer, List<MBCommentBean>>)request.getAttribute("bean");
 
 		//サービスを取得
 		UsersService service = new UsersService();
 		MBListBean mbBeanList = service.findAllBlog();
 
 		//MBListBeanにMBCommentListBeanを持たせる
-		mbBeanList.setMbClb(mbCList);
+		mbBeanList.setMap(map);
 
 		request.setAttribute("bean", mbBeanList);
 
 		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/test.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/mBlist.jsp");
 		disp.forward(request, response);
 	}
 

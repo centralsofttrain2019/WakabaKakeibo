@@ -8,8 +8,16 @@ public class MBCommentDto {
 	private int blogID;
 	private Timestamp commentDate;
 	private String Content;
+	private String userName;
 
 
+
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getCommentID() {
 		return commentID;
 	}
@@ -43,7 +51,7 @@ public class MBCommentDto {
 
 	@Override
 	public String toString() {
-		return "MBCommentBean [commentID=" + commentID + ", userID=" + userID + ", blogID=" + blogID + ", commentDate="
-				+ commentDate + ", Content=" + Content + "]";
+		return "MBCommentDto [commentID=" + commentID + ", userID=" + userID + ", blogID=" + blogID + ", commentDate="
+				+ commentDate + ", Content=" + Content + ", userName=" + userName + "]";
 	}
 }

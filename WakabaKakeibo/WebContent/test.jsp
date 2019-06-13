@@ -6,6 +6,8 @@
   		scope="request" />
 
 <%@ page import="bean.MBCommentListBean" %>
+<%@ page import="bean.MBCommentBean" %>
+<%@ page import="java.util.Map" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,12 +28,39 @@
 	<script type="text/javascript">header("mBListNav");</script>
 
 
-<%= bean.getMbClb().toString() %>
+"<div class="modal fade" id=" + thisModalId + " tabinex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    + <div class="modal-dialog" role="document">
+		+   <div class="modal-content">
+		+		<div class="modal-header">
+		+			<h5 class="modal-title" id="exampleModalLabel">コメント先：" + replyUser + </h5>
+		+			<button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+		+				<span aria-hidden="true">&times;</span>
+		+			</button>
+		+			</div>
+		+			<div class="modal-body">
+		+				<form>
+		+					<div class="form-group">
+		+						<textarea class="form-control" id="FormControlTextarea1" placeholder="返信を書き込む"></textarea>
+		+					</div>
+		+				</form>
+		+			</div>
+		+			<div class="modal-footer">
+		+				<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+		+				<button type="button" class="btn btn-primary">コメント</button>
+		+			</div>
+		+		</div>
+		+	</div>
+		+</div>;
 
 <%-- <% for(bean.MBCommentBean b : bean.getMbClb().getMbCList()){ %> --%>
 
 <%-- 			<%= b.getContent() %> --%>
 
+<%-- <% } %> --%>
+
+<!-- テキスト出力 -->
+<%-- <%  for (Map.Entry<Integer, List<MBCommentBean>> entry : bean.getMap().entrySet()) { %> --%>
+<%--     <%= (entry.getKey() + ": " + entry.getValue()) %> --%>
 <%-- <% } %> --%>
 
 

@@ -1,6 +1,9 @@
 package web;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.MBCommentBean;
 import bean.MBCommentListBean;
 import service.BlogService;
 
@@ -38,7 +42,10 @@ public class CommentServlet extends HttpServlet {
 		BlogService service = new BlogService();
 		MBCommentListBean mbCBeanList = service.findAllComment();
 
-		request.setAttribute("bean", mbCBeanList);
+		// aでグルーピングする
+		Map<Integer, List<MBCommentBean>> map1 = mbCBeanList.getMbCList().stream().collect(Collectors.groupingBy(o -> o.getBlogID()));
+
+		request.setAttribute("bean", map1);
 
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/MBListServlet");

@@ -5,6 +5,9 @@
   		class="bean.MBListBean"
   		scope="request" />
 
+<%@ page import="bean.MBCommentListBean" %>
+<%@ page import="bean.MBCommentBean" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,10 +82,9 @@
 							<div id=<%= commentBlogTagId %>>
 <!-- 							JavaScriptによる挿入 -->
 <!-- 							innerComment('コメントするユーザ名', '内容', コメントブログタグID) -->
-							<script type="text/javascript">innerComment('tarou','hello', '<%= commentBlogTagId %>');</script>
-							<script type="text/javascript">innerComment('tarou','hello', '<%= commentBlogTagId %>');</script>
-							<script type="text/javascript">innerComment('tarou','hello', '<%= commentBlogTagId %>');</script>
-
+							<% for(bean.MBCommentBean bComment : bean.getMap().get(b.getBlogID())){ %>
+							<script type="text/javascript">innerComment('<%= bComment.getUserName() %>','<%= bComment.getContent() %>', '<%= commentBlogTagId %>');</script>
+							<% } %>
 							</div>
 						</div>
 						<div class="modal-footer">

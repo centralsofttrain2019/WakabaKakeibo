@@ -5,11 +5,22 @@ import java.sql.Timestamp;
 import dto.MBCommentDto;
 
 public class MBCommentBean {
+
+
 	private int commentID;
 	private int userID;
 	private int blogID;
 	private Timestamp commentDate;
 	private String Content;
+	private String userName;
+
+
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getCommentID() {
 		return commentID;
 	}
@@ -43,7 +54,7 @@ public class MBCommentBean {
 	@Override
 	public String toString() {
 		return "MBCommentBean [commentID=" + commentID + ", userID=" + userID + ", blogID=" + blogID + ", commentDate="
-				+ commentDate + ", Content=" + Content + "]";
+				+ commentDate + ", Content=" + Content + ", userName=" + userName + "]";
 	}
 
 	public void setDto(MBCommentDto mbCDto) {
@@ -52,5 +63,6 @@ public class MBCommentBean {
 		this.commentID = mbCDto.getCommentID();
 		this.Content = mbCDto.getContent();
 		this.userID = mbCDto.getUserID();
+		this.userName = mbCDto.getUserName();
 	}
 }

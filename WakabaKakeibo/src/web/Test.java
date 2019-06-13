@@ -38,6 +38,7 @@ public class Test extends HttpServlet {
 		UsersService service = new UsersService();
 		MBListBean mbBeanList = service.findAllBlog();
 
+
 		request.setAttribute("bean", mbBeanList);
 
 		//JSPに遷移する
