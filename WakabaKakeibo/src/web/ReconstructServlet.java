@@ -14,14 +14,14 @@ import bean.ReconstructBean;
 /**
  * Servlet implementation class ReconstructServlet
  */
-@WebServlet("/ReconstructListServlet")
-public class ReconstructListServlet extends HttpServlet {
+@WebServlet("/ReconstructServlet")
+public class ReconstructServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReconstructListServlet() {
+    public ReconstructServlet() {
         super();
     }
 
@@ -34,7 +34,7 @@ public class ReconstructListServlet extends HttpServlet {
 
 
 		//JSPに遷移する
-				RequestDispatcher disp = request.getRequestDispatcher("/reconstructList.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("/reconstruct.jsp");
 				disp.forward(request, response);
 	}
 

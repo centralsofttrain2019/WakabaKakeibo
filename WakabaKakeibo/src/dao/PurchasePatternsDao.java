@@ -38,7 +38,6 @@ public class PurchasePatternsDao
 			dto.setPurchasePatternID(rs.getInt("PurchasePatternID"));
 			dto.setUserID(rs.getInt("UserID"));
 			dto.setProductID(rs.getInt("Products.ProductID"));
-			dto.setProductName(rs.getString("ProductName"));
 			dto.setDatePatternType(DatePatternTypeEnum.valueOf(rs.getString("DatePatternType")));
 			dto.setLastPurchaseDate(rs.getDate("LastPurchaseDate").toLocalDate());
 			dto.setNumberPattern(rs.getInt("NumberPattern"));

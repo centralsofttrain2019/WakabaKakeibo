@@ -32,29 +32,38 @@
 <!--   <caption>テーブルの表題</caption> -->
 		  <thead>
 		    <tr>
-		      <% for(int i=6;i>=0;i--){ %>
-		      <th whidth="400" scope="col">
-		        <%= bean.getDispDay().get(i).getDayOfWeek() %><br>
-		        <%= bean.getDispDay().get(i).toString() %>
-		      </th>
-		      <% } %>
+		      <th whidth="400" scope="col">日</th>
+		      <th whidth="400" scope="col">月</th>
+		      <th whidth="400" scope="col">火</th>
+		      <th whidth="400" scope="col">水</th>
+		      <th whidth="400" scope="col">木</th>
+		      <th whidth="400" scope="col">金</th>
+		      <th whidth="400" scope="col">日</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	<tr>
-		      <% for(int i=6;i>=0;i--){ %>
-		      	<td>
-		      	  <% for(String s: bean.getPurchaseCalendar().get(bean.getDispDay().get(i))){ %>
-		      	  	<%= s %><br>
-		      	  <% } %>
-
-		      	  <font color="#ff0000">
-		      	  <% for(String s: bean.getReconstructCalendar().get(bean.getDispDay().get(i))){ %>
-		      	  	<%= s %><br>
-		      	  <% } %>
-		      	  </font>
-		      	</td>
-		      <% } %>
+		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(6)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(5)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(4)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(3)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(2)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(1)) %>
+		      </td>
+		      		      <td>
+		        <%= bean.getPurchaseCalendar().get(bean.getDispDay().get(0)) %>
+		      </td>
 		    </tr>
 		  </tbody>
 		</table>
@@ -85,6 +94,7 @@
 		    	<td style="color:red"><%= rb.getAmount() %></td>
 		    </tr>
 		    <% } %>
+
 		  </tbody>
 		</table>
 

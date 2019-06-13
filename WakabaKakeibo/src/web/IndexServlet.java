@@ -36,6 +36,7 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
 				//ユーザの好感度の取得
 				//ここではユーザの好感度は0－2を考えている
 				//とりあえず0を代入する

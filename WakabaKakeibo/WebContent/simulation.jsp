@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:useBean
-  		id="bean"
-  		class="bean.TestBean"
-  		scope="request" />
-
-<%-- <%@ page import="bean.MBCommentListBean" %> --%>
-<%-- <%@ page import="bean.MBCommentBean" %> --%>
-<%-- <%@ page import="java.util.Map" %> --%>
 
 <!DOCTYPE html>
 <html>
@@ -17,14 +9,18 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Insert title here</title>
 
-<!-- inner.jsの読み込み -->
-<script type="text/javascript" src="./test.js"></script>
-
+<!-- javascript読み込み -->
+<script type="text/javascript" src="inner.js"></script>
 </head>
 <body>
 <div class="container" style="height: 500px">
+<!-- ヘッダー部 -->
+<div id="header"></div>
+<script type="text/javascript">header("simulationNav");</script>
 
-<%= bean.toString() %>
+
+<h3 class="my-3">シミュレーション</h3>
+<div class="bg-light h-75">シミュレーション図</div>
 
 
 </div>

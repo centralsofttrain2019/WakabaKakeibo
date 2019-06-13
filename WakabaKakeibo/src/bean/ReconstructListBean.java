@@ -11,15 +11,10 @@ public class ReconstructListBean
 {
 	private LocalDate todaysDate;
 
-	//一週間のカレンダーの各曜日の購入リスト
 	private HashMap<LocalDate, List<String>> purchaseCalendar;
 	private HashMap<LocalDate, List<String>> reconstructCalendar;
-
-	//一覧リストの家計簿データ
 	private List<ReconstructBean> purchaseList;
 	private List<ReconstructBean> reconstructList;
-
-	//一週間の日付（get(0):今日の日付,...,get(6):6日前の日付）
 	private List<LocalDate> dispDay;
 
 	public List<LocalDate> getDispDay()
@@ -78,37 +73,33 @@ public class ReconstructListBean
 		reconstructCalendar = new HashMap<LocalDate, List<String>>();
 		reconstructList = new ArrayList<ReconstructBean>();
 
-		//各リストの初期化と各曜日の日にちを格納
-		dispDay = new ArrayList<LocalDate>();
-		for(int i=0; i<7; i++)
-		{
-			dispDay.add(today.minusDays(i));
-			List<String> list = new ArrayList<String>();
-			List<String> list2 = new ArrayList<String>();
-
-			purchaseCalendar.put(today.minusDays(i),list);
-			reconstructCalendar.put(today.minusDays(i),list2);
-		}
-
-		//既存の家計簿データをカレンダーのリストと一覧リストに格納
 		for(MoneyNotesDto dto: mnList)
 		{
 			ReconstructBean bean = new ReconstructBean();
 			bean.setValueFromDto(dto);
+			this.purchaseList.add(bean);
 
-			purchaseList.add(bean);
 			purchaseCalendar.get(dto.getPurchaseDate()).add(dto.getProductName());
 		}
 
-		//復旧する家計簿データをカレンダーのリストと一覧リストに格納
 		for(MoneyNotesDto dto: reconsList)
 		{
 			ReconstructBean bean = new ReconstructBean();
 			bean.setValueFromDto(dto);
+			this.reconstructList.add(bean);
 
-			reconstructList.add(bean);
-			reconstructCalendar.get(dto.getPurchaseDate()).add(dto.getProductName());
+			purchaseCalendar.get(dto.getPurchaseDate()).add(dto.getProductName());
 		}
+
+
+		dispDay = new ArrayList();
+		dispDay.add(today);
+		dispDay.add(today.minusDays(1));
+		dispDay.add(today.minusDays(2));
+		dispDay.add(today.minusDays(3));
+		dispDay.add(today.minusDays(4));
+		dispDay.add(today.minusDays(5));
+		dispDay.add(today.minusDays(6));
 	}
 
 }

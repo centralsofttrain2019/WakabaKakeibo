@@ -82,15 +82,4 @@ public class PurchasePatternsDto
 		this.datePatternType = datePatternType;
 	}
 
-	@Override
-	public String toString()
-	{
-		return "PurchasePatternsDto [purchasePatternID=" + purchasePatternID + ", userID=" + userID + ", productID="
-				+ productID + ", productName=" + productName + ", datePatternType=" + datePatternType
-				+ ", lastPurchaseDate=" + lastPurchaseDate + ", numberPattern=" + numberPattern + ", amountPattern="
-				+ amountPattern + "]";
-	}
-
-
-
 }

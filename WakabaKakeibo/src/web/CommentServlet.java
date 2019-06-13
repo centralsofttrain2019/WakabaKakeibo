@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,6 +38,14 @@ public class CommentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		//コメントの取得
+		String content = (String)request.getAttribute("comment");
+		//時間の取得
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		//コメントユーザー名の取得
+
+
 
 		//サービスを取得
 		BlogService service = new BlogService();

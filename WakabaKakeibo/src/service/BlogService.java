@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import bean.MBCommentBean;
@@ -36,6 +37,23 @@ public class BlogService {
 		}
 
 		return bean;
+	}
+
+	public void innerComment(int UserID, int BLogID, Timestamp CommentDate, String Content)
+	{
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			CommentDao bDao = new CommentDao(con);
+			bDao.insertComment(UserID, BLogID, CommentDate, Content);
+
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
 	}
 
 }

@@ -6,7 +6,7 @@ var navigation = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-success\">
                    + "<div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">"
                    +    "<div class=\"navbar-nav\">"
                    +     "<a class=\"nav-item nav-link\" id=\"indexNav\" href=\"#\">チャット<span class=\"sr-only\">(現位置)</span></a>"
-                   +     "<a class=\"nav-item nav-link\" id=\"reconstructNav\" href=\"ReconstructListServlet\">復元確認</a>"
+                   +     "<a class=\"nav-item nav-link\" id=\"reconstructNav\" href=\"ReconstructServlet\">復元確認</a>"
                    +     "<a class=\"nav-item nav-link\" id=\"settingNav\" href=\"\">設定</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"mBListNav\" href=\"MBListServlet\">ミニブログ一覧</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"mBListEditNav\" href=\"#\">ミニブログ編集</a>"
@@ -39,7 +39,7 @@ function header(id){
         navElement.classList.add("active");
 	}
 
-function innerReply(replyUser, blogId, thisModalId){
+function innerReply(replyUser, blogId, thisModalId, replyModalTagId, replySubmitId, replyFormId){
 	var replyModal = "<div class=\"modal fade\" id=" + thisModalId + " tabinex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">"
 	    + "<div class=\"modal-dialog\" role=\"document\">"
 		+   "<div class=\"modal-content\">"
@@ -50,22 +50,23 @@ function innerReply(replyUser, blogId, thisModalId){
 		+			"</button>"
 		+			"</div>"
 		+			"<div class=\"modal-body\">"
-		+				"<form>"
+		+				"<form action=\"Test\" id=\"" + replyFormId +"\">"
 		+					"<div class=\"form-group\">"
-		+						"<textarea class=\"form-control\" id=\"FormControlTextarea1\" placeholder=\"返信を書き込む\"></textarea>"
+		+						"<textarea class=\"form-control\" name=\"formControlTextarea\" placeholder=\"返信を書き込む\">" + replySubmitId + "</textarea>"
+		+						"<input type=\"hidden\" name=\"blogID\" value=\"" + blogId + "\">"
 		+					"</div>"
 		+				"</form>"
 		+			"</div>"
 		+			"<div class=\"modal-footer\">"
 		+				"<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">閉じる</button>"
-		+				"<button type=\"button\" class=\"btn btn-primary\">コメント</button>"
+		+				"<button type=\"submit\" class=\"btn btn-primary\" id=\"" + replySubmitId + "\">コメント</button>"
 		+			"</div>"
 		+		"</div>"
 		+	"</div>"
 		+"</div>";
 
 
-	var h = document.getElementById("replyModal");
+	var h = document.getElementById(replyModalTagId);
 	h.innerHTML += replyModal;
 }
 

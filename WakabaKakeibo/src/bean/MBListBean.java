@@ -9,6 +9,23 @@ public class MBListBean {
 	private MBCommentListBean mbClb;
 	private Map<Integer, List<MBCommentBean>> map;
 
+
+
+	public MBListBean(List<MBBean> bBeanList, MBCommentListBean mbClb, Map<Integer, List<MBCommentBean>> map) {
+		super();
+		this.bBeanList = bBeanList;
+		this.mbClb = mbClb;
+		this.map = map;
+	}
+
+
+
+	public MBListBean() {
+		super();
+	}
+
+
+
 	public Map<Integer, List<MBCommentBean>> getMap() {
 		return map;
 	}

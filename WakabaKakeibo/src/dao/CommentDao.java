@@ -31,7 +31,7 @@ public class CommentDao {
 			"SELECT * FROM BlogComments WHERE MessageID = ?";
 
 	private static final String INSERT_COMMENT = "INSERT INTO blogcomments(UserID, BLogID, CommentDate, Content) VALUES\r\n" +
-	"(?, ?, ?, ?),";
+	"(?, ?, ?, ?);";
 
 	private Connection con = null;
 
@@ -93,7 +93,7 @@ public class CommentDao {
 					stmt.setInt( 2, BLogID);
 					stmt.setTimestamp( 3, CommentDate);
 					stmt.setString( 4, Content);
-					ResultSet rs= stmt.executeQuery();
+					stmt.executeUpdate();
 
 				}
 	}

@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.MBListBean;
-import service.UsersService;
+import service.BlogService;
 
 /**
  * Servlet implementation class Test
@@ -34,15 +34,30 @@ public class Test extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		//時間の取得
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		//blogIDの取得
+		int blogId = Integer.parseInt(request.getParameter("blogID"));
+		//contentの取得
+		String content = request.getParameter("formControlTextarea");
+		//sessionからユーザーIDの取得
+		int userId = 1;//テストです。
+
 		//サービスを取得
-		UsersService service = new UsersService();
-		MBListBean mbBeanList = service.findAllBlog();
+		BlogService service = new BlogService();
+		service.innerComment(userId, blogId, timestamp, content);
 
 
-		request.setAttribute("bean", mbBeanList);
+		//テスト消してよし
+//		request.setAttribute("bean", mbBeanList);
+//		TestBean t = new TestBean();
+//		t.setBlogID(Integer.parseInt(request.getParameter("blogID")));
+//		t.setContent(request.getParameter("formControlTextarea"));
+
+		//request.setAttribute("bean", t);
 
 		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/mBlist.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/CommentServlet");
 		disp.forward(request, response);
 
 	}
