@@ -6,7 +6,7 @@ var navigation = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-success\">
                    + "<div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">"
                    +    "<div class=\"navbar-nav\">"
                    +     "<a class=\"nav-item nav-link\" id=\"indexNav\" href=\"#\">チャット<span class=\"sr-only\">(現位置)</span></a>"
-                   +     "<a class=\"nav-item nav-link\" id=\"reconstructNav\" href=\"ReconstructServlet\">復元確認</a>"
+                   +     "<a class=\"nav-item nav-link\" id=\"reconstructNav\" href=\"ReconstructListServlet\">復元確認</a>"
                    +     "<a class=\"nav-item nav-link\" id=\"settingNav\" href=\"\">設定</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"mBListNav\" href=\"MBListServlet\">ミニブログ一覧</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"mBListEditNav\" href=\"#\">ミニブログ編集</a>"
