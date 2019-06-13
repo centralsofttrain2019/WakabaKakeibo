@@ -50,10 +50,13 @@ public class MoneyNotesService
 			MoneyNotesDao mnDao = new MoneyNotesDao(con);
 			List<MoneyNotesDto> mnList = mnDao.findByDate(userID,today.minusDays(6),today);
 
+			System.out.println(mnList.toString());
+
 			//購入パターンをテーブルから取得
 			PurchasePatternsDao ppDao = new PurchasePatternsDao(con);
 			List<PurchasePatternsDto> ppList = ppDao.findByUserID(userID);
 
+			System.out.println(ppList.toString());
 
 			List<MoneyNotesDto> reconsList = createReconstructList(mnList,ppList,today);
 
@@ -76,6 +79,7 @@ public class MoneyNotesService
 
 		for(PurchasePatternsDto pp: ppList)
 		{
+
 			LocalDate lastDay = pp.getLastPurchaseDate();
 			LocalDate nextDay = null;
 
@@ -94,16 +98,17 @@ public class MoneyNotesService
 				break;
 			}
 
-			//
-			if(nextDay.isAfter(today.minusDays(7)) && nextDay.isAfter(today))
+
+			if(nextDay.isAfter(today.minusDays(7)) && nextDay.isBefore(today.plusDays(1)))
 			{
+				System.out.println("Pattern : "+ pp.getProductName());
 				MoneyNotesDto reconsData = new MoneyNotesDto(
 						0,  //インサート時に自動採番させる
 						pp.getUserID(),
 						nextDay,
 						MoneyNoteTypeEnum.EXPENSE,
 						pp.getProductID(),
-						"", //商品名は必要ない
+						pp.getProductName(),
 						pp.getProductID()/100 ,
 						pp.getNumberPattern(),
 						pp.getAmountPattern(),

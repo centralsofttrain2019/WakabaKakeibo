@@ -36,7 +36,7 @@ public class MoneyNotesDao {
 			mnd.setType(MoneyNoteTypeEnum.valueOf(rs.getString("type")));
 			mnd.setProductID(rs.getInt("productID"));
 			mnd.setCategoryID(rs.getInt("categoryID"));
-			mnd.setNumberOfPurchase(rs.getInt("NumberOfParchase"));
+			mnd.setNumberOfPurchase(rs.getInt("NumberOfPurchase"));
 			mnd.setAmount(rs.getInt("amount"));
 			mnd.setPurchaseIntervalDays(rs.getInt("PARCHASEINTERVALDAYS"));
 
@@ -64,7 +64,7 @@ public class MoneyNotesDao {
 			mnd.setType(MoneyNoteTypeEnum.valueOf(rs.getString("type")));
 			mnd.setProductID(rs.getInt("productID"));
 			mnd.setCategoryID(rs.getInt("categoryID"));
-			mnd.setNumberOfPurchase(rs.getInt("NumberOfParchase"));
+			mnd.setNumberOfPurchase(rs.getInt("NumberOfPurchase"));
 			mnd.setAmount(rs.getInt("amount"));
 			mnd.setPurchaseIntervalDays(rs.getInt("PARCHASEINTERVALDAYS"));
 
@@ -133,9 +133,9 @@ public class MoneyNotesDao {
 				mnd.setType(MoneyNoteTypeEnum.valueOf(rs.getString("type")));
 				mnd.setProductID(rs.getInt("productID"));
 				mnd.setCategoryID(rs.getInt("categoryID"));
-				mnd.setNumberOfPurchase(rs.getInt("NumberOfParchase"));
+				mnd.setNumberOfPurchase(rs.getInt("NumberOfPurchase"));
 				mnd.setAmount(rs.getInt("amount"));
-				mnd.setPurchaseIntervalDays(rs.getInt("PurchaseIntervalID"));
+				mnd.setPurchaseIntervalDays(rs.getInt("PurchaseIntervalDays"));
 				mnd.setCategoryName(rs.getString("MoneyCategorys.CategoryName"));
 				dtoList.add(mnd);
 			}

@@ -140,6 +140,15 @@ public class MoneyNotesDto
 		this.categoryName = categoryName;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "MoneyNotesDto [moneyNoteID=" + moneyNoteID + ", userID=" + userID + ", purchaseDate=" + purchaseDate
+				+ ", type=" + type + ", productID=" + productID + ", productName=" + productName + ", categoryID="
+				+ categoryID + ", numberOfPurchase=" + numberOfPurchase + ", amount=" + amount
+				+ ", purchaseIntervalDays=" + purchaseIntervalDays + ", categoryName=" + categoryName + "]";
+	}
+
 
 
 }
