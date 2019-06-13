@@ -1,5 +1,7 @@
+<%@page import="dto.DepositDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<jsp:useBean id="bean" class="bean.SimulationListBean" scope="request" />
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +22,20 @@
 
 
 <h3 class="my-3">シミュレーション</h3>
-<div class="bg-light h-75">シミュレーション図</div>
+<div class="bg-light h-75">シミュレーション図
+<table>
+<% for(bean.SimulationBean b: bean.getSimList())
+{%>
+<tr>
+ <td> <%=b.getDate().toString() %> </td>
+ <td> <%=b.getBalance() %> </td>
+ <td> <%=b.getStrIsReal() %> </td>
+ <td> <%=b.getHiddenName() %> </td>
+</tr>
+
+<% }%>
+</table>
+</div>
 
 
 </div>

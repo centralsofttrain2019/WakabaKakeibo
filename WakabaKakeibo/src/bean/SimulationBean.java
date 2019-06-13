@@ -6,16 +6,15 @@ public class SimulationBean {
 
 	private LocalDate date;
 	private int balance;
-	private boolean isReal;
 	private String strIsReal;
 	private String hiddenName;
 
 
-	public SimulationBean(LocalDate date, int balance, boolean isReal, String hiddenName) {
+	public SimulationBean(LocalDate date, int balance, String strIsReal, String hiddenName) {
 		super();
 		this.date = date;
 		this.balance = balance;
-		this.isReal = isReal;
+		this.strIsReal = strIsReal;
 		this.hiddenName = hiddenName;
 	}
 
@@ -48,14 +47,11 @@ public class SimulationBean {
 	}
 
 	public String getStrIsReal() {
-
-		strIsReal = String.valueOf(isReal);
-
 		return strIsReal;
 	}
 
-	public void setReal(boolean isReal) {
-		this.isReal = isReal;
+	public void setStrIsReal(String strIsReal) {
+		this.strIsReal = strIsReal;
 	}
 
 }
