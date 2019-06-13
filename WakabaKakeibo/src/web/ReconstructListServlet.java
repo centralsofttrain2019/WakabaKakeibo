@@ -30,18 +30,15 @@ public class ReconstructListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("servlet 実行");
 		ReconstructListBean bean = new ReconstructListBean();
-
 		MoneyNotesService service = new MoneyNotesService();
 
+		//TODO セッションから取得したユーザIDに変える
 		bean = service.getReconstructListBean(1);
 
 		request.setAttribute("bean", bean);
-
-		//JSPに遷移する
-				RequestDispatcher disp = request.getRequestDispatcher("/reconstructList.jsp");
-				disp.forward(request, response);
+		RequestDispatcher disp = request.getRequestDispatcher("/reconstructList.jsp");
+		disp.forward(request, response);
 	}
 
 	/**
