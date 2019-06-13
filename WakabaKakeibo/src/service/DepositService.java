@@ -75,6 +75,7 @@ public class DepositService {
 		//targetMonthは切り上げ long型でキャスト
 		dto.setBalance(targetAmount);
 		dto.setUserID(userID);
+		dto.setReal(true);
 
 		inlist.add(dto);
 	}
