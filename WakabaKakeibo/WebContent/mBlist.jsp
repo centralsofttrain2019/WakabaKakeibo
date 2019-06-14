@@ -26,7 +26,7 @@
 
 </head>
 <body>
-<div class="container" style="height: 500px">
+<div class="container " style="height: 500px; padding-top:4.5rem;">
 
 	<div id="header"></div>
 	<script type="text/javascript">header("mBListNav");</script>
@@ -117,6 +117,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 </script>
 
 <% } %>
+
+
 </div>
 
 

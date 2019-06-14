@@ -37,6 +37,9 @@ public class BlogsDao {
 	private static final String FIND_BY_ID =
 			"SELECT * FROM BLOGS WHERE MessageID = ?";
 
+	private static final String INSERT_BLOG = "INSERT INTO blogcomments(UserID, CreateDate, Title, Content, Category, image1, image2, ReblogID) VALUES\r\n" +
+			"(?, ?, ?, ?, ?, ?, ?, ?);";
+
 	private Connection con = null;
 
 	public BlogsDao(Connection con)

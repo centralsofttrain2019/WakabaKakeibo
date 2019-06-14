@@ -13,7 +13,7 @@
 <script type="text/javascript" src="inner.js"></script>
 </head>
 <body>
-<div class="container" style="height: 500px">
+<div class="container" style="height: 500px; padding-top:4.5rem;">
 <!-- ヘッダー部 -->
 <div id="header"></div>
 <script type="text/javascript">header("simulationNav");</script>

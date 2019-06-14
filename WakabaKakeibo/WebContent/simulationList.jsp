@@ -17,7 +17,7 @@
 
 </head>
 <body>
-<div class="container" style="height: 500px">
+<div class="container" style="padding-top:4.5rem;">
 <!-- ヘッダー部 -->
 <div id="header"></div>
 <script type="text/javascript">header("simulationNav");</script>
@@ -56,7 +56,7 @@ var myChart = new Chart(ctx, {
     labels: [
     		<% for(bean.SimulationBean b: bean.getSimList())
   	  		{%>
-  	  		"<%=b.getDate().toString() %>",
+  	  		'<%=b.getDate().toString() %>',
   	 		<% }%>
     ],
     datasets: [{
