@@ -21,39 +21,41 @@
 <script type="text/javascript" src="inner.js"></script>
 </head>
 <body>
-<div class="container" style="height: 500px">
+<div class="container" style="padding-top:4.5rem;padding-bottom:4.5rem; height:70vh">
 
 <!-- ヘッダー部 -->
 <div id="header"></div>
 <script type="text/javascript">header("indexNav");</script>
 
 <!-- 動画画面 -->
-<div class="bg-light my-5 h-50 text-center">
-<!-- 	<video autoplay style="height: 50vh;"> -->
-<!-- 		<source src="logIn.mp4"> -->
-<!-- 	</video> -->
-	<div class="embed-responsive embed-responsive-16by9">
-  		<video autoplay style="height: 50vh;" loop>
-			<source src="logIn1.mp4">
-		</video>
-	</div>
-
-<!-- 	<div class="embed-responsive embed-responsive-16by9"> -->
-<!--   		<iframe class="embed-responsive-item" src="normal.mp4" allowfullscreen></iframe> -->
-<!-- 	</div> -->
+<div class="embed-responsive embed-responsive-16by9">
+	<video autoplay class="h-100" loop>
+		<source src="logIn1.mp4">
+	</video>
 </div>
 
 
 <!-- チャット画面 -->
-<div class="bg-light mt-5 h-25" id="chat" ></div>
-<div id="select" class="mt-5 h-10"></div>
+<div class="fixed-bottom container">
+	<div class="mt-5" id="chat" style="height:10vh;background: rgba(230,200,200,0.5); font-weight:bold;">
+	</div>
+	<div id="select"></div>
+	 <!-- class="mt-5 h-10"></div> -->
 
-<!-- <div class="embed-responsive embed-responsive-16by9"> -->
-<!--   <iframe class="embed-responsive-item" src="normal.mp4" allowfullscreen></iframe> -->
-<!-- </div> -->
-
+	<div class="input-group mb-3">
+	<input type="text" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
+	<div class="input-group-append">
+		<button type="button" id="button-addon2" class="btn btn-success">送信</button>
+	</div>
+	</div>
 </div>
 
+
+
+
+
+
+</div>
 
 <% for(MessageBean b : bean.getmBeanList()){ %>
 		<script>
