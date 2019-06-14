@@ -73,12 +73,23 @@ public class ReconstructListBean
 		reconstructCalendar = new HashMap<LocalDate, List<String>>();
 		reconstructList = new ArrayList<ReconstructBean>();
 
+		dispDay = new ArrayList<LocalDate>();
+		for(int i=0; i<7; i++)
+		{
+			dispDay.add(today.minusDays(i));
+			List<String> list = new ArrayList<String>();
+			List<String> list2 = new ArrayList<String>();
+
+			purchaseCalendar.put(today.minusDays(i),list);
+			reconstructCalendar.put(today.minusDays(i),list2);
+		}
+
 		for(MoneyNotesDto dto: mnList)
 		{
 			ReconstructBean bean = new ReconstructBean();
 			bean.setValueFromDto(dto);
-			this.purchaseList.add(bean);
 
+			purchaseList.add(bean);
 			purchaseCalendar.get(dto.getPurchaseDate()).add(dto.getProductName());
 		}
 
@@ -86,20 +97,12 @@ public class ReconstructListBean
 		{
 			ReconstructBean bean = new ReconstructBean();
 			bean.setValueFromDto(dto);
-			this.reconstructList.add(bean);
 
-			purchaseCalendar.get(dto.getPurchaseDate()).add(dto.getProductName());
+			reconstructList.add(bean);
+			reconstructCalendar.get(dto.getPurchaseDate()).add(dto.getProductName());
 		}
 
 
-		dispDay = new ArrayList();
-		dispDay.add(today);
-		dispDay.add(today.minusDays(1));
-		dispDay.add(today.minusDays(2));
-		dispDay.add(today.minusDays(3));
-		dispDay.add(today.minusDays(4));
-		dispDay.add(today.minusDays(5));
-		dispDay.add(today.minusDays(6));
 	}
 
 }

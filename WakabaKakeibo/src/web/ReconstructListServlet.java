@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.ReconstructBean;
+import bean.ReconstructListBean;
+import service.MoneyNotesService;
 
 /**
  * Servlet implementation class ReconstructServlet
@@ -29,13 +30,15 @@ public class ReconstructListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ReconstructBean bean = new ReconstructBean();
+		ReconstructListBean bean = new ReconstructListBean();
+		MoneyNotesService service = new MoneyNotesService();
 
+		bean = service.getReconstructListBean(1);
 
+		request.setAttribute("bean", bean);
+		RequestDispatcher disp = request.getRequestDispatcher("/reconstructList.jsp");
+		disp.forward(request, response);
 
-		//JSPに遷移する
-				RequestDispatcher disp = request.getRequestDispatcher("/reconstructList.jsp");
-				disp.forward(request, response);
 	}
 
 	/**
