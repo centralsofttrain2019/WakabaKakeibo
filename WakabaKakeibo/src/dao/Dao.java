@@ -15,7 +15,8 @@ public class Dao
         Connection con = null;
         con = DriverManager.getConnection(
                     "jdbc:mysql://"
-                    + "52.197.244.142"
+                    //+ "52.197.244.142"
+                    + "localhost"
                     + "/"
                     + "wakaba_schema"
                     + "?serverTimezone=JST",
