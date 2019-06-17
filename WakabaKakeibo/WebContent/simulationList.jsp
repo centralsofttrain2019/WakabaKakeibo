@@ -31,6 +31,10 @@
               ["<%=bean.getSimList().get(i).getDate() %>", <%=bean.getSimList().get(i).getBalance() %>, null, null],
               <% }%>
               ["<%=bean.getSimList().get(bean.getSimList().size()-2).getDate()%>", <%=bean.getSimList().get(bean.getSimList().size()-2).getBalance() %>, <%=bean.getSimList().get(bean.getSimList().size()-2).getBalance() %>, <%=bean.getSimList().get(bean.getSimList().size()-2).getBalance() %>],
+              <% for(int j = 0; j < 8 ; j++ )
+              {%>
+              [null, null, null, null],
+              <% }%>
               ["<%=bean.getSimList().get(bean.getSimList().size()-1).getDate()%>", <%=bean.getSimList().get(bean.getSimList().size()-1).getBalance() %>, null, <%=bean.getSimList().get(bean.getSimList().size()-1).getBalance() %>]
             ]);
 

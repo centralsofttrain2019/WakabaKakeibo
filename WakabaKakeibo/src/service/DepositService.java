@@ -65,14 +65,17 @@ public class DepositService {
 
 		//傾きの計算 a = ( y2 - y1 ) / ( x2 - x1 )
 		slope = (inlist.get(inlist.size()-1).getBalance() - inlist.get(0).getBalance()) / month ;
+		//System.out.println(slope);
 		//目標達成の予測(月)の計算 x = (y - b ) / a　yは目標金額 bは開始時の貯金額(1万円)
 		targetMonth = ( targetAmount - inlist.get(0).getBalance() ) / slope;
+		//System.out.println(targetMonth);
 
 		//目標金額から算出した予測データをリストに挿入
 		DepositDto dto = new DepositDto();
 
-		dto.setDate(inlist.get(inlist.size()-1).getDate().plusMonths((long) Math.ceil(targetMonth)));
+		dto.setDate(inlist.get(0).getDate().plusMonths((long) Math.ceil(targetMonth)));
 		//targetMonthは切り上げ long型でキャスト
+		//targetは「家計簿 開 始 月」から〇ヶ月後
 		dto.setBalance(targetAmount);
 		dto.setUserID(userID);
 		dto.setReal(true);
