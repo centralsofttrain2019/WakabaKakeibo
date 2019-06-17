@@ -36,6 +36,7 @@ public class BlogsDao {
 			"blogs.UserID = users.UserID;";
 
 
+
 	private static final String FIND_BLOG_BY_ID =
 			"SELECT * FROM BLOGS WHERE MessageID = ?";
 
