@@ -11,8 +11,8 @@ public class ReconstructListBean
 {
 	private LocalDate todaysDate;
 
-	private HashMap<LocalDate, List<String>> purchaseCalendar;
-	private HashMap<LocalDate, List<String>> reconstructCalendar;
+	private HashMap<LocalDate, List<ReconstructBean>> purchaseCalendar;
+	private HashMap<LocalDate, List<ReconstructBean>> reconstructCalendar;
 	private List<ReconstructBean> purchaseList;
 	private List<ReconstructBean> reconstructList;
 	private List<LocalDate> dispDay;
@@ -33,19 +33,19 @@ public class ReconstructListBean
 	{
 		this.todaysDate = todaysDate;
 	}
-	public HashMap<LocalDate, List<String>> getPurchaseCalendar()
+	public HashMap<LocalDate, List<ReconstructBean>> getPurchaseCalendar()
 	{
 		return purchaseCalendar;
 	}
-	public void setPurchaseCalendar(HashMap<LocalDate, List<String>> purchaseCalendar)
+	public void setPurchaseCalendar(HashMap<LocalDate, List<ReconstructBean>> purchaseCalendar)
 	{
 		this.purchaseCalendar = purchaseCalendar;
 	}
-	public HashMap<LocalDate, List<String>> getReconstructCalendar()
+	public HashMap<LocalDate, List<ReconstructBean>> getReconstructCalendar()
 	{
 		return reconstructCalendar;
 	}
-	public void setReconstructCalendar(HashMap<LocalDate, List<String>> reconstructCalendar)
+	public void setReconstructCalendar(HashMap<LocalDate, List<ReconstructBean>> reconstructCalendar)
 	{
 		this.reconstructCalendar = reconstructCalendar;
 	}
@@ -69,16 +69,16 @@ public class ReconstructListBean
 	public void setValueFromDto(List<MoneyNotesDto> mnList, List<MoneyNotesDto> reconsList, LocalDate today)
 	{
 		purchaseList = new ArrayList<ReconstructBean>();
-		purchaseCalendar = new HashMap<LocalDate, List<String>>();
-		reconstructCalendar = new HashMap<LocalDate, List<String>>();
+		purchaseCalendar = new HashMap<LocalDate, List<ReconstructBean>>();
+		reconstructCalendar = new HashMap<LocalDate, List<ReconstructBean>>();
 		reconstructList = new ArrayList<ReconstructBean>();
 
 		dispDay = new ArrayList<LocalDate>();
 		for(int i=0; i<7; i++)
 		{
 			dispDay.add(today.minusDays(i));
-			List<String> list = new ArrayList<String>();
-			List<String> list2 = new ArrayList<String>();
+			List<ReconstructBean> list = new ArrayList<ReconstructBean>();
+			List<ReconstructBean> list2 = new ArrayList<ReconstructBean>();
 
 			purchaseCalendar.put(today.minusDays(i),list);
 			reconstructCalendar.put(today.minusDays(i),list2);
@@ -90,7 +90,7 @@ public class ReconstructListBean
 			bean.setValueFromDto(dto);
 
 			purchaseList.add(bean);
-			purchaseCalendar.get(dto.getPurchaseDate()).add(dto.getProductName());
+			purchaseCalendar.get(dto.getPurchaseDate()).add(bean);
 		}
 
 		for(MoneyNotesDto dto: reconsList)
@@ -99,7 +99,7 @@ public class ReconstructListBean
 			bean.setValueFromDto(dto);
 
 			reconstructList.add(bean);
-			reconstructCalendar.get(dto.getPurchaseDate()).add(dto.getProductName());
+			reconstructCalendar.get(dto.getPurchaseDate()).add(bean);
 		}
 
 

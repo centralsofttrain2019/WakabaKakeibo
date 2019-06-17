@@ -183,8 +183,15 @@ public class MoneyNotesDao {
 		stmt.setInt(1, userID);
 		stmt.setInt(2, productID);
 		ResultSet rs = stmt.executeQuery();
-		LocalDate date = rs.getDate("PurchaseDate").toLocalDate();
-		return date;
+
+		if(rs.next())
+		{
+			LocalDate date = rs.getDate("PurchaseDate").toLocalDate();
+			return date;
+		}else
+		{
+			throw new RuntimeException();
+		}
 	}
 
 	//過去の購入情報からカテゴリIDを検索する
@@ -197,8 +204,14 @@ public class MoneyNotesDao {
 		PreparedStatement stmt = con.prepareStatement( GET_CATEGORY_ID_BY_PRODUCT_ID );
 		stmt.setInt(1, productID);
 		ResultSet rs = stmt.executeQuery();
-		int id = rs.getInt("CategoryID");
-		return id;
+
+		if(rs.next()) {
+			int id = rs.getInt("CategoryID");
+			return id;
+		}else
+		{
+			throw new RuntimeException();
+		}
 	}
 
 	//商品を挿入する
@@ -211,8 +224,8 @@ public class MoneyNotesDao {
 	{
 		PreparedStatement stmt = con.prepareStatement( INSERT_MONEY_NOTE );
 		stmt.setInt(1, dto.getUserID());
-		stmt.setString(2,dto.getPurchaseDate().toString());
-		stmt.setString(3, dto.getType().toString());
+		stmt.setDate(2, java.sql.Date.valueOf(dto.getPurchaseDate()));
+		stmt.setString(3,  dto.getType().toString());
 		stmt.setInt(4, dto.getProductID());
 		stmt.setInt(5, dto.getCategoryID());
 		stmt.setInt(6, dto.getNumberOfPurchase());
@@ -230,9 +243,19 @@ public class MoneyNotesDao {
 	public int findProductID(String productName) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( GET_PRODUCT_ID_BY_NAME );
-		stmt.setString(1, productName);
+		stmt.setString(1,productName);
+		System.out.println(stmt.toString());
+
 		ResultSet rs = stmt.executeQuery();
-		int id = rs.getInt("ProductID");
-		return id;
+
+		if(rs.next())
+		{
+			int id = rs.getInt("ProductID");
+			return id;
+		}else
+		{
+			System.out.println("商品未登録");
+			throw new RuntimeException();
+		}
 	}
 }

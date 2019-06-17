@@ -27,6 +27,7 @@
 
 <h2>予想される今週の家計簿</h2>
 
+<form method="POST" action="RegistReconstructServlet" >
     予想される家計簿
      <table class="table table-bordered">
 <!--   <caption>テーブルの表題</caption> -->
@@ -44,13 +45,17 @@
 		  	<tr>
 		       <% for(int i=6;i>=0;i--){ %>
 		      	<td>
-		      	  <% for(String s: bean.getPurchaseCalendar().get(bean.getDispDay().get(i))){ %>
-		      	  	<%= s %><br>
+		      	  <% for(bean.ReconstructBean b: bean.getPurchaseCalendar().get(bean.getDispDay().get(i))){ %>
+		      	  	<%= b.getProductName() %><br>
 		      	  <% } %>
 
 		      	  <font color="#ff0000">
-		      	  <% for(String s: bean.getReconstructCalendar().get(bean.getDispDay().get(i))){ %>
-		      	  	<%= s %><br>
+		      	  <% for(bean.ReconstructBean b: bean.getReconstructCalendar().get(bean.getDispDay().get(i))){ %>
+		      	  	<input type="checkbox" name="select" value="<%= b.getProductName() %>" checked="checked">&nbsp;
+		      	  	<input type="hidden" name="num_<%= b.getProductName() %>" value="<%= b.getNumberOfPurchase() %>">
+		      	  	<input type="hidden" name="amount_<%= b.getProductName() %>" value="<%= b.getAmount() %>">
+		      	  	<input type="hidden" name="date_<%= b.getProductName() %>" value="<%= b.getPurchaseDate() %>">
+		      	  	<%= b.getProductName() %><br>
 		      	  <% } %>
 		      	  </font>
 		      	</td>
@@ -92,10 +97,10 @@
 
 <div class="text-center my-5">
 	変更を適用しますか？<br>
-	<button type="button" class="btn btn-primary mx-5">はい</button>
-	<button type="button" class="btn btn-danger mx-5">いいえ</button>
-
+		<button type="submit" class="btn btn-primary mx-5" >はい</button>
+		<button type="submit" class="btn btn-danger mx-5" >いいえ</button>
 </div>
+</form>
 
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
