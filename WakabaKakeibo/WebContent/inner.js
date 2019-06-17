@@ -50,9 +50,9 @@ function innerReply(replyUser, blogId, thisModalId, replyModalTagId, replySubmit
 		+			"</button>"
 		+			"</div>"
 		+			"<div class=\"modal-body\">"
-		+				"<form action=\"Test\" id=\"" + replyFormId +"\">"
+		+				"<form action=\"CommentServlet\" id=\"" + replyFormId +"\">"
 		+					"<div class=\"form-group\">"
-		+						"<textarea class=\"form-control\" name=\"formControlTextarea\" placeholder=\"返信を書き込む\">" + replySubmitId + "</textarea>"
+		+						"<textarea class=\"form-control\" name=\"formControlTextarea\" placeholder=\"返信を書き込む\"></textarea>"
 		+						"<input type=\"hidden\" name=\"blogID\" value=\"" + blogId + "\">"
 		+					"</div>"
 		+				"</form>"
@@ -83,12 +83,12 @@ function innerComment(user, content, commentBlogTagId){
 	c.innerHTML += commentCard;
 }
 
-function innerMainBlog(title, userName, category, month, day, hour, minute, content, likeNum, isChecked, thisId, replyId, mainBlogTagId, thumsUpIconID, likeFormName, blogID){
+function innerMainBlog(title, userName, category, date, content, likeNum, isChecked, thisId, replyId, mainBlogTagId, thumsUpIconID, likeFormName, blogID){
 	var mainBlogCard = "<div class=\"card my-3\">"
 		+	"<h5 class=\"card-header\">"
 		+		title
 		+		"<div class=\"float-right\">"
-		+			"<small class=\"text-muted\">" + month + "月" + day + "日" + hour + ":" + day + "</small><br>"
+		+			"<small class=\"text-muted\">" + date + "</small><br>"
 		+		"</div>"
 		+		"<br>"
 		+		"<small>by" + userName + "</small>"

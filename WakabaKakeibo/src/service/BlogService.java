@@ -53,6 +53,7 @@ public class BlogService {
 		{
 			BlogCommentsDao bDao = new BlogCommentsDao(con);
 			bDao.insertComment(UserID, BLogID, CommentDate, Content);
+			System.out.println("Service Hello");
 
 		}
 		catch( SQLException | ClassNotFoundException e )

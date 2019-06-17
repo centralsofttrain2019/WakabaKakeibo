@@ -1,6 +1,6 @@
 package dto;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 import domain.BlogCategoryEnum;
 
@@ -8,7 +8,7 @@ public class BlogsDto
 {
 	private int blogID;
 	private int userId;
-	private LocalDate createDate;
+	private Timestamp createDate;
 	private String title;
 	private String content;
 	private BlogCategoryEnum category;
@@ -50,10 +50,10 @@ public class BlogsDto
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public LocalDate getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(LocalDate date) {
+	public void setCreateDate(Timestamp date) {
 		this.createDate = date;
 	}
 	public String getTitle() {

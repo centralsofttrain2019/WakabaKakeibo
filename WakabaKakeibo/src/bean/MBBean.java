@@ -1,6 +1,7 @@
 package bean;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import domain.BlogCategoryEnum;
 import dto.BlogsDto;
@@ -9,7 +10,7 @@ public class MBBean {
 
 	private int blogID;
 	private int userId;
-	private LocalDate createDate;
+	private String createDate;
 	private String title;
 	private String content;
 	private BlogCategoryEnum category;
@@ -45,11 +46,14 @@ public class MBBean {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public LocalDate getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(LocalDate createDate) {
-		this.createDate = createDate;
+	public void setCreateDate(Timestamp createDate) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+		this.createDate = sdf.format(createDate);
 	}
 	public String getTitle() {
 		return title;
@@ -100,7 +104,10 @@ public class MBBean {
 		this.blogID = bDto.getBlogID();
 		this.category = bDto.getCategory();
 		this.content = bDto.getContent();
-		this.createDate = bDto.getCreateDate();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		this.createDate = sdf.format(bDto.getCreateDate());
+
 		this.reblogID = bDto.getReblogID();
 		this.title = bDto.getTitle();
 		this.userId = bDto.getUserId();

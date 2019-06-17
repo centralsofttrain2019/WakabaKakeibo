@@ -87,15 +87,13 @@
 
 <!-- 							メインのブログカードの生成 -->
 <!-- 							innerMainBlog() -->
-<!-- 					使い方：innerMainBlog('沖縄旅行', 'しんのすけ', '旅行', month, day, hour, day, '楽しい旅行でした', likeNum, isChecked,このBlogId, "replyModal1",MainBlogのタグID, thumsUpIconID, likeFormName, blogID) -->
+<!-- 					使い方：innerMainBlog('沖縄旅行', 'しんのすけ', '旅行', date, '楽しい旅行でした', likeNum, isChecked,このBlogId, "replyModal1",MainBlogのタグID, thumsUpIconID, likeFormName, blogID) -->
 							<script type="text/javascript">innerMainBlog(
 									'<%= b.getTitle() %>',
 									'<%= b.getUserName() %>',
 									'<%= b.getCategory() %>',
-									'<%= b.getCreateDate().getMonth() %>',
-									'<%= b.getCreateDate().getDayOfMonth() %>',
-									11,
-									29,
+									'<%= b.getCreateDate() %>',
+<%-- 									'<%= b.getCreateDate().getDayOfMonth() %>', --%>
 									'<%= b.getContent() %>',
 									'<%= bean.getBlMap().getLikeCount(b.getBlogID()) %>',
 									'<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>',
@@ -113,8 +111,10 @@
 							<div id=<%= commentBlogTagId %>>
 <!-- 							JavaScriptによる挿入 -->
 <!-- 							innerComment('コメントするユーザ名', '内容', コメントブログタグID) -->
-							<% for(bean.MBCommentBean bComment : bean.getCmap().get(b.getBlogID())){ %>
-							<script type="text/javascript">innerComment('<%= bComment.getUserName() %>','<%= bComment.getContent() %>', '<%= commentBlogTagId %>');</script>
+							<%if(bean.getCmap().containsKey(b.getBlogID())) { %>
+								<% for(bean.MBCommentBean bComment : bean.getCmap().get(b.getBlogID())){ %>
+								<script type="text/javascript">innerComment('<%= bComment.getUserName() %>','<%= bComment.getContent() %>', '<%= commentBlogTagId %>');</script>
+								<% } %>
 							<% } %>
 							</div>
 						</div>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.BlogCategoryEnum;
 import service.BlogService;
 
 /**
@@ -39,7 +40,7 @@ public class MBEditServlet extends HttpServlet {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 		//コメントのrequestがあれば
-		if(request.getParameter("formControlTextarea") != null) {
+		if(request.getParameter("blogContent") != null) {
 			//コメントのインサート
 			insertBlog(request, timestamp);
 		}
@@ -60,17 +61,29 @@ public class MBEditServlet extends HttpServlet {
 	}
 
 	public void insertBlog(HttpServletRequest request, Timestamp timestamp) {
-		//blogIDの取得
-		int blogId = Integer.parseInt(request.getParameter("blogID"));
+
 		//contentの取得
-		String blogContent = request.getParameter("formControlTextarea");
+		String blogContent = request.getParameter("blogContent");
+		//contentの取得
+		String title = request.getParameter("title");
+		//contentの取得
+		BlogCategoryEnum category = BlogCategoryEnum.valueOf(request.getParameter("category"));
+
 		//sessionからユーザーIDの取得
-		int userId = 1;//テストです。
+		int userID = 1;//テストです。
+		//image1
+		String image1 = null;
+		//image2
+		String image2 = null;
+		//ReblogID
+		int ReblogID = 1;
 
 		//サービスを取得
 		BlogService service = new BlogService();
 		//blogcomentsDBへinsert
-		service.innerComment(userId, blogId, timestamp, blogContent);
+		service.insertBlog(userID, timestamp, title, blogContent, category, image1, image2, ReblogID);
+
+
 	}
 
 }

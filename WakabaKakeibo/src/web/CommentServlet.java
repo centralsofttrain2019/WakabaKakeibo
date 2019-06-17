@@ -84,6 +84,7 @@ public class CommentServlet extends HttpServlet {
 		BlogService service = new BlogService();
 		//blogcomentsDBへinsert
 		service.innerComment(userId, blogId, timestamp, blogContent);
+		System.out.println("hello");
 	}
 
 	public Map<Integer, List<MBCommentBean>> takeAllCommentToMap(HttpServletRequest request) {

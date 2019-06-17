@@ -39,7 +39,7 @@ public class BlogsDao {
 	private static final String FIND_BLOG_BY_ID =
 			"SELECT * FROM BLOGS WHERE MessageID = ?";
 
-	private static final String INSERT_BLOG = "INSERT INTO blogcomments(UserID, CreateDate, Title, Content, Category, image1, image2, ReblogID) VALUES\r\n" +
+	private static final String INSERT_BLOG = "INSERT INTO blogs(UserID, CreateDate, Title, Content, Category, image1, image2, ReblogID) VALUES\r\n" +
 			"(?, ?, ?, ?, ?, ?, ?, ?);";
 
 	private Connection con = null;
@@ -70,7 +70,7 @@ public class BlogsDao {
 
 				bDto.setUserId(rs.getInt("UserID"));
 				bDto.setBlogID(rs.getInt("BlogID"));
-				bDto.setCreateDate(date2LocalDate( rs.getDate("CreateDate")));
+				bDto.setCreateDate(rs.getTimestamp("CreateDate"));
 				bDto.setTitle(rs.getString("Title"));
 				bDto.setContent(rs.getString("Content"));
 				bDto.setCategory(BlogCategoryEnum.valueOf(rs.getString("Category")));

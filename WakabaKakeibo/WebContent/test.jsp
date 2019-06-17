@@ -2,7 +2,7 @@
 
 <jsp:useBean
   		id="bean"
-  		class="bean.TestBean"
+  		class="bean.MBListBean"
   		scope="request" />
 
 <%-- <%@ page import="bean.MBCommentListBean" %> --%>

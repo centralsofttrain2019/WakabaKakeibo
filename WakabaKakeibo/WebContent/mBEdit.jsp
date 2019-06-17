@@ -40,13 +40,13 @@
 	<!--タイトル-->
 	<div class="form-group">
 		<label for="exampleInputEmail1">タイトル</label>
-		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="タイトルを入力してください">
+		<input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="タイトルを入力してください">
 	</div>
 
   	<!--コンテンツ-->
 	<div class="form-group">
 		<label for="exampleFormControlTextarea1">コンテンツ</label>
-		<textarea class="form-control" id="exampleFormControlTextarea1" rows="7" placeholder="コンテンツを入力してください"></textarea>
+		<textarea class="form-control"  name="blogContent" id="exampleFormControlTextarea1" rows="7" placeholder="コンテンツを入力してください"></textarea>
 		<div class="col">
 			<div class="imagePreview" id="preview1"></div>
 		</div>
@@ -57,10 +57,10 @@
 		<div class="col-3">
 			<div class="form-group">
 				<label for="exampleSelect1exampleFormControlSelect1">ジャンル</label>
-				<select class="form-control" id="exampleFormControlSelect1">
-				<option>FOODS</option>
-				<option>BUSINESS</option>
-				<option>OUTDOOR</option>
+				<select class="form-control" id="exampleFormControlSelect1" name="category">
+					<option>FOODS</option>
+					<option>BUSINESS</option>
+					<option>OUTDOOR</option>
 				</select>
 			</div>
 		</div>
