@@ -3,12 +3,15 @@ package bean;
 import java.util.List;
 import java.util.Map;
 
+import domain.BlogCategoryEnum;
+
 public class MBListBean {
 
 	private List<MBBean> bBeanList;
 	private MBCommentListBean mbClb;
 	private Map<Integer, List<MBCommentBean>> cMap;
 	private BLMapBean blMap;
+	private Map<BlogCategoryEnum, List<MBBean>> blogMap;
 
 
 
@@ -21,7 +24,13 @@ public class MBListBean {
 		this.blMap = blMap;
 	}
 
+	public Map<BlogCategoryEnum, List<MBBean>> getBlogMap() {
+		return blogMap;
+	}
 
+	public void setBlogMap(Map<BlogCategoryEnum, List<MBBean>> blogMap) {
+		this.blogMap = blogMap;
+	}
 
 	public MBListBean() {
 		super();
@@ -66,7 +75,8 @@ public class MBListBean {
 
 	@Override
 	public String toString() {
-		return "MBListBean [bBeanList=" + bBeanList + ", mbClb=" + mbClb + ", cMap=" + cMap + ", blMap=" + blMap + "]";
+		return "MBListBean [bBeanList=" + bBeanList + ", mbClb=" + mbClb + ", cMap=" + cMap + ", blMap=" + blMap
+				+ ", blogMap=" + blogMap + "]";
 	}
 
 

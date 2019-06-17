@@ -8,6 +8,7 @@
 <%-- <%@ page import="bean.MBCommentListBean" %> --%>
 <%-- <%@ page import="bean.MBCommentBean" %> --%>
 <%-- <%@ page import="java.util.Map" %> --%>
+<%@ page import="domain.BlogCategoryEnum" %>
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,7 @@
 <body>
 <div class="container" style="height: 500px">
 
-<%= bean.toString() %>
+<%= bean.getBlogMap().get(BlogCategoryEnum.FOODS).toString() %>
 
 
 </div>

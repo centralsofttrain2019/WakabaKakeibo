@@ -27,7 +27,7 @@ public class BlogService {
 		{
 			BlogCommentsDao bDao = new BlogCommentsDao(con);
 			List<MBCommentBean> bList = bDao.selectAll();
-
+			
 			bean.setMbCList(bList);
 
 			//bean.setEmpList(eList);

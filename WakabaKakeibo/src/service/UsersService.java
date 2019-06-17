@@ -3,6 +3,8 @@ package service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import bean.MBBean;
 import bean.MBListBean;
@@ -10,6 +12,7 @@ import bean.MessageBean;
 import bean.MessageListBean;
 import dao.BlogsDao;
 import dao.MessageDao;
+import domain.BlogCategoryEnum;
 import dto.MessageDto;
 
 
@@ -83,12 +86,10 @@ public class UsersService {
 
 			bean.setbBeanList(bList);
 
-			//bean.setEmpList(eList);
-			//System.out.println(mList);
+//			List->Map<Integer, List<BLBean>>への変換
+			Map<BlogCategoryEnum, List<MBBean>> map = bList.stream().collect(Collectors.groupingBy(s -> s.getCategory()));
+			bean.setBlogMap(map);
 
-//			System.out.println("従業員の情報は以下です。\n"
-//								+ eList.toString()
-//								);
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
