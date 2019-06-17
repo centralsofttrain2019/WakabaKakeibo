@@ -79,7 +79,7 @@ public class UsersService {
 		try( Connection con= dao.Dao.getConnection() )
 		{
 			BlogsDao bDao = new BlogsDao(con);
-			List<MBBean> bList = bDao.selectAll();
+			List<MBBean> bList = bDao.selectAllBlog();
 
 			bean.setbBeanList(bList);
 

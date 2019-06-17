@@ -1,14 +1,16 @@
-package dto;
+package bean;
 
 import java.sql.Timestamp;
 
-public class BlogLikesDto
-{
+import dto.BlogLikesDto;
+
+public class BLBean {
 
 	private int likeID;
 	private int userID;
 	private int blogID;
 	private Timestamp likeDate;
+
 	public int getLikeID()
 	{
 		return likeID;
@@ -35,6 +37,18 @@ public class BlogLikesDto
 	}
 	public void setLikeDate(Timestamp likeDate) {
 		this.likeDate = likeDate;
+	}
+
+	public void setDto(BlogLikesDto dto) {
+		this.blogID = dto.getBlogID();
+		this.likeDate = dto.getLikeDate();
+		this.likeID = dto.getLikeID();
+		this.userID = dto.getUserID();
+	}
+	@Override
+	public String toString() {
+		return "BLBean [likeID=" + likeID + ", userID=" + userID + ", blogID=" + blogID + ", likeDate=" + likeDate
+				+ "]";
 	}
 
 

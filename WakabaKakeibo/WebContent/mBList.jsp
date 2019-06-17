@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <jsp:useBean
-  		id="bean"
-  		class="bean.MBListBean"
-  		scope="request" />
+   		id="bean"
+   		class="bean.MBListBean"
+   		scope="request" />
 
-<%@ page import="bean.MBCommentListBean" %>
-<%@ page import="bean.MBCommentBean" %>
+ <%@ page import="bean.MBCommentListBean" %>
+ <%@ page import="bean.MBCommentBean" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,10 @@
 <link rel="stylesheet" href="css/bootstrap-arrows.css" data-angle="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Insert title here</title>
+<!-- fontawesome -->
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
+<!-- bootstrap -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM crossorigin="anonymous"></script>
@@ -34,7 +37,7 @@
 <div class="my-3" style="display: flex; align-items: center;">
 	<h3 class="my-3">ミニブログ一覧</h3>
 	<div>
-		<button type="button" class="btn btn-primary mx-5">追加</button>
+		<button type="button" class="btn btn-primary mx-5">新規作成</button>
 	</div>
 </div>
 
@@ -58,6 +61,14 @@
 	//リプレイform
 	String replyFormId = "replyFormId" + (b.getBlogID());
 	String replyFormId2 = "#replyFormId" + (b.getBlogID());
+
+	//thumsUpIconID
+	String thumsUpIconID = "icon" + b.getBlogID();
+	//likeFormName
+	String likeFormName = "likeForm" + b.getBlogID();
+
+	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
+	int nowUserID = 1;
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -76,7 +87,7 @@
 
 <!-- 							メインのブログカードの生成 -->
 <!-- 							innerMainBlog() -->
-<!-- 					使い方：innerMainBlog('沖縄旅行', 'しんのすけ', '旅行', month, day, hour, day, '楽しい旅行でした', likeNum, このBlogId, "replyModal1",MainBlogのタグID) -->
+<!-- 					使い方：innerMainBlog('沖縄旅行', 'しんのすけ', '旅行', month, day, hour, day, '楽しい旅行でした', likeNum, isChecked,このBlogId, "replyModal1",MainBlogのタグID, thumsUpIconID, likeFormName, blogID) -->
 							<script type="text/javascript">innerMainBlog(
 									'<%= b.getTitle() %>',
 									'<%= b.getUserName() %>',
@@ -86,16 +97,23 @@
 									11,
 									29,
 									'<%= b.getContent() %>',
-									3,
+									'<%= bean.getBlMap().getLikeCount(b.getBlogID()) %>',
+									'<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>',
 									'<%= mainBlogId %>',
-									'<%= replyModalId %>'
-									,'<%= mainBlogTagId %>')</script>
+									'<%= replyModalId %>',
+									'<%= mainBlogTagId %>',
+									'<%= thumsUpIconID %>',
+									'<%= likeFormName %>',
+									'<%= b.getBlogID() %>');
+
+							isCheckThumsUp('<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>', '<%= thumsUpIconID %>');
+							</script>
 
 							<!--コメントブログ-->
 							<div id=<%= commentBlogTagId %>>
 <!-- 							JavaScriptによる挿入 -->
 <!-- 							innerComment('コメントするユーザ名', '内容', コメントブログタグID) -->
-							<% for(bean.MBCommentBean bComment : bean.getMap().get(b.getBlogID())){ %>
+							<% for(bean.MBCommentBean bComment : bean.getCmap().get(b.getBlogID())){ %>
 							<script type="text/javascript">innerComment('<%= bComment.getUserName() %>','<%= bComment.getContent() %>', '<%= commentBlogTagId %>');</script>
 							<% } %>
 							</div>
@@ -116,36 +134,21 @@
 $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 </script>
 
+<!-- いいねform送信用のJS -->
+<script>
+    var btn = document.getElementById('<%= thumsUpIconID %>');
+
+    btn.addEventListener('click', function() {
+
+      //submit()でフォームの内容を送信
+      document.<%= likeFormName %>.submit();
+    })
+  </script>
+
 <% } %>
 
 
 </div>
-
-
-<!-- <div class="modal fade" id="myModal1" tabinex="-1" role="dialog" aria-labelledby="myModalLabel"> -->
-<!--     <div class="modal-dialog" role="document"> -->
-<!--    <div class="modal-content"> -->
-<!-- 		<div class="modal-header"> -->
-<!-- 			<h5 class="modal-title" id="exampleModalLabel">コメント先：太郎 </h5> -->
-<!-- 			<button type="button" class="close" data-dismiss="modal" aria-label="閉じる"> -->
-<!-- 				<span aria-hidden="true">&times;</span> -->
-<!-- 			</button> -->
-<!-- 			</div> -->
-<!-- 			<div class="modal-body"> -->
-<!-- 			<form action="CommentServlet" method="post" id="form1"> -->
-<!-- 				<div class="form-group"> -->
-<!-- 					<textarea class="form-control" id="FormControlTextarea1" placeholder="返信を書き込む" name="content"></textarea> -->
-<!-- 					<input type="hidden" id="userid" name="userName" value="fff"> -->
-<!-- 					<input type="hidden" id="userid" name="blogID" value="012345678"> -->
-<!-- 				</div> -->
-
-<!-- 				<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button> -->
-<!-- 				<button type="submit" class="btn btn-primary" id="submit1">コメント</button> -->
-<!-- 			</form> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
 
 </body>
 </html>

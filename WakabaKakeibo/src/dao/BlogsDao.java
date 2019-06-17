@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import dto.MessageDto;
 
 public class BlogsDao {
 
-	private static final String FIND_ALL =
+	private static final String FIND_ALL_BLOGS =
 			"SELECT `blogs`.`blogID`,\r\n" +
 			"    `blogs`.`UserID`,\r\n" +
 			"    `blogs`.`CreateDate`,\r\n" +
@@ -34,7 +35,8 @@ public class BlogsDao {
 			"WHERE\r\n" +
 			"blogs.UserID = users.UserID;";
 
-	private static final String FIND_BY_ID =
+
+	private static final String FIND_BLOG_BY_ID =
 			"SELECT * FROM BLOGS WHERE MessageID = ?";
 
 	private static final String INSERT_BLOG = "INSERT INTO blogcomments(UserID, CreateDate, Title, Content, Category, image1, image2, ReblogID) VALUES\r\n" +
@@ -49,9 +51,9 @@ public class BlogsDao {
 	}
 
 
-	public List<MBBean> selectAll() throws SQLException
+	public List<MBBean> selectAllBlog() throws SQLException
 	{
-		PreparedStatement stmt = con.prepareStatement( FIND_ALL );
+		PreparedStatement stmt = con.prepareStatement( FIND_ALL_BLOGS );
 
 		System.out.println("hisdao-1");
 
@@ -91,12 +93,12 @@ public class BlogsDao {
 		}
 	}
 
-	public MessageDto findById(int id) throws SQLException
+	public MessageDto findBlogById(int id) throws SQLException
 	{
 		MessageDto ret = new MessageDto();
 
 		// オートクローズ版
-		try( PreparedStatement stmt = con.prepareStatement( FIND_BY_ID ) )
+		try( PreparedStatement stmt = con.prepareStatement( FIND_BLOG_BY_ID ) )
 		{
 			stmt.setInt( 1, id );
 			ResultSet rs= stmt.executeQuery();
@@ -115,9 +117,34 @@ public class BlogsDao {
 		return ret;
 	}
 
+	public void insertBlog(int UserID, Timestamp CreateDate, String Title, String Content, BlogCategoryEnum Category, String image1, String image2, int ReblogID) throws SQLException
+	{
+//		PreparedStatement stmt = con.prepareStatement(INSERT_COMMENT);
+
+		System.out.println("hisdao-1");
+
+		// オートクローズ版
+				try( PreparedStatement stmt = con.prepareStatement( INSERT_BLOG ) )
+				{
+					stmt.setInt( 1, UserID);
+					stmt.setTimestamp( 2, CreateDate);
+					stmt.setString( 3, Title);
+					stmt.setString( 4, Content);
+					stmt.setString( 5, Category.toString());
+					stmt.setString( 6, image1);
+					stmt.setString( 7, image2);
+					stmt.setInt( 8, ReblogID);
+					stmt.executeUpdate();
+
+				}
+	}
+
+
+
 	public static LocalDate date2LocalDate(Date date) {
 		  return date.toLocalDate();
 		}
+
 
 
 

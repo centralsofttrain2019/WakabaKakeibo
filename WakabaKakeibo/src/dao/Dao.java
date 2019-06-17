@@ -21,6 +21,7 @@ public class Dao
                     + "wakaba_schema"
                     + "?serverTimezone=JST",
                     "root",
+                    //"password"
                     "root"
                     );
         return con;

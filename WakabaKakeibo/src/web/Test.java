@@ -47,6 +47,8 @@ public class Test extends HttpServlet {
 		BlogService service = new BlogService();
 		service.innerComment(userId, blogId, timestamp, content);
 
+		//コメントの取得<- 何これ？　忘れた
+//		String content = (String)request.getAttribute("comment");
 
 		//テスト消してよし
 //		request.setAttribute("bean", mbBeanList);

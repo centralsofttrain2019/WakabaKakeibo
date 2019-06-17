@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.BLMapBean;
 import bean.MBCommentBean;
 import bean.MBListBean;
+import service.BlogService;
 import service.UsersService;
 
 /**
@@ -41,16 +43,22 @@ public class MBListServlet extends HttpServlet {
 		Map<Integer, List<MBCommentBean>> map = (Map<Integer, List<MBCommentBean>>)request.getAttribute("bean");
 
 		//サービスを取得
-		UsersService service = new UsersService();
-		MBListBean mbBeanList = service.findAllBlog();
+		UsersService uService = new UsersService();
+		MBListBean mbBeanList = uService.findAllBlog();
 
-		//MBListBeanにMBCommentListBeanを持たせる
-		mbBeanList.setMap(map);
+		//likeデータの取得
+		BlogService bService = new BlogService();
+		BLMapBean blMBean = bService.findAllLike();
+
+		//MBListBeanにMBCommentListBeanをセットする
+		mbBeanList.setCmap(map);
+		//MBListBeanにBLMapBeanをセットする
+		mbBeanList.setBlMap(blMBean);
 
 		request.setAttribute("bean", mbBeanList);
 
 		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/mBlist.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("./mBList.jsp");
 		disp.forward(request, response);
 	}
 

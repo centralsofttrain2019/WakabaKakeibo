@@ -7,15 +7,18 @@ public class MBListBean {
 
 	private List<MBBean> bBeanList;
 	private MBCommentListBean mbClb;
-	private Map<Integer, List<MBCommentBean>> map;
+	private Map<Integer, List<MBCommentBean>> cMap;
+	private BLMapBean blMap;
 
 
 
-	public MBListBean(List<MBBean> bBeanList, MBCommentListBean mbClb, Map<Integer, List<MBCommentBean>> map) {
+	public MBListBean(List<MBBean> bBeanList, MBCommentListBean mbClb, Map<Integer, List<MBCommentBean>> cMap,
+			BLMapBean blMap) {
 		super();
 		this.bBeanList = bBeanList;
 		this.mbClb = mbClb;
-		this.map = map;
+		this.cMap = cMap;
+		this.blMap = blMap;
 	}
 
 
@@ -25,13 +28,24 @@ public class MBListBean {
 	}
 
 
-
-	public Map<Integer, List<MBCommentBean>> getMap() {
-		return map;
+	public BLMapBean getBlMap() {
+		return blMap;
 	}
 
-	public void setMap(Map<Integer, List<MBCommentBean>> map) {
-		this.map = map;
+
+
+	public void setBlMap(BLMapBean blMap) {
+		this.blMap = blMap;
+	}
+
+
+
+	public Map<Integer, List<MBCommentBean>> getCmap() {
+		return cMap;
+	}
+
+	public void setCmap(Map<Integer, List<MBCommentBean>> cMap) {
+		this.cMap = cMap;
 	}
 
 	public MBCommentListBean getMbClb() {
@@ -52,7 +66,7 @@ public class MBListBean {
 
 	@Override
 	public String toString() {
-		return "MBListBean [bBeanList=" + bBeanList + ", mbClb=" + mbClb + ", map=" + map + "]";
+		return "MBListBean [bBeanList=" + bBeanList + ", mbClb=" + mbClb + ", cMap=" + cMap + ", blMap=" + blMap + "]";
 	}
 
 
