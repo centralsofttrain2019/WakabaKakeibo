@@ -20,14 +20,14 @@ import service.UsersService;
 /**
  * Servlet implementation class IndexStartServlet
  */
-@WebServlet("/IndexServlet")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/ChatServlet")
+public class ChatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IndexServlet() {
+    public ChatServlet() {
         super();
     }
 
@@ -74,7 +74,7 @@ public class IndexServlet extends HttpServlet {
 				request.setAttribute("bean", mListBean);
 
 				//JSPに遷移する
-				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("/chat.jsp");
 				disp.forward(request, response);
 	}
 
