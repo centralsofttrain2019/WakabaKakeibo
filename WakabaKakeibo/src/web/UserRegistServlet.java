@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.UserRegistBean;
 import domain.UserSexEnum;
 import dto.UsersDto;
 import service.UsersService;
@@ -43,7 +44,7 @@ public class UserRegistServlet extends HttpServlet {
 		//コメントのrequestがあれば
 		if(request.getParameter("password") != null) {
 			//コメントのインサート
-			insertUser(request, date);
+			insertUser(request, response, date);
 		}
 
 		//JSPに遷移する
@@ -59,14 +60,35 @@ public class UserRegistServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void insertUser(HttpServletRequest request, LocalDate date){
+	public void insertUser(HttpServletRequest request, HttpServletResponse response, LocalDate date) throws ServletException, IOException{
+
+		int userID = Integer.valueOf(request.getParameter("userID")).intValue();
+		String password = request.getParameter("password");
+
+		//サービスを取得
+		UsersService service = new UsersService();
+		if(service.getUserOnNew(userID, password).getUserID() != 0) {
+
+			UserRegistBean errorBean = new UserRegistBean();
+			errorBean.setError(true);
+
+			request.setAttribute("bean", errorBean);
+			System.out.println("null");
+			System.out.println(service.getUserOnNew(userID, password).toString());
+
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/userRegist.jsp");
+			disp.forward(request, response);
+
+		}else {
+			System.out.println("exitst");
 
 		UsersDto uDto = new UsersDto();
 		String monthString = String.format("%02d", Integer.valueOf(request.getParameter("month")).intValue());
 		String dayString = String.format("%02d", Integer.valueOf(request.getParameter("day")).intValue());
 
 		String honorific;
-		if(request.getParameter("sex").equals("man")) {
+		if(request.getParameter("sex").equals("MAN")) {
 			honorific = "さん";
 		}else {
 			honorific = "ちゃん";
@@ -75,11 +97,11 @@ public class UserRegistServlet extends HttpServlet {
 		String birthString = request.getParameter("year") + monthString + dayString;
 		LocalDate birth = convertToLocalDate(birthString, "yyyyMMdd");
 
-		uDto.setUserID(Integer.valueOf(request.getParameter("userID")).intValue());
+		uDto.setUserID(userID);
 		uDto.setUserName(request.getParameter("userName"));
 		uDto.setFeelingLevel(1);
 		uDto.setSex(UserSexEnum.valueOf(request.getParameter("sex")));
-		uDto.setPassword(request.getParameter("password"));
+		uDto.setPassword(password);
 		uDto.setLastLogin(date);
 		uDto.setPresentAmount(Integer.valueOf(request.getParameter("presentAmount")).intValue());
 		uDto.setTargetAmount(Integer.valueOf(request.getParameter("targetAmount")).intValue());
@@ -87,10 +109,9 @@ public class UserRegistServlet extends HttpServlet {
 		uDto.setBirthday(birth);
 		uDto.setHonorific(honorific);
 
-		//サービスを取得
-		UsersService service = new UsersService();
-		//blogcomentsDBへinsert
+		//UsersTableへinsert
 		service.insertUser(uDto);
+		}
 
 	}
 

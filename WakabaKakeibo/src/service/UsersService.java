@@ -69,6 +69,7 @@ public class UsersService {
 		return bean;
 	}
 
+	//なんかmapを追加するしている
 	public MBListBean findAllBlog()
 	{
 		MBListBean bean = new MBListBean();
@@ -114,7 +115,7 @@ public class UsersService {
 
 	}
 
-
+	//ユーザの検索 ログイン
 	public UsersDto getUser(int userID, String password)
 	{
 
@@ -131,6 +132,29 @@ public class UsersService {
 				return null;
 
 			}
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+		return dto;
+	}
+
+
+	//ユーザの検索 新規登録
+	public UsersDto getUserOnNew(int userID, String password)
+	{
+
+		UsersDto dto = null;
+
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			UsersDao usersDao = new UsersDao(con);
+			dto = usersDao.getUser( userID );
+
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
