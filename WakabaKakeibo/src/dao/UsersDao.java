@@ -53,15 +53,15 @@ public class UsersDao
 			" ?);";
 
 
-
-
+	private static final String UPDATE_TIME=
+			"UPDATE USERS SET LASTLOGIN = now()  WHERE USERID =?";
 
 
 
 	public UsersDto getUser(int id) throws SQLException
 	{
-		UsersDto ud = new UsersDto();
 
+		UsersDto ud=null;
 		try(PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID ))
 		{
 			stmt.setInt(1, id);
@@ -69,20 +69,22 @@ public class UsersDao
 
 			while(rs.next())
 			{
+				ud= new UsersDto();
 
-				ud.setUserID(rs.getInt("userID"));
-				ud.setPassword(rs.getString("password"));
-				ud.setUserName(rs.getString("password"));
-				ud.setSex(UserSexEnum.valueOf(rs.getString("sex")));
-				ud.setBirthday(rs.getDate("birthday").toLocalDate());
-				ud.setTargetAmount(rs.getInt("targetAmount"));
+				ud.setUserID(		rs.getInt("userID"));
+				ud.setPassword(		rs.getString("password"));
+				ud.setUserName(		rs.getString("username"));
+				ud.setSex(			UserSexEnum.valueOf(rs.getString("sex")));
+				ud.setBirthday(		rs.getDate("birthday").toLocalDate());
+				ud.setTargetAmount(	rs.getInt("targetAmount"));
 				ud.setPresentAmount(rs.getInt("presentAmount"));
-				ud.setLastLogin(rs.getDate("lastLogin").toLocalDate());
-				ud.setRunningDays(rs.getInt("runningDays"));
-				ud.setFeelingLevel(rs.getInt("feelingLevel"));
-				ud.setHonorific(rs.getString("honorific"));
+				ud.setLastLogin(	rs.getDate("lastLogin").toLocalDate());
+				ud.setRunningDays(	rs.getInt("runningDays"));
+				ud.setFeelingLevel(	rs.getInt("feelingLevel"));
+				ud.setHonorific(	rs.getString("honorific"));
 
 			}
+
 		}
 
 
@@ -107,9 +109,28 @@ public class UsersDao
 					stmt.setInt( 9, uDto.getRunningDays());
 					stmt.setInt( 10, uDto.getFeelingLevel());
 					stmt.setString( 11, uDto.getHonorific());
+					stmt.setString( 12, null);
 					stmt.executeUpdate();
 
 				}
 
 	}
+
+	public void updateLoginDate(int userID) throws SQLException
+	{
+		try(PreparedStatement stmt = con.prepareStatement(UPDATE_TIME))
+		{
+			stmt.setInt(1,userID);
+
+			stmt.executeUpdate();
+
+
+
+		}
+
+
+
+
+	}
+
 }

@@ -20,6 +20,9 @@ import dto.UsersDto;
 
 public class UsersService {
 
+
+
+	//ブログの取得
 	public MessageListBean findAll()
 	{
 		MessageListBean bean = new MessageListBean();
@@ -48,6 +51,7 @@ public class UsersService {
 		return bean;
 	}
 
+	//ブログの検索
 	public MessageBean findById(int id)
 	{
 		MessageBean bean = new MessageBean();
@@ -75,7 +79,7 @@ public class UsersService {
 
 		return bean;
 	}
-
+	//なんかmapを追加するしている
 	public MBListBean findAllBlog()
 	{
 		MBListBean bean = new MBListBean();
@@ -102,7 +106,8 @@ public class UsersService {
 		return bean;
 	}
 
-	public void insertBlog(UsersDto uDto)
+	//ユーザの新規追加処理
+	public void insertUser(UsersDto uDto)
 	{
 		//オートクローズ
 		try( Connection con= dao.Dao.getConnection() )
@@ -119,7 +124,7 @@ public class UsersService {
 
 	}
 
-
+	//ユーザの検索 ログイン
 	public UsersDto getUser(int userID, String password)
 	{
 
@@ -131,11 +136,75 @@ public class UsersService {
 			UsersDao usersDao = new UsersDao(con);
 			dto = usersDao.getUser( userID );
 
-			if( !dto.getPassword().equals(password) )
+
+
+
+//			if( dto==null || !dto.getPassword().equals(password) )
+//			{
+//				return null;
+//
+//			}
+
+
+			String pass =null;
+			if(dto==null)
+			{
+				return null;
+			}
+			else
+			{
+				pass = dto.getPassword();
+			}
+
+
+			if( !pass.equals(password) )
 			{
 				return null;
 
+
 			}
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+		return dto;
+	}
+
+	public void updateLoginDate(int userID)
+	{
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			UsersDao usersDao = new UsersDao(con);
+			usersDao.updateLoginDate( userID );
+
+
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+
+
+	}
+
+	//ユーザの検索 新規登録
+	public UsersDto getUserOnNew(int userID, String password)
+	{
+
+		UsersDto dto = null;
+
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			UsersDao usersDao = new UsersDao(con);
+			dto = usersDao.getUser( userID );
+
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{

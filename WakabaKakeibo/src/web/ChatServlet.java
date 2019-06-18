@@ -86,7 +86,12 @@ public class ChatServlet extends HttpServlet {
 		}
 		catch( NumberFormatException e )
 		{
+
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+			disp.forward(request, response);
 			// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
+			return;
 		}
 
 		//Beanの中身をDtoにセット
@@ -97,18 +102,16 @@ public class ChatServlet extends HttpServlet {
 		usersDto = service.getUser(userID, password );
 		if( usersDto == null )
 		{
-
-
-			request.setAttribute("bean", bean);
-
 			//JSPに遷移する
 			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
 			disp.forward(request, response);
 			//ログインエラー画面に飛ぶ
 
+			return;
+
 		}
 
-
+		service.updateLoginDate(userID);
 
 		//ログイン情報をセッションに保存する
 		request.getSession().setAttribute( ChatBean.USERINFO_SESSION_SAVE_NAME, bean );
