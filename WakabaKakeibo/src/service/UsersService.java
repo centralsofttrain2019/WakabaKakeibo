@@ -35,12 +35,6 @@ public class UsersService {
 
 			bean.setmDtoList(mList);
 
-			//bean.setEmpList(eList);
-			//System.out.println(mList);
-
-//			System.out.println("従業員の情報は以下です。\n"
-//								+ eList.toString()
-//								);
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
@@ -64,12 +58,7 @@ public class UsersService {
 			bean.setDto(mDto);
 			//bean.setmDtoList(mList);
 
-			//bean.setEmpList(eList);
-			//System.out.println(mList);
 
-//			System.out.println("従業員の情報は以下です。\n"
-//								+ eList.toString()
-//								);
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
@@ -79,6 +68,7 @@ public class UsersService {
 
 		return bean;
 	}
+
 	//なんかmapを追加するしている
 	public MBListBean findAllBlog()
 	{
@@ -173,6 +163,7 @@ public class UsersService {
 		return dto;
 	}
 
+
 	public void updateLoginDate(int userID)
 	{
 		//オートクローズ
@@ -213,6 +204,7 @@ public class UsersService {
 		}
 
 		return dto;
+
 	}
 
 

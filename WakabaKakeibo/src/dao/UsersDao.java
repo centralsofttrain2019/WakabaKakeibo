@@ -116,6 +116,7 @@ public class UsersDao
 
 	}
 
+
 	public void updateLoginDate(int userID) throws SQLException
 	{
 		try(PreparedStatement stmt = con.prepareStatement(UPDATE_TIME))
