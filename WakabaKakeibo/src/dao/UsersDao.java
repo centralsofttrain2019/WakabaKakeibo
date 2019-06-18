@@ -56,6 +56,8 @@ public class UsersDao
 	private static final String UPDATE_TIME=
 			"UPDATE USERS SET LASTLOGIN = now()  WHERE USERID =?";
 
+	private static final String UPDATE_TARGET_AMOUNT = "UPDATE USERS SET TARGETAMOUNT = ?  WHERE USERID =?;" ;
+
 
 
 	public UsersDto getUser(int id) throws SQLException
@@ -131,6 +133,22 @@ public class UsersDao
 
 
 
+
+	}
+
+	public void updateTargetAmount(UsersDto dto) throws SQLException
+	{
+		System.out.println("ta-02");
+
+		// オートクローズ版
+				try( PreparedStatement stmt = con.prepareStatement( UPDATE_TARGET_AMOUNT ) )
+				{
+
+					stmt.setInt( 1, dto.getTargetAmount());
+					stmt.setInt( 2, dto.getUserID());
+					stmt.executeUpdate();
+
+				}
 
 	}
 

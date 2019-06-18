@@ -40,7 +40,7 @@
 
         var options = {
           title: '',
-          hAxis: { title: '日時', minValue: 0, maxValue: <%=bean.getSimList().get(bean.getSimList().size()-1).getDate() %> },
+          hAxis: { title: '日時', minValue: 0, maxValue: <%=bean.getSimList().get(bean.getSimList().size()-1).getDate() %>,textStyle :{ fontSize: 12 } },
           vAxis: { title: '貯金額', minValue: 0, maxValue: <%=bean.getSimList().get(bean.getSimList().size()-1).getBalance() %> },
           legend: 'none',
           interpolateNulls: true,
@@ -64,6 +64,15 @@
 
 
 <h3 class="my-3">シミュレーション</h3>
+<div style="display:inline-flex">
+現在の目標金額：<strong><%=bean.getTargetAmount() %></strong>　　　目標金額の変更：
+<form action="UpdateSimulationListServlet" method="post">
+<input type="text" name="targetAmount" size="20"> 円
+<input type="submit" value="変更">
+</form>
+</div>
+
+<br><br>
 <h5><center>シミュレーショングラフ</center></h5>
 </div>
 

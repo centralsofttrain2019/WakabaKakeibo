@@ -9,9 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.ChatBean;
 import bean.SimulationListBean;
 import dto.DepositDto;
+import dto.UsersDto;
 import service.DepositService;
 
 /**
@@ -36,16 +39,35 @@ public class SimulationListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
+
+		//HttpSession取得
+		 HttpSession session;
+		 ChatBean cBean = new ChatBean();
+		 //cBean = (ChatBean)session.getAttribute("UserInfo");
+
+
+		//あとで削除
+		UsersDto ud = new UsersDto();
+		ud.setTargetAmount(500000);
+		ud.setUserID(1);
+		//ここまで
+
+
+
+
 		SimulationListBean bean = new SimulationListBean();
 		DepositService service = new DepositService();
 
-		List<DepositDto> list = service.getDepositandSimulation( 1 );  //後でセッションから取り出す
+		List<DepositDto> list = service.getDepositandSimulation(ud);  //後でセッションから取り出す  修正：udをcBean
 
 		for(int i = 0; i < list.size(); i++) {
 
 			bean.add(list.get(i), "Deposit" + i);
 
 		}
+
+
+		bean.setTargetAmount(ud.getTargetAmount());
 		//beanをリクエストにセット キー名は「bean」とする
 		request.setAttribute("bean", bean);
 

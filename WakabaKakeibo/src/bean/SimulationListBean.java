@@ -8,6 +8,7 @@ import dto.DepositDto;
 public class SimulationListBean {
 
 	private List<SimulationBean> list = new ArrayList<SimulationBean>();
+	private int targetAmount;
 
 	public List<SimulationBean> getSimList() {
 		return list;
@@ -24,5 +25,15 @@ public class SimulationListBean {
 		list.add(bean);
 
 	}
+
+	public int getTargetAmount() {
+		return targetAmount;
+	}
+
+	public void setTargetAmount(int targetAmount) {
+		this.targetAmount = targetAmount;
+	}
+
+
 
 }

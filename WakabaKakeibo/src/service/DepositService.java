@@ -7,11 +7,13 @@ import java.util.List;
 
 import dao.Dao;
 import dao.DepositDao;
+import dao.UsersDao;
 import dto.DepositDto;
+import dto.UsersDto;
 
 public class DepositService {
 
-	public List<DepositDto> getDepositandSimulation(int userID){
+	public List<DepositDto> getDepositandSimulation(UsersDto cBean){ //修正：UsersDtoをChatBean
 
 		List<DepositDto> list = null;
 
@@ -20,14 +22,14 @@ public class DepositService {
 			DepositDao depositDao = new DepositDao(con);
 			//UserDao userDao = new UserDao(con);
 
-			list = depositDao.getDepositList(userID);
+			list = depositDao.getDepositList(cBean.getUserID());
 			//ここにリストのソート処理を記述
 
 //			//リストの中身確認用
 //			System.out.println("最初のデータ→"+ list.get(0).getBalance() + "\n" + "最新のデータ→" + list.get(list.size()-1).getBalance());
 
 
-			this.addToDepositSimulation(list, 500000, userID);
+			this.addToDepositSimulation(list, cBean.getTargetAmount(), cBean.getUserID());
 			//後で目標金額をDBから取り出すように変更
 
 
@@ -81,6 +83,23 @@ public class DepositService {
 		dto.setReal(true);
 
 		inlist.add(dto);
+	}
+
+
+	public void updateTargetAmount(UsersDto dto) {
+		try ( Connection con= Dao.getConnection() ){
+
+			UsersDao dao = new UsersDao(con);;
+
+			dao.updateTargetAmount(dto);
+
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
 	}
 
 }
