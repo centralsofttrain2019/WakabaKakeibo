@@ -20,6 +20,9 @@ import dto.UsersDto;
 
 public class UsersService {
 
+
+
+	//ブログの取得
 	public MessageListBean findAll()
 	{
 		MessageListBean bean = new MessageListBean();
@@ -32,12 +35,6 @@ public class UsersService {
 
 			bean.setmDtoList(mList);
 
-			//bean.setEmpList(eList);
-			//System.out.println(mList);
-
-//			System.out.println("従業員の情報は以下です。\n"
-//								+ eList.toString()
-//								);
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
@@ -48,6 +45,7 @@ public class UsersService {
 		return bean;
 	}
 
+	//ブログの検索
 	public MessageBean findById(int id)
 	{
 		MessageBean bean = new MessageBean();
@@ -60,12 +58,7 @@ public class UsersService {
 			bean.setDto(mDto);
 			//bean.setmDtoList(mList);
 
-			//bean.setEmpList(eList);
-			//System.out.println(mList);
 
-//			System.out.println("従業員の情報は以下です。\n"
-//								+ eList.toString()
-//								);
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
@@ -102,7 +95,9 @@ public class UsersService {
 		return bean;
 	}
 
-	public void insertBlog(UsersDto uDto)
+
+	//ユーザの新規追加処理
+	public void insertUser(UsersDto uDto)
 	{
 		//オートクローズ
 		try( Connection con= dao.Dao.getConnection() )
