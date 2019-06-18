@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%-- <%@ page import="bean.MessageBean" %> --%>
 <jsp:useBean
   		id="bean"
-  		class="bean.MessageListBean"
+  		class="bean.ChatBean"
   		scope="request" />
 
 <%@ page import="bean.MessageBean" %>
@@ -57,7 +56,7 @@
 
 </div>
 
-<% for(MessageBean b : bean.getmBeanList()){ %>
+<% for(MessageBean b : bean.getMessageListBean().getmBeanList() ){ %>
 		<script>
 <%-- 			setInterval(communicate, 200, '<%= b.getMessageContent() %>'); --%>
 		</script>

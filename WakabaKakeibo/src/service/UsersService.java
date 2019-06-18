@@ -12,8 +12,10 @@ import bean.MessageBean;
 import bean.MessageListBean;
 import dao.BlogsDao;
 import dao.MessageDao;
+import dao.UsersDao;
 import domain.BlogCategoryEnum;
 import dto.MessageDto;
+import dto.UsersDto;
 
 
 public class UsersService {
@@ -98,6 +100,50 @@ public class UsersService {
 		}
 
 		return bean;
+	}
+
+	public void insertBlog(UsersDto uDto)
+	{
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			UsersDao uDao = new UsersDao(con);
+			uDao.insertUser(uDto);
+
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+	}
+
+	//-------------------------------------------------
+	public UsersDto getUser(int userID, String password)
+	{
+
+		UsersDto dto = null;
+
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			UsersDao usersDao = new UsersDao(con);
+			dto = usersDao.getUser( userID );
+
+			if( !dto.getPassword().equals(password) )
+			{
+				return null;
+
+			}
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+		return dto;
 	}
 
 
