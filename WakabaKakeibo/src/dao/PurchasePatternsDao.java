@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,5 +48,73 @@ public class PurchasePatternsDao
 		}
 		return list;
 	}
+
+	private static final String INSERT_SQL =
+			"INSERT INTO PurchasePatterns "
+			+ "(UserID, ProductID, DatePatternType, LastPurchaseDate, NumberPattern, AmountPattern) VALUES "
+			+ "(?,?,?,?,?,?)";
+	public void insertData(PurchasePatternsDto dto ) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement(INSERT_SQL);
+		stmt.setInt(1, dto.getUserID());
+		stmt.setInt(2, dto.getProductID());
+		stmt.setString(3, dto.getDatePatternType().toString());
+		stmt.setDate(4, java.sql.Date.valueOf(dto.getLastPurchaseDate()));
+		stmt.setInt(5, dto.getNumberPattern());
+		stmt.setInt(6, dto.getAmountPattern());
+		int res = stmt.executeUpdate();
+	}
+
+	private static final String UPDATE_SQL_HEAD = "UPDATE PurchasePatterns ";
+
+	private static final String UPDATE_SQL_FOOT = " WHERE UserID = ? AND ProductID = ?";
+	public void updateData(int userID, int productID, DatePatternTypeEnum pattern , LocalDate lastPurchaseDate, int amountPattern, int numberPattern)
+			throws SQLException
+	{
+		String sqlBody = "SET ";
+
+		if(lastPurchaseDate != null) {
+			sqlBody += "LastPurchaseDate = '" + lastPurchaseDate.toString() + "'";
+		}
+		if(amountPattern != -1) {
+			if(!sqlBody.equals("SET ")) {
+				sqlBody += ", ";
+			}
+			sqlBody += " AmountPattern = " + amountPattern;
+		}
+		if(numberPattern != -1) {
+			if(!sqlBody.equals("SET ")) {
+				sqlBody += ", ";
+			}
+			sqlBody += " NumberPattern = " + numberPattern;
+		}
+		if(numberPattern != -1) {
+			if(!sqlBody.equals("SET ")) {
+				sqlBody += ", ";
+			}
+			sqlBody += " DatePatternType = '" + pattern.toString() + "'";
+		}
+
+		PreparedStatement stmt = con.prepareStatement(UPDATE_SQL_HEAD + sqlBody + UPDATE_SQL_FOOT);
+		stmt.setInt(1, userID);
+		stmt.setInt(2, productID);
+
+		System.out.println("Update Pattern Table :" + stmt);
+		stmt.executeUpdate();
+	}
+
+	private static final String DELETE_SQL =
+			"DELETE FROM PurchasePatterns "
+			+ "WHERE UserID = ? AND ProductID = ?";
+	public void deleteData(int userID, int productID) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement(DELETE_SQL);
+		stmt.setInt(1, userID);
+		stmt.setInt(2, productID);
+
+		System.out.println("Delete Pattern Table :" + stmt);
+		stmt.executeUpdate();
+	}
+
 }
 

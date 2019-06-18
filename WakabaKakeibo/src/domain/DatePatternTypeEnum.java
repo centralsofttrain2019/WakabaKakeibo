@@ -4,5 +4,6 @@ public enum DatePatternTypeEnum
 {
 	ONEWEEK,
 	TWOWEEKS,
-	THREEWEEKS
+	THREEWEEKS,
+	OUTOFPTTERN
 }

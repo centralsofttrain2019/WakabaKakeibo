@@ -51,11 +51,12 @@
 
 		      	  <font color="#ff0000">
 		      	  <% for(bean.ReconstructBean b: bean.getReconstructCalendar().get(bean.getDispDay().get(i))){ %>
-		      	  	<input type="checkbox" name="select" value="<%= b.getProductName() %>" checked="checked">&nbsp;
+		      	  	<input type="checkbox" id="select_<%= b.getProductName() %>" name="select" value="<%= b.getProductName() %>" checked="checked"> &nbsp;
+		      	  	<label for="select_<%= b.getProductName() %>"><%= b.getProductName() %></label>
 		      	  	<input type="hidden" name="num_<%= b.getProductName() %>" value="<%= b.getNumberOfPurchase() %>">
 		      	  	<input type="hidden" name="amount_<%= b.getProductName() %>" value="<%= b.getAmount() %>">
 		      	  	<input type="hidden" name="date_<%= b.getProductName() %>" value="<%= b.getPurchaseDate() %>">
-		      	  	<%= b.getProductName() %><br>
+		      	  	<br>
 		      	  <% } %>
 		      	  </font>
 		      	</td>
@@ -96,9 +97,7 @@
 
 
 <div class="text-center my-5">
-	変更を適用しますか？<br>
-		<button type="submit" class="btn btn-primary mx-5" >はい</button>
-		<button type="submit" class="btn btn-danger mx-5" >いいえ</button>
+		<button type="submit" class="btn btn-primary mx-5" name="regist" value="Yes">補完する</button>
 </div>
 </form>
 

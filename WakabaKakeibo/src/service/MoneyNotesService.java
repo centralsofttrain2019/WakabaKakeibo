@@ -85,10 +85,25 @@ public class MoneyNotesService
 			case ONEWEEK:
 				nextDay = lastDay.plusDays(7);
 				intervalDays = 7;
+				if(nextDay.isBefore(today.minusDays(6)))
+				{
+					nextDay = lastDay.plusDays(14);
+					intervalDays = 14;
+					if(nextDay.isBefore(today.minusDays(6)))
+					{
+						nextDay = lastDay.plusDays(21);
+						intervalDays = 21;
+					}
+				}
 				break;
 			case TWOWEEKS:
 				nextDay = lastDay.plusDays(14);
 				intervalDays = 14;
+				if(nextDay.isBefore(today.minusDays(6)))
+				{
+					nextDay = lastDay.plusDays(21);
+					intervalDays = 21;
+				}
 				break;
 			case THREEWEEKS:
 				nextDay = lastDay.plusDays(21);
@@ -97,9 +112,7 @@ public class MoneyNotesService
 			}
 
 			if(nextDay.isAfter(today.minusDays(7)) && nextDay.isBefore(today.plusDays(1)))
-			//
 			{
-				System.out.println("Pattern : "+ pp.getProductName());
 				MoneyNotesDto reconsData = new MoneyNotesDto(
 						0,  //インサート時に自動採番させる
 						pp.getUserID(),
@@ -138,6 +151,8 @@ public class MoneyNotesService
 			dto.setCategoryID(dao.getCategoryID(productID));
 			dto.setPurchaseIntervalDays((int)ChronoUnit.DAYS.between(dao.getLastPurchaseDate(userID, productID), purchaseDate));
 			dao.insertMoneyNotes(dto);
+
+			updatePatternTable(userID, productID,purchaseDate );
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
@@ -146,55 +161,21 @@ public class MoneyNotesService
 		}
 	}
 
-
-	//過去12週間のデータを取得し購入パターンを作成する
-	public void createPatternTable(int userID)
+	private void updatePatternTable(int userID, int productID, LocalDate lastPurchaseDate)
 	{
-		LocalDate today = LocalDate.now();
-		List<MoneyNotesDto> dtoList;
+		PurchasePatternsDto dto = checkDatePattern(userID, productID);
+
 
 		try( Connection con= Dao.getConnection() )
 		{
-			MoneyNotesDao mnDao = new MoneyNotesDao(con);
-			dtoList = mnDao.findByDate(userID, today.minusWeeks(12), today);
+			PurchasePatternsDao dao = new PurchasePatternsDao(con);
 
-			//同じ商品が3回連続で登場した場合は間隔によってパターンのデータを作成
-			int preProductID =0;
-			int maxIntervalDate =0;
-			int count =0;
-			LocalDate lastPurchaseDate = null;
-			int lastNumberOfPurchase=0;
-			int lastAmount=0;
-			for(MoneyNotesDto mnd : dtoList)
+			if(dto.getDatePatternType() == DatePatternTypeEnum.OUTOFPTTERN)
 			{
-				if(mnd.getProductID() != preProductID)
-				{
-					preProductID = mnd.getProductID();
-				}else if(count < 3){
-					count++;
-					if(count ==1)
-					{
-						lastPurchaseDate = mnd.getPurchaseDate();
-						lastNumberOfPurchase = mnd.getNumberOfPurchase();
-						lastAmount = mnd.getAmount();
-					}
-					else if(count==3) {
-						if(maxIntervalDate <=7)
-						{
-							insertPurchasePattern(userID,preProductID, DatePatternTypeEnum.ONEWEEK, lastPurchaseDate, lastNumberOfPurchase, lastAmount);
-						}
-						else if(maxIntervalDate <= 14)
-						{
-							insertPurchasePattern(userID,preProductID, DatePatternTypeEnum.TWOWEEKS, lastPurchaseDate, lastNumberOfPurchase, lastAmount);
-						}
-						else if(maxIntervalDate <= 21)
-						{
-							insertPurchasePattern(userID,preProductID, DatePatternTypeEnum.THREEWEEKS, lastPurchaseDate, lastNumberOfPurchase, lastAmount);
-						}
-					}
-					maxIntervalDate = mnd.getPurchaseIntervalDays() > maxIntervalDate
-							? mnd.getPurchaseIntervalDays() : maxIntervalDate;
-				}
+				dao.deleteData(userID, productID);
+			}else
+			{
+				dao.updateData(userID, productID, dto.getDatePatternType() , lastPurchaseDate, dto.getAmountPattern(), dto.getNumberPattern());
 			}
 		}
 		catch( SQLException | ClassNotFoundException e )
@@ -204,9 +185,98 @@ public class MoneyNotesService
 		}
 	}
 
-	private void insertPurchasePattern(int userID, int productID, DatePatternTypeEnum type, LocalDate lastDate, int numberPattern, int amountPattern)
+	//過去12週間のデータを取得し購入パターンを作成する
+	public void createPatternTable(int userID)
 	{
-		//TODO
+		LocalDate today = LocalDate.now();
+		List<Integer> idList;
+
+		try( Connection con= Dao.getConnection() )
+		{
+			MoneyNotesDao mnDao = new MoneyNotesDao(con);
+			idList = mnDao.getProductIDsByDate(userID, today, today.minusWeeks(3));
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+		for(int id : idList)
+		{
+			PurchasePatternsDto dto = checkDatePattern(userID, id);
+			if(dto.getDatePatternType() != DatePatternTypeEnum.OUTOFPTTERN)
+			{
+				insertPurchasePattern(dto);
+			}
+		}
+	}
+
+	//同じ商品が3回連続で登場した場合は間隔によってパターンのデータを作成
+	private PurchasePatternsDto checkDatePattern(int userID, int productID)
+	{
+		List<MoneyNotesDto> dtoList;
+		try( Connection con= Dao.getConnection() )
+		{
+			MoneyNotesDao mnDao = new MoneyNotesDao(con);
+			dtoList = mnDao.findByProductIDWithSorted(userID, productID);
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+		int maxIntervalDate =0;
+		int count =0;
+
+		//最初はパターン外として設定
+		PurchasePatternsDto dto = new PurchasePatternsDto();
+		dto.setDatePatternType(DatePatternTypeEnum.OUTOFPTTERN);
+		dto.setUserID(userID);
+		dto.setProductID(productID);
+
+		for(MoneyNotesDto mnd : dtoList)
+		{
+			count++;
+			if(count ==1)
+			{
+				dto.setLastPurchaseDate(mnd.getPurchaseDate());
+				dto.setNumberPattern(mnd.getNumberOfPurchase());
+				dto.setAmountPattern(mnd.getAmount());
+			}
+			else if(count==3) {
+				if(maxIntervalDate <=7)
+				{
+					dto.setDatePatternType(DatePatternTypeEnum.ONEWEEK);
+				}
+				else if(maxIntervalDate <= 14)
+				{
+					dto.setDatePatternType(DatePatternTypeEnum.TWOWEEKS);
+				}
+				else if(maxIntervalDate <= 21)
+				{
+					dto.setDatePatternType(DatePatternTypeEnum.THREEWEEKS);
+				}
+			}
+			maxIntervalDate = mnd.getPurchaseIntervalDays() > maxIntervalDate
+					? mnd.getPurchaseIntervalDays() : maxIntervalDate;
+		}
+		return dto;
+	}
+
+	public void insertPurchasePattern(PurchasePatternsDto dto)
+	{
+		try( Connection con= Dao.getConnection() )
+		{
+			PurchasePatternsDao dao = new PurchasePatternsDao(con);
+			dao.insertData(dto);
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
 	}
 
 }

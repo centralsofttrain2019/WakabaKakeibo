@@ -32,16 +32,20 @@ public class RegistReconstructServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
+        String isRegist = request.getParameter("regist");
 
         String select[ ] = request.getParameterValues("select");
         MoneyNotesService service = new MoneyNotesService();
 
-        for (String name : select) {
-            LocalDate date = LocalDate.parse(request.getParameter("date_" + name));
-            int amount = Integer.parseInt(request.getParameter("amount_" + name));
-            int number = Integer.parseInt(request.getParameter("num_" + name));
-
-            service.insertMoneyNotes(1, name, number, amount, date);
+        if(select != null)
+        {
+	        for (String name : select)
+	        {
+	            LocalDate date = LocalDate.parse(request.getParameter("date_" + name));
+	            int amount = Integer.parseInt(request.getParameter("amount_" + name));
+	            int number = Integer.parseInt(request.getParameter("num_" + name));
+	            service.insertMoneyNotes(1, name, number, amount, date);
+	        }
         }
 
 		RequestDispatcher disp = request.getRequestDispatcher("/ReconstructListServlet");

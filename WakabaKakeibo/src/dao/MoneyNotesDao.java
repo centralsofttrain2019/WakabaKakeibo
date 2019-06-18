@@ -57,7 +57,6 @@ public class MoneyNotesDao {
 
 	private static final String FIND_BY_USERID =
 			"SELECT * FROM MONEYNOTES WHERE UserID = ?";
-
 	public List<MoneyNotesDto> findByUserID(int userID) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID );
@@ -81,7 +80,6 @@ public class MoneyNotesDao {
 		+ "INNER JOIN Products ON MoneyNotes.ProductID = Products.ProductID "
 		+ "INNER JOIN MoneyCategorys ON MoneyNotes.CategoryID = MoneyCategorys.MoneyCategorysID "
 		+ "WHERE UserID = ?";
-
 	public List<MoneyNotesDto> findByUserIDWithIDName(int userID) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_WITH_ID_NAME );
@@ -110,7 +108,6 @@ public class MoneyNotesDao {
 			+ "INNER JOIN MoneyCategorys ON MoneyNotes.CategoryID = MoneyCategorys.MoneyCategorysID "
 			+ "WHERE UserID = ? "
 			+ "AND PurchaseDate >= ? AND PurchaseDate <= ?";
-
 	public List<MoneyNotesDto> findByDate(int userID,LocalDate sinceDate, LocalDate untilDate) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_DATE );
@@ -149,7 +146,6 @@ public class MoneyNotesDao {
 			+ "WHERE UserID = ? "
 			+ "AND PurchaseDate >= ? AND PurchaseDate <= ? "
 			+ "ORDER BY ProductID ASC, PurchaseDate DESC";
-
 	public List<MoneyNotesDto> findByDateWithSorted(int userID,LocalDate sinceDate, LocalDate untilDate) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_DATE_SORT );
@@ -171,12 +167,66 @@ public class MoneyNotesDao {
 		return dtoList;
 	}
 
+	//一人のユーザの家計簿データのうちある商品の購入履歴を取得
+	private static final String FIND_BY_USERID_PRODUCTID_SORT =
+			"SELECT * FROM MONEYNOTES "
+			+ "INNER JOIN Products ON MoneyNotes.ProductID = Products.ProductID "
+			+ "INNER JOIN MoneyCategorys ON MoneyNotes.CategoryID = MoneyCategorys.MoneyCategorysID "
+			+ "WHERE UserID = ? "
+			+ "AND Products.ProductID = ? "
+			+ "ORDER BY PurchaseDate DESC";
+	public List<MoneyNotesDto> findByProductIDWithSorted(int userID,int productID) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_PRODUCTID_SORT );
+		stmt.setInt(1, userID);
+		stmt.setInt(2, productID);
+		ResultSet rs = stmt.executeQuery();
+
+		List<MoneyNotesDto> dtoList = new ArrayList<MoneyNotesDto>();
+		while(rs.next())
+		{
+			MoneyNotesDto mnd = new MoneyNotesDto();
+			this.SetMoneyNotesResultSet(mnd, rs);
+			mnd.setProductName(rs.getString("Products.ProductName"));
+			mnd.setCategoryName(rs.getString("MoneyCategorys.CategoryName"));
+			dtoList.add(mnd);
+		}
+		if(stmt != null) stmt.close();
+		return dtoList;
+	}
+
+	//一人のユーザの家計簿データのある期間内に購入した商品ID一覧を取得
+	private static final String FIND_BY_USERID_DATE_PRODUCTID =
+			"SELECT ProductID FROM MONEYNOTES "
+			+ "WHERE UserID = ? "
+			+ "AND PurchaseDate >= ? AND PurchaseDate <= ? "
+			+ "GROUP BY ProductID "
+			+ "ORDER BY ProductID ASC";
+	public List<Integer> getProductIDsByDate(int userID,LocalDate sinceDate, LocalDate untilDate) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_DATE_PRODUCTID );
+		stmt.setInt(1, userID);
+		stmt.setString(2, sinceDate.toString());
+		stmt.setString(3, untilDate.toString());
+		ResultSet rs = stmt.executeQuery();
+
+		List<Integer> idList = new ArrayList<Integer>();
+		while(rs.next())
+		{
+			int id = rs.getInt("ProductID");
+			idList.add(id);
+		}
+		if(stmt != null) stmt.close();
+
+		return idList;
+	}
+
+
 	//ユーザのある商品の最終購入日を取得
 	private static final String GET_LAST_PURCHASE_DATE =
 			"SELECT * FROM MoneyNotes "
 			+ "WHERE UserID = ? AND ProductID = ? "
 			+ "ORDER BY PurchaseDate DESC";
-
 	public LocalDate getLastPurchaseDate(int userID, int productID) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( GET_LAST_PURCHASE_DATE );
@@ -258,4 +308,7 @@ public class MoneyNotesDao {
 			throw new RuntimeException();
 		}
 	}
+
+
 }
+
