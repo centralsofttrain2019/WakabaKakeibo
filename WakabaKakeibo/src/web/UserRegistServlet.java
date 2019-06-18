@@ -56,7 +56,9 @@ public class UserRegistServlet extends HttpServlet {
 		UsersDto uDto = new UsersDto();
 
 		uDto.setUserID(Integer.valueOf(request.getParameter("userID")).intValue());
-
+		uDto.setUserName(request.getParameter("userName"));
+		uDto.setFeelingLevel(1);
+//		uDto.setSex(sex);
 
 	}
 
