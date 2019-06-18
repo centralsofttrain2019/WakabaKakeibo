@@ -115,6 +115,32 @@ public class UsersService {
 	}
 
 
+	public UsersDto getUser(int userID, String password)
+	{
+
+		UsersDto dto = null;
+
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			UsersDao usersDao = new UsersDao(con);
+			dto = usersDao.getUser( userID );
+
+			if( !dto.getPassword().equals(password) )
+			{
+				return null;
+
+			}
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+		return dto;
+	}
+
 
 
 

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.ChatBean;
 import bean.MessageBean;
 import bean.MessageListBean;
+import dto.UsersDto;
 import service.UsersService;
 
 
@@ -37,45 +39,89 @@ public class ChatServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-				//ユーザの好感度の取得
-				//ここではユーザの好感度は0－2を考えている
-				//とりあえず0を代入する
-				int userFeelingLevel = 0;
+		//UserID,Passwordをbeanにセット
+		ChatBean bean = new ChatBean();
 
-				//Userの好感度をMessageIdへ代入
-				//0:嫌い 1:好き 2:普通
-				int messageId = 0;
+		//サービスを取得
+		UsersService service = new UsersService();
 
-				//時間の取得
-				LocalDateTime ld = LocalDateTime.now();
+		//ユーザの好感度の取得
+		//ここではユーザの好感度は0－2を考えている
+		//とりあえず0を代入する
+		int userFeelingLevel = 0;
 
-				//MessageListBeanの生成
-				MessageListBean mListBean = new MessageListBean();
+		//Userの好感度をMessageIdへ代入
+		//0:嫌い 1:好き 2:普通
+		int messageId = 0;
 
-				//Message用のListの生成
-				List<MessageBean> mList = new ArrayList();
+		//時間の取得
+		LocalDateTime ld = LocalDateTime.now();
+
+		//MessageListBeanの生成
+		MessageListBean mListBean = new MessageListBean();
+
+		//Message用のListの生成
+		List<MessageBean> mList = new ArrayList<MessageBean>();
+
+					//ユーザーの誕生日の取り出し
+		//Dtoからユーザの誕生日を取り出す
+		LocalDateTime userBirthDay = LocalDateTime.now();
+
+
+		mList.add(getGreeting(service, ld, messageId));
+		mList.add(getBirth(service, ld, userBirthDay, userFeelingLevel));
+
+		//MessageBeanのListをMessageListBeanへset
+		mListBean.setmBeanList(mList);
+
+		bean.setMessageListBean( mListBean );
+
+
+		String userIDstr = request.getParameter("userID");
+		String password = request.getParameter("password");
+
+		int userID = Integer.MAX_VALUE ;
+		try {
+			userID = Integer.parseInt(userIDstr);
+		}
+		catch( NumberFormatException e )
+		{
+			// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
+		}
+
+		//Beanの中身をDtoにセット
+		UsersDto usersDto;
+
+
+		//ログインIDとパスワードを渡して、ユーザDTOを検索し、取得する
+		usersDto = service.getUser(userID, password );
+		if( usersDto == null )
+		{
+
+
+			request.setAttribute("bean", bean);
+
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+			disp.forward(request, response);
+			//ログインエラー画面に飛ぶ
+
+		}
 
 
 
-				//サービスを取得
-				UsersService service = new UsersService();
-
-				//ユーザーの誕生日の取り出し
-				//Dtoからユーザの誕生日を取り出す
-				LocalDateTime userBirthDay = LocalDateTime.now();
+		//ログイン情報をセッションに保存する
+		request.getSession().setAttribute( ChatBean.USERINFO_SESSION_SAVE_NAME, bean );
 
 
-				mList.add(getGreeting(service, ld, messageId));
-				mList.add(getBirth(service, ld, userBirthDay, userFeelingLevel));
+		bean.setUserID(userID);
+		bean.setPassword(password);
 
-				//MessageBeanのListをMessageListBeanへset
-				mListBean.setmBeanList(mList);
+		request.setAttribute("bean", bean);
 
-				request.setAttribute("bean", mListBean);
-
-				//JSPに遷移する
-				RequestDispatcher disp = request.getRequestDispatcher("/chat.jsp");
-				disp.forward(request, response);
+		//JSPに遷移する
+		RequestDispatcher disp = request.getRequestDispatcher("/chat.jsp");
+		disp.forward(request, response);
 	}
 
 	/**

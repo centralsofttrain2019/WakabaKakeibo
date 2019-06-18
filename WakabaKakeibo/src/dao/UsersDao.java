@@ -14,6 +14,13 @@ public class UsersDao
 
 
 
+	//コネクションをセットするコンストラクター
+	public UsersDao(Connection con) {
+		super();
+		this.con = con;
+	}
+
+
 	private static final String FIND_BY_USERID =
 			"SELECT * FROM Users WHERE UserID = ?";
 
@@ -45,11 +52,10 @@ public class UsersDao
 			" ?,\r\n" +
 			" ?);";
 
-	public UsersDao(Connection con)
-	{
-		super();
-		this.con = con;
-	}
+
+
+
+
 
 
 	public UsersDto getUser(int id) throws SQLException

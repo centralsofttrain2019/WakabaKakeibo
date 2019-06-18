@@ -1,6 +1,7 @@
 package dto;
 
 import java.time.LocalDate;
+import domain.UserSexEnum;
 
 import domain.UserSexEnum;
 
@@ -17,6 +18,8 @@ public class UsersDto
 	private int runningDays;
 	private int feelingLevel;
 	private String honorific;
+
+
 	public int getUserID() {
 		return userID;
 	}
@@ -83,7 +86,13 @@ public class UsersDto
 	public void setHonorific(String honorific) {
 		this.honorific = honorific;
 	}
-
+	@Override
+	public String toString() {
+		return "UsersDto [userID=" + userID + ", password=" + password + ", userName=" + userName + ", sex=" + sex
+				+ ", birthday=" + birthday + ", targetAmount=" + targetAmount + ", presentAmount=" + presentAmount
+				+ ", lastLogin=" + lastLogin + ", runningDays=" + runningDays + ", feelingLevel=" + feelingLevel
+				+ ", honorific=" + honorific + "]";
+	}
 
 
 }

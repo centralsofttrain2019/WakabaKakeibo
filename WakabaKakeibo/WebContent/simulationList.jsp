@@ -20,9 +20,9 @@
       function drawChart() {
     	  var data = new google.visualization.DataTable();
           data.addColumn('string', '年月');
-          data.addColumn('number', 'a');
-          data.addColumn('number', 'b');
-          data.addColumn('number', '予測');
+          data.addColumn('number', '貯金額');
+          data.addColumn('number', '');
+          data.addColumn('number', 'シミュレーション');
 
           data.addRows([
               ["<%=bean.getSimList().get(0).getDate()%>", <%=bean.getSimList().get(0).getBalance() %>, <%=bean.getSimList().get(0).getBalance() %>, null],
@@ -39,14 +39,15 @@
             ]);
 
         var options = {
-          title: 'シミュレーション図',
+          title: '',
           hAxis: { title: '日時', minValue: 0, maxValue: <%=bean.getSimList().get(bean.getSimList().size()-1).getDate() %> },
           vAxis: { title: '貯金額', minValue: 0, maxValue: <%=bean.getSimList().get(bean.getSimList().size()-1).getBalance() %> },
           legend: 'none',
           interpolateNulls: true,
+          colors: ['gray','black','red'], //色指定
           series: {
-            1: { lineWidth: 1, pointSize: 0 },
-          	2: { lineWidth: 1, pointSize: 0 }
+            1: { lineWidth: 1.5, pointSize: 0.1 },
+          	2: { lineWidth: 3, pointSize: 0.1 ,lineDashStyle: [10, 2] }
           }
         };
 
@@ -63,15 +64,10 @@
 
 
 <h3 class="my-3">シミュレーション</h3>
-
-
-<%=bean.getSimList().get(0).getBalance() %>
-<%=bean.getSimList().get(bean.getSimList().size()-2).getBalance() %>
-
-
-
+<h5><center>シミュレーショングラフ</center></h5>
 </div>
-<div id="chart_div" style="width: 1000px; height: 500px;"></div>
+
+<div id="chart_div" style="width: 1200px; height: 600px;"></div>
 
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
