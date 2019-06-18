@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,10 +41,14 @@ public class UserRegistServlet extends HttpServlet {
 		LocalDate date = LocalDate.now();
 
 		//コメントのrequestがあれば
-		if(request.getParameter("formControlTextarea") != null) {
+		if(request.getParameter("password") != null) {
 			//コメントのインサート
 			insertUser(request, date);
 		}
+
+		//JSPに遷移する
+		RequestDispatcher disp = request.getRequestDispatcher("/ChatServlet");
+		disp.forward(request, response);
 	}
 
 	/**
@@ -57,8 +62,15 @@ public class UserRegistServlet extends HttpServlet {
 	public void insertUser(HttpServletRequest request, LocalDate date){
 
 		UsersDto uDto = new UsersDto();
-		String monthString = String.format("%02d", request.getParameter("month"));
-		String dayString = String.format("%02d", request.getParameter("day"));
+		String monthString = String.format("%02d", Integer.valueOf(request.getParameter("month")).intValue());
+		String dayString = String.format("%02d", Integer.valueOf(request.getParameter("day")).intValue());
+
+		String honorific;
+		if(request.getParameter("sex").equals("man")) {
+			honorific = "さん";
+		}else {
+			honorific = "ちゃん";
+		}
 
 		String birthString = request.getParameter("year") + monthString + dayString;
 		LocalDate birth = convertToLocalDate(birthString, "yyyyMMdd");
@@ -73,6 +85,7 @@ public class UserRegistServlet extends HttpServlet {
 		uDto.setTargetAmount(Integer.valueOf(request.getParameter("targetAmount")).intValue());
 		uDto.setRunningDays(1);
 		uDto.setBirthday(birth);
+		uDto.setHonorific(honorific);
 
 		//サービスを取得
 		UsersService service = new UsersService();

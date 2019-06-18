@@ -107,6 +107,7 @@ public class UsersDao
 					stmt.setInt( 9, uDto.getRunningDays());
 					stmt.setInt( 10, uDto.getFeelingLevel());
 					stmt.setString( 11, uDto.getHonorific());
+					stmt.setString( 12, null);
 					stmt.executeUpdate();
 
 				}
