@@ -59,20 +59,12 @@
 <input type="submit" id="update" value="更新">
 </form>
 
-<script>
-// 	function call(){
-// 		var year = document.selectDate.year;
-// 		var month = document.selectDate.month;
-
-// 		window.location.replace("historyList.jsp?year=" + year + "?month=" + month);
-// 	}
-</script>
-
 
 <br>
 <div class="flex_testjoubu " id="history">
     <div class="flex_test-item bg-secondary "id="graph" style=float:left; >
         1.円グラフ
+
     </div>
         <div class="flex_test-item bg-warning " style=float:right;
          id="shuushi">
@@ -92,6 +84,8 @@
        <%= hd.getPurchaseDate() %>
        <%= hd.getProductName() %>
        <%= hd.getAmount() %>
+       <%= hd.getCategoryName() %>
+       <%= hd.getType().toString() %>
      </div>
    <% } %>
  <% }else{ %>
@@ -100,6 +94,8 @@
 	       <%= hd.getPurchaseDate() %>
 	       <%= hd.getProductName() %>
 	       <%= hd.getAmount() %>
+	       <%= hd.getCategoryName() %>
+	       <%= hd.getType().toString() %>
 	     </div>
  	<% } %>
  <% } %>

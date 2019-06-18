@@ -2,6 +2,7 @@ package bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import dto.MoneyNotesDto;
 
@@ -10,8 +11,15 @@ public class HistoryListBean
 	private List<HistoryBean> historyList;
 	private int history_year = 0;
 	private int history_month = 0;
+	Map<String, List<HistoryBean>> map;
 
+	public Map<String, List<HistoryBean>> getMap() {
+		return map;
+	}
 
+	public void setMap(Map<String, List<HistoryBean>> map) {
+		this.map = map;
+	}
 
 	public int getHistory_year() {
 		return history_year;
@@ -49,6 +57,7 @@ public class HistoryListBean
 			historyList.add(bean);
 		}
 	}
+
 
 	@Override
 	public String toString() {

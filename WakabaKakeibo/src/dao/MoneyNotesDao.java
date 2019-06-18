@@ -57,6 +57,7 @@ public class MoneyNotesDao {
 
 	private static final String FIND_BY_USERID =
 			"SELECT * FROM MONEYNOTES WHERE UserID = ?";
+
 	public List<MoneyNotesDto> findByUserID(int userID) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID );
@@ -80,6 +81,7 @@ public class MoneyNotesDao {
 		+ "INNER JOIN Products ON MoneyNotes.ProductID = Products.ProductID "
 		+ "INNER JOIN MoneyCategorys ON MoneyNotes.CategoryID = MoneyCategorys.MoneyCategorysID "
 		+ "WHERE UserID = ?";
+
 	public List<MoneyNotesDto> findByUserIDWithIDName(int userID) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_WITH_ID_NAME );
@@ -108,6 +110,7 @@ public class MoneyNotesDao {
 			+ "INNER JOIN MoneyCategorys ON MoneyNotes.CategoryID = MoneyCategorys.MoneyCategorysID "
 			+ "WHERE UserID = ? "
 			+ "AND PurchaseDate >= ? AND PurchaseDate <= ?";
+
 	public List<MoneyNotesDto> findByDate(int userID,LocalDate sinceDate, LocalDate untilDate) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement( FIND_BY_USERID_DATE );

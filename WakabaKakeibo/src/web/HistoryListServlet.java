@@ -1,6 +1,9 @@
 package web;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.HistoryBean;
 import bean.HistoryListBean;
 import service.MoneyNotesService;
 
@@ -39,6 +43,12 @@ public class HistoryListServlet extends HttpServlet {
 			bean.setHistory_month(Integer.valueOf(request.getParameter("month")).intValue());
 			System.out.println("getYear");
 		}
+
+		// categoryNameでグルーピングする
+		Map<String, List<HistoryBean>> map = bean.getHistoryList().stream().collect(Collectors.groupingBy(o -> o.getCategoryName()));
+
+
+		bean.setMap(map);
 
 		System.out.println("HistoryServlet");
 		request.setAttribute("bean",bean);

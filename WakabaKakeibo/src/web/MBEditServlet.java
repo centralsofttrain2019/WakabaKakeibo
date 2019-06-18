@@ -43,6 +43,7 @@ public class MBEditServlet extends HttpServlet {
 		if(request.getParameter("blogContent") != null) {
 			//コメントのインサート
 			insertBlog(request, timestamp);
+
 		}
 
 
