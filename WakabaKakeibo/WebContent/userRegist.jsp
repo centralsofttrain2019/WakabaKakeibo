@@ -18,11 +18,28 @@
 <h1 class="my-4">新規登録</h1>
 
 <form class="needs-validation" novalidate>
-  <!-- ユーザID -->
+ <!-- ユーザID -->
   <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationCustom01">ユーザID</label>
-      <input type="text" class="form-control" id="validationCustom01" value="" required pattern="([^\x01-\x7E]|[a-zA-Z0-9]{4,8})">
+    <div class="col-md-7 mb-3">
+      <label for="validationCustom00">ユーザID</label>
+      <input type="text" class="form-control" id="validationCustom00" name="userID" value="" required pattern="([^\x01-\x7E]|[a-zA-Z0-9]{4,8})">
+      <div class="valid-feedback">
+        入力済み!
+      </div>
+      <div class="invalid-feedback">
+          正しく入力してください
+      </div>
+      <small id="passwordHelpInline" class="text-muted col-5">
+          　長さは4-8文字で、全角半角整数で入力してください
+      </small>
+    </div>
+  </div>
+
+  <!-- ユーザName -->
+  <div class="form-row">
+    <div class="col-md-7 mb-3">
+      <label for="validationCustom01">ユーザ名</label>
+      <input type="text" class="form-control" id="validationCustom01" name="userName" value="" required pattern="([^\x01-\x7E]|[a-zA-Z0-9]{4,8})">
       <div class="valid-feedback">
         入力済み!
       </div>
@@ -37,9 +54,9 @@
 
   <!-- 	パスワード -->
   <div class="form-row">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-7 mb-3">
         <label for="validationCustom02">パスワード</label>
-        <input type="password" class="form-control" id="validationCustom02" value="" required pattern="[a-zA-Z0-9]{4,8}">
+        <input type="password" class="form-control" id="validationCustom02" name="password" value="" required pattern="[a-zA-Z0-9]{4,8}">
         <div class="valid-feedback">
           入力済み!
         </div>
@@ -57,7 +74,7 @@
       <div class="row">
         <div class="col">
           <label for="number">年</label>
-          <input type="number" class="form-control" id="number" name="amount" value="2000" min="1900" max="2019" step="1">
+          <input type="number" class="form-control" id="number" name="year" value="2000" min="1900" max="2019" step="1">
           <div class="valid-feedback">
             入力済み!
           </div>
@@ -70,7 +87,7 @@
         </div>
         <div class="col">
           <label for="number">月</label>
-          <input type="number" class="form-control" id="number" name="amount" value="1" min="1" max="12" step="1">
+          <input type="number" class="form-control" id="number" name="month" value="1" min="1" max="12" step="1">
           <div class="valid-feedback">
             入力済み!
           </div>
@@ -83,7 +100,7 @@
         </div>
         <div class="col">
           <label for="number">日</label>
-          <input type="number" class="form-control" id="number" name="amount" value="1" min="1" max="31" step="1">
+          <input type="number" class="form-control" id="number" name="day" value="1" min="1" max="31" step="1">
           <div class="valid-feedback">
             入力済み!
           </div>
@@ -98,19 +115,19 @@
     </div>
 
     <div class="custom-control custom-radio">
-        <input id="customRadio1" name="customRadio" type="radio" class="custom-control-input" required>
+        <input id="customRadio1" name="sex" value="man" type="radio" class="custom-control-input" required>
         <label class="custom-control-label" for="customRadio1">男</label>
     </div>
     <div class="custom-control custom-radio">
-        <input id="customRadio2" name="customRadio" type="radio" class="custom-control-input" required>
+        <input id="customRadio2" name="sex" value="woman" type="radio" class="custom-control-input" required>
         <label class="custom-control-label" for="customRadio2">女</label>
     </div>
 
     <!-- 現在の貯金額 -->
   <div class="form-row">
-      <div class="col-md-4 my-3">
+      <div class="col-md-7 my-3">
         <label for="validationCustom04">現在の貯金額</label>
-        <input type="text" class="form-control" id="validationCustom04" placeholder="現在の貯金額を入力してください"　value="" required pattern="[0-9]{1,8}">
+        <input type="text" class="form-control" name="presentAmount" id="validationCustom04" placeholder="現在の貯金額を入力してください"　value="" required pattern="[0-9]{1,8}">
         <div class="valid-feedback">
           入力済み!
         </div>
@@ -125,9 +142,9 @@
 
     <!-- 目標の貯金額 -->
   <div class="form-row">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-7 mb-3">
         <label for="validationCustom05">目標の貯金額</label>
-        <input type="text" class="form-control" id="validationCustom05" placeholder="目標の貯金額を入力してください" value="" required pattern="[0-9]{1,8}">
+        <input type="text" class="form-control" name="targetAmount" id="validationCustom05" placeholder="目標の貯金額を入力してください" value="" required pattern="[0-9]{1,8}">
         <div class="valid-feedback">
           入力済み!
         </div>
@@ -142,7 +159,7 @@
 
 
 
-  <button type="submit" class="btn btn-primary my-5">フォームを送信</button>
+  <a href="UserRegistServlet"><button type="submit" class="btn btn-primary my-5">フォームを送信</button></a>
 </form>
 
 </div>

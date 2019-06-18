@@ -2,12 +2,14 @@ package dto;
 
 import java.time.LocalDate;
 
+import domain.UserSexEnum;
+
 public class UsersDto
 {
 	private int userID;
 	private String password;
 	private String userName;
-	private String sex;
+	private UserSexEnum sex;
 	private LocalDate birthday;
 	private int targetAmount;
 	private int presentAmount;
@@ -33,10 +35,10 @@ public class UsersDto
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getSex() {
+	public UserSexEnum getSex() {
 		return sex;
 	}
-	public void setSex(String sex) {
+	public void setSex(UserSexEnum sex) {
 		this.sex = sex;
 	}
 	public LocalDate getBirthday() {
