@@ -119,7 +119,7 @@ public class UsersService {
 
 	}
 
-	//-------------------------------------------------
+
 	public UsersDto getUser(int userID, String password)
 	{
 
@@ -145,6 +145,7 @@ public class UsersService {
 
 		return dto;
 	}
+
 
 
 

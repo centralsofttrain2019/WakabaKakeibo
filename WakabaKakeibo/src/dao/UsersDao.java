@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import domain.UserSexEnum;
 import dto.UsersDto;
 
@@ -12,14 +13,17 @@ public class UsersDao
 	private Connection con;
 
 
+
 	//コネクションをセットするコンストラクター
 	public UsersDao(Connection con) {
 		super();
 		this.con = con;
 	}
 
+
 	private static final String FIND_BY_USERID =
 			"SELECT * FROM Users WHERE UserID = ?";
+
 	private static final String INSERT_USER =
 			"INSERT INTO `wakaba_schema`.`users`\r\n" +
 			"(`UserID`,\r\n" +
@@ -47,7 +51,13 @@ public class UsersDao
 			" ?,\r\n" +
 			" ?,\r\n" +
 			" ?);";
-	
+
+
+
+
+
+
+
 	public UsersDto getUser(int id) throws SQLException
 	{
 		UsersDto ud = new UsersDto();
