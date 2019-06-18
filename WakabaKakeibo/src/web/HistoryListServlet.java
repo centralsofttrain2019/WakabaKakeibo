@@ -34,6 +34,13 @@ public class HistoryListServlet extends HttpServlet {
 		MoneyNotesService service = new MoneyNotesService();
 		HistoryListBean bean = service.findAllHistoryList(1); //引数にユーザID
 
+		if(request.getParameter("year") != null){
+			bean.setHistory_year(Integer.valueOf(request.getParameter("year")).intValue());
+			bean.setHistory_month(Integer.valueOf(request.getParameter("month")).intValue());
+			System.out.println("getYear");
+		}
+
+		System.out.println("HistoryServlet");
 		request.setAttribute("bean",bean);
 
 		//JSPに遷移

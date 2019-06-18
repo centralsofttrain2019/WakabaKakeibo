@@ -65,6 +65,15 @@ public class HistoryBean
 		this.categoryName = dto.getCategoryName();
 	}
 
+	public boolean isAccount(int year, int month) {
+
+		if((this.purchaseDate.getYear() == year) && (this.purchaseDate.getMonthValue() == month)) {
+			return true;
+		}
+
+		return false;
+	}
+
 
 
 
