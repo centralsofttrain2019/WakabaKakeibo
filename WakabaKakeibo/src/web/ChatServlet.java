@@ -36,9 +36,11 @@ public class ChatServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+	protected void doGet(
+			HttpServletRequest request,
+			HttpServletResponse response)
+					throws ServletException, IOException
+	{
 		//UserID,Passwordをbeanにセット
 		ChatBean bean = new ChatBean();
 
@@ -100,6 +102,7 @@ public class ChatServlet extends HttpServlet {
 
 		//ログインIDとパスワードを渡して、ユーザDTOを検索し、取得する
 		usersDto = service.getUser(userID, password );
+
 		if( usersDto == null )
 		{
 			//JSPに遷移する
@@ -113,13 +116,14 @@ public class ChatServlet extends HttpServlet {
 
 		service.updateLoginDate(userID);
 
+
 		//ログイン情報をセッションに保存する
 		request.getSession().setAttribute( ChatBean.USERINFO_SESSION_SAVE_NAME, bean );
-
 
 		bean.setUserID(userID);
 		bean.setPassword(password);
 
+		bean.setUsersDto(usersDto);
 		request.setAttribute("bean", bean);
 
 		//JSPに遷移する
