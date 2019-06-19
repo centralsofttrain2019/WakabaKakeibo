@@ -36,7 +36,7 @@
           正しく入力してください
       </div>
       <small id="passwordHelpInline" class="text-muted col-5">
-          　長さは4-8文字で、全角半角整数で入力してください
+          　長さは2-8文字で、半角整数で入力してください
       </small>
     </div>
   </div>
@@ -45,7 +45,7 @@
   <div class="form-row">
     <div class="col-md-7 mb-3">
       <label for="validationCustom01">ユーザ名</label>
-      <input type="text" class="form-control" id="validationCustom01" name="userName" value="" required pattern="([^\x01-\x7E]|[a-zA-Z0-9]{4,8})">
+      <input type="text" class="form-control" id="validationCustom01" name="userName" value="" required pattern="([^\x01-\x7E]|[a-zA-Z0-9]){2,8}">
       <div class="valid-feedback">
         入力済み!
       </div>
@@ -53,7 +53,7 @@
           正しく入力してください
       </div>
       <small id="passwordHelpInline" class="text-muted col-5">
-          　長さは4-8文字で、全角半角英数、ひらカタ漢字で入力してください
+          　長さは2-8文字で、全角半角英数、ひらカタ漢字で入力してください
       </small>
     </div>
   </div>
@@ -62,7 +62,7 @@
   <div class="form-row">
       <div class="col-md-7 mb-3">
         <label for="validationCustom02">パスワード</label>
-        <input type="password" class="form-control" id="validationCustom02" name="password" value="" required pattern="[a-zA-Z0-9]{4,8}">
+        <input type="password" class="form-control" id="validationCustom02" name="password" value="" required pattern="[a-zA-Z0-9]{2,8}">
         <div class="valid-feedback">
           入力済み!
         </div>
@@ -70,7 +70,7 @@
             正しく入力してください
         </div>
         <small id="passwordHelpInline" class="text-muted col-5">
-            　長さは4-8文字で、全角半角英数で入力してください
+            　長さは2-8文字で、半角英数で入力してください
         </small>
       </div>
     </div>
@@ -133,7 +133,7 @@
   <div class="form-row">
       <div class="col-md-7 my-3">
         <label for="validationCustom04">現在の貯金額</label>
-        <input type="text" class="form-control" name="presentAmount" id="validationCustom04" placeholder="現在の貯金額を入力してください"　value="" required pattern="[0-9]{1,8}">
+        <input type="text" class="form-control" name="presentAmount" id="validationCustom04" placeholder="現在の貯金額を入力してください"　value="" required pattern="[0-9]{1,13}">
         <div class="valid-feedback">
           入力済み!
         </div>
@@ -141,7 +141,7 @@
            正しく入力してください
         </div>
         <small id="passwordHelpInline" class="text-muted col-5">
-            　単位は万円で1-8桁までの整数のみを入力してください
+            　単位は円で1-13桁までの整数のみを入力してください
         </small>
       </div>
     </div>
@@ -150,7 +150,7 @@
   <div class="form-row">
       <div class="col-md-7 mb-3">
         <label for="validationCustom05">目標の貯金額</label>
-        <input type="text" class="form-control" name="targetAmount" id="validationCustom05" placeholder="目標の貯金額を入力してください" value="" required pattern="[0-9]{1,8}">
+        <input type="text" class="form-control" name="targetAmount" id="validationCustom05" placeholder="目標の貯金額を入力してください" value="" required pattern="[0-9]{1,13}">
         <div class="valid-feedback">
           入力済み!
         </div>
@@ -158,7 +158,7 @@
             正しく入力してください
         </div>
         <small id="passwordHelpInline" class="text-muted col-5">
-            　単位は万円で1-8桁までの整数のみを入力してください
+            　単位は円で1-13桁までの整数のみを入力してください
         </small>
       </div>
     </div>
