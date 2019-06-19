@@ -25,8 +25,59 @@
 <body>
 <div class="container" style="height: 500px">
 
-<%= bean.getMap() %>
+<div id="piechart" ></div>
+<div id="piechart2" ></div>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['CategoryName', 'Amount']
+
+		<% for (String key : bean.getIncomeTotal().keySet()) { %>
+			,['<%= key %>', <%= bean.getIncomeTotal().get(key) %>]
+			<% System.out.println(key + bean.getIncomeTotal().get(key).toString());%>
+     	<% } %>
+     ]);
+
+    var options = {
+      title: '収入'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+  }
+</script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart2);
+
+      function drawChart2() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+        chart.draw(data, options);
+      }
+    </script>
 
 </div>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>

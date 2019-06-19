@@ -1,4 +1,7 @@
+<%@page import="bean.HistoryBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<%@ page import="java.util.List" %>
 
 <!--     pageEncoding="UTF-8"%> -->
 <jsp:useBean
@@ -14,8 +17,51 @@
  <link rel="stylesheet" type="text/css" href="history.css">
 <title>円グラフと履歴</title>
 
+
 <!-- javascript読み込み -->
 <script type="text/javascript" src="inner.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChartIncome);
+  google.charts.setOnLoadCallback(drawChartExpense);
+
+  function drawChartIncome() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['CategoryName', 'Amount']
+	<% for (String key : bean.getIncomeTotal().keySet()) { %>
+		,['<%= key %>', <%= bean.getIncomeTotal().get(key) %>]
+     <% } %>
+    ]);
+
+    var options = {
+      title: '支出'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechartIncome'));
+
+    chart.draw(data, options);
+  }
+
+  function drawChartExpense() {
+
+	    var data = google.visualization.arrayToDataTable([
+	      ['CategoryName', 'Amount']
+		<% for (String key : bean.getExpenseTotal().keySet()) { %>
+			,['<%= key %>', <%= bean.getExpenseTotal().get(key) %>]
+	     <% } %>
+	    ]);
+
+	    var options = {
+	      title: '収入'
+	    };
+
+	    var chart = new google.visualization.PieChart(document.getElementById('piechartExpense'));
+
+	    chart.draw(data, options);
+	  }
+</script>
 
 </head>
 
@@ -59,27 +105,18 @@
 <input type="submit" id="update" value="更新">
 </form>
 
+<!-- 円グラフ -->
+<div class="row">
+	<div id="piechartIncome" class="col"></div>
+	<div id="piechartExpense" class="col"></div>
+</div>
 
-<br>
-<div class="flex_testjoubu " id="history">
-    <div class="flex_test-item bg-secondary "id="graph" style=float:left; >
-        1.円グラフ
-
-    </div>
-        <div class="flex_test-item bg-warning " style=float:right;
-         id="shuushi">
-        2.バランスシート
-    </div>
-    </div>
-<br>
 <h1>購入履歴</h1>
 
 <div class="flex_testkabu " id="historyList">
 <% System.out.println("month : " + bean.getHistory_month()); %>
 
-<%if(bean.getHistory_year() != 0) { %>
 <% for( bean.HistoryBean hd : bean.getHistoryList() ) { %>
-	<%if(!hd.isAccount(bean.getHistory_year(), bean.getHistory_month())) continue; %>
    	<div class="flex_test-item1 bg-primary"style=width:100%;>
        <%= hd.getPurchaseDate() %>
        <%= hd.getProductName() %>
@@ -87,21 +124,9 @@
        <%= hd.getCategoryName() %>
        <%= hd.getType().toString() %>
      </div>
-   <% } %>
- <% }else{ %>
- 	<% for( bean.HistoryBean hd : bean.getHistoryList() ) { %>
- 		<div class="flex_test-item1 bg-primary"style=width:100%;>
-	       <%= hd.getPurchaseDate() %>
-	       <%= hd.getProductName() %>
-	       <%= hd.getAmount() %>
-	       <%= hd.getCategoryName() %>
-	       <%= hd.getType().toString() %>
-	     </div>
- 	<% } %>
  <% } %>
 </div>
 </div>
-
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

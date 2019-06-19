@@ -73,6 +73,11 @@ public class HistoryBean
 
 		return false;
 	}
+	@Override
+	public String toString() {
+		return "HistoryBean [productName=" + productName + ", purchaseDate=" + purchaseDate + ", type=" + type
+				+ ", categoryID=" + categoryID + ", amount=" + amount + ", categoryName=" + categoryName + "]";
+	}
 
 
 

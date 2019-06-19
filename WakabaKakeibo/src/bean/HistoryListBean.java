@@ -9,16 +9,84 @@ import dto.MoneyNotesDto;
 public class HistoryListBean
 {
 	private List<HistoryBean> historyList;
+	private List<HistoryBean> incomeList;
+	private List<HistoryBean> expenseList;
+
 	private int history_year = 0;
 	private int history_month = 0;
-	Map<String, List<HistoryBean>> map;
+	private Map<String, List<HistoryBean>> incomeMap;
+	private Map<String, List<HistoryBean>> expenseMap;
 
-	public Map<String, List<HistoryBean>> getMap() {
-		return map;
+	private Map<String, Integer> incomeTotal;
+	private Map<String, Integer> expenseTotal;
+
+	int incomeSum = 0;
+	int expenseSum = 0;
+
+
+
+	public int getIncomeSum() {
+		return incomeSum;
 	}
 
-	public void setMap(Map<String, List<HistoryBean>> map) {
-		this.map = map;
+	public void setIncomeSum(int incomeSum) {
+		this.incomeSum = incomeSum;
+	}
+
+	public int getExpenseSum() {
+		return expenseSum;
+	}
+
+	public void setExpenseSum(int expenseSum) {
+		this.expenseSum = expenseSum;
+	}
+
+	public Map<String, Integer> getIncomeTotal() {
+		return incomeTotal;
+	}
+
+	public void setIncomeTotal(Map<String, Integer> incomeTotal) {
+		this.incomeTotal = incomeTotal;
+	}
+
+	public Map<String, Integer> getExpenseTotal() {
+		return expenseTotal;
+	}
+
+	public void setExpenseTotal(Map<String, Integer> expenseTotal) {
+		this.expenseTotal = expenseTotal;
+	}
+
+	public List<HistoryBean> getIncomeList() {
+		return incomeList;
+	}
+
+	public void setIncomeList(List<HistoryBean> incomeList) {
+		this.incomeList = incomeList;
+	}
+
+	public List<HistoryBean> getExpenseList() {
+		return expenseList;
+	}
+
+	public void setExpenseList(List<HistoryBean> expenseList) {
+		this.expenseList = expenseList;
+	}
+
+	public Map<String, List<HistoryBean>> getIncomeMap() {
+		return incomeMap;
+	}
+
+	public void setIncomeMap(Map<String, List<HistoryBean>> incomeMap) {
+		this.incomeMap = incomeMap;
+	}
+
+	public Map<String, List<HistoryBean>> getExpenseMap() {
+		return expenseMap;
+	}
+
+	public void setExpenseMap(Map<String, List<HistoryBean>> expenseMap) {
+		this.expenseMap = expenseMap;
 	}
 
 	public int getHistory_year() {
@@ -61,7 +129,9 @@ public class HistoryListBean
 
 	@Override
 	public String toString() {
-		return "HistoryListBean [historyList=" + historyList + ", history_year=" + history_year + ", history_month="
-				+ history_month + "]";
+		return "HistoryListBean [historyList=" + historyList + ", incomeList=" + incomeList + ", expenseList="
+				+ expenseList + ", history_year=" + history_year + ", history_month=" + history_month + ", incomeMap="
+				+ incomeMap + ", expenseMap=" + expenseMap + ", incomeTotal=" + incomeTotal + ", expenseTotal="
+				+ expenseTotal + "]";
 	}
 }

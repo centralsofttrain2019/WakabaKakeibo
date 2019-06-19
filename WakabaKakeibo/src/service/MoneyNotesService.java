@@ -69,6 +69,32 @@ public class MoneyNotesService
 		return bean;
 	}
 
+
+	//日時を指定してその間のデータを取得する
+	public HistoryListBean getHistoryListBeanByDate(int userID, LocalDate sinceLd, LocalDate untilLd)
+	{
+		HistoryListBean bean = new HistoryListBean();
+
+		try( Connection con= Dao.getConnection() )
+		{
+//			//今日の日付を取得
+//			LocalDate today = LocalDate.now();
+
+			//家計簿（全部の）データをテーブルから取得
+			MoneyNotesDao mnDao = new MoneyNotesDao(con);
+			List<MoneyNotesDto> mnList = mnDao.findByDate(userID, sinceLd, untilLd);
+
+
+			bean.setValueFromDto(mnList);
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+		return bean;
+	}
+
 	//家計簿の復元予想した後のデータを作成する
 	private List<MoneyNotesDto> createReconstructList(List<MoneyNotesDto> mnList, List<PurchasePatternsDto> ppList, LocalDate today)
 	{
