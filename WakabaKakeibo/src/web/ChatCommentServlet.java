@@ -9,21 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.ChatBean;
-import bean.ReconstructListBean;
-import service.MoneyNotesService;
-
 /**
- * Servlet implementation class ReconstructServlet
+ * Servlet implementation class ChatCommentServlet
  */
-@WebServlet("/ReconstructListServlet")
-public class ReconstructListServlet extends HttpServlet {
+@WebServlet("/ChatCommentServlet")
+public class ChatCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReconstructListServlet() {
+    public ChatCommentServlet() {
         super();
     }
 
@@ -31,25 +27,24 @@ public class ReconstructListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//家計簿データの登録をした場合
+		if(request.getParameter("MoneyNoteSubmit") != null) {
+			System.out.println("MoneyNoteSubmit!!");
 
-		ChatBean session = (ChatBean)request.getSession().getAttribute("UserInfo");
-		//セッション切れ
-		if(session == null) {
-			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-			disp.forward(request, response);
-			return;
+			String productName = request.getParameter("product-name");
+
+
+
 		}
 
-		ReconstructListBean bean = new ReconstructListBean();
-		MoneyNotesService service = new MoneyNotesService();
+		//家計簿データの登録をした場合
+		if(request.getParameter("ChatPhrase") != null) {
+			System.out.println("ChatPhrase!!");
+		}
 
-		bean = service.getReconstructListBean(session.getUserID());
-
-
-		request.setAttribute("bean", bean);
-		RequestDispatcher disp = request.getRequestDispatcher("/reconstructList.jsp");
+		//JSPに遷移する
+		RequestDispatcher disp = request.getRequestDispatcher("/ChatServlet");
 		disp.forward(request, response);
-
 	}
 
 	/**

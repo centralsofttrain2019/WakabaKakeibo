@@ -35,34 +35,32 @@
 
 
 <!-- チャット画面 -->
+<form method = "POST" action = "ChatMessageServlet">
 <div class="fixed-bottom container">
 	<div class="mt-5" id="chat" style="height:10vh;background: rgba(230,200,200,0.5); font-weight:bold;">
 	</div>
 	<div id="select"></div>
 	 <!-- class="mt-5 h-10"></div> -->
 
-<div class="input-group mb-3">
-	<form method = "POST" action = "ChatMessageServlet">
-		<input type="text" name = "chatMessage" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
-		<div class="input-group-append">
-			<input type="submit" id="button-addon2" class="btn btn-success" value="送信">
-		</div>
-		<div class="input-group-append">
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalScrollable2">
-				 定型文
-			</button>
-		</div>
-		<div class="input-group-append">
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalScrollable1">
-				 家計簿データの追加
-			</button>
-		</div>
-	</form>
+	<div class="input-group mb-3">
+
+			<input type="text" name = "chatMessage" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
+			<div class="input-group-append">
+				<input type="submit" id="button-addon2" class="btn btn-primary" value="送信">
+			</div>
+			<div class="input-group-append">
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalScrollable2">
+					 定型文
+				</button>
+			</div>
+			<div class="input-group-append">
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalScrollable1">
+					 家計簿データの追加
+				</button>
+			</div>
 	</div>
 </div>
-
-
-</div>
+</form>
 
 <% for(MessageBean b : bean.getMessageListBean().getmBeanList() ){ %>
 		<script>
