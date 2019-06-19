@@ -109,8 +109,7 @@ public class ChatServlet extends HttpServlet {
 		}
 		else
 		{
-			System.out.println("セッションにユーザー情報が存在するのでログイン処理を行わない"
-					+chatBeanSession.toString());
+			System.out.println("セッションにユーザー情報が存在するのでログイン処理を行わない");
 
 		}
 
