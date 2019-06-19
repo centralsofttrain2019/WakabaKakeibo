@@ -9,7 +9,6 @@ public class ChatBean
 	private MessageListBean messageListBean;
 	private UsersDto usersDto;
 
-
 	public final static String USERINFO_SESSION_SAVE_NAME= "UserInfo";
 
 	public int getUserID()

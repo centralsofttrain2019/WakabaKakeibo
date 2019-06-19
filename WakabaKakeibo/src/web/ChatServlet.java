@@ -41,6 +41,9 @@ public class ChatServlet extends HttpServlet {
 			HttpServletResponse response)
 					throws ServletException, IOException
 	{
+
+
+
 		//UserID,Passwordをbeanにセット
 		ChatBean bean = new ChatBean();
 
@@ -79,6 +82,57 @@ public class ChatServlet extends HttpServlet {
 		bean.setMessageListBean( mListBean );
 
 
+		ChatBean chatBeanSession=(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+
+		//ログイン画面からじゃない遷移の場合にログイン処理を行わない
+		if( chatBeanSession == null )
+		{
+			System.out.println("セッションにユーザー情報が存在しないのでログイン処理を行う");
+
+			//ログイン処理
+			boolean isLoginOK = logIn(request,response,bean);
+			if( !isLoginOK )
+			{
+				//JSPに遷移する
+				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+				disp.forward(request, response);
+				// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
+
+				return;
+			}
+		}
+		else
+		{
+			System.out.println("セッションにユーザー情報が存在するのでログイン処理を行わない"
+					+chatBeanSession.toString());
+
+		}
+
+		request.setAttribute("bean", bean);
+
+		//JSPに遷移する
+		RequestDispatcher disp = request.getRequestDispatcher("/chat.jsp");
+		disp.forward(request, response);
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+	//-------------------------------------------------------------------
+	private boolean logIn(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			ChatBean bean
+			)
+					throws ServletException, IOException
+	{
+		UsersService service = new UsersService();
+
 		String userIDstr = request.getParameter("userID");
 		String password = request.getParameter("password");
 
@@ -89,11 +143,8 @@ public class ChatServlet extends HttpServlet {
 		catch( NumberFormatException e )
 		{
 
-			//JSPに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-			disp.forward(request, response);
 			// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
-			return;
+			return false;
 		}
 
 		//Beanの中身をDtoにセット
@@ -103,14 +154,12 @@ public class ChatServlet extends HttpServlet {
 		//ログインIDとパスワードを渡して、ユーザDTOを検索し、取得する
 		usersDto = service.getUser(userID, password );
 
+
+
 		if( usersDto == null )
 		{
-			//JSPに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-			disp.forward(request, response);
 			//ログインエラー画面に飛ぶ
-
-			return;
+			return false;
 
 		}
 
@@ -124,20 +173,14 @@ public class ChatServlet extends HttpServlet {
 		bean.setPassword(password);
 
 		bean.setUsersDto(usersDto);
-		request.setAttribute("bean", bean);
 
-		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/chat.jsp");
-		disp.forward(request, response);
+
+
+		return true;
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
+	//-------------------------------------------------------------------
 	//挨拶の取得
 	public MessageBean getGreeting(UsersService service, LocalDateTime ld, int messageId) {
 

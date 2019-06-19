@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<jsp:useBean
+  		id="bean"
+  		class="bean.UserRegistBean"
+  		scope="request" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,16 +18,21 @@
 
 </head>
 <body>
+<script>
+	if(<%= bean.isError()%> == 1){
+		alert("入力されたユーザーIDは、すでにが登録されてます。")
+	}
+</script>
 
 <div class="container">
 <h1 class="my-4">新規登録</h1>
 
-<form class="needs-validation" novalidate>
+<form class="needs-validation" action="UserRegistServlet" novalidate>
  <!-- ユーザID -->
   <div class="form-row">
     <div class="col-md-7 mb-3">
       <label for="validationCustom00">ユーザID</label>
-      <input type="text" class="form-control" id="validationCustom00" name="userID" value="" required pattern="([^\x01-\x7E]|[a-zA-Z0-9]{4,8})">
+      <input type="text" class="form-control" id="validationCustom00" name="userID" value="" required pattern="([0-9]{2,8})">
       <div class="valid-feedback">
         入力済み!
       </div>
@@ -30,7 +40,7 @@
           正しく入力してください
       </div>
       <small id="passwordHelpInline" class="text-muted col-5">
-          　長さは4-8文字で、全角半角整数で入力してください
+          　長さは2-8文字で、全角半角整数で入力してください
       </small>
     </div>
   </div>
@@ -39,7 +49,7 @@
   <div class="form-row">
     <div class="col-md-7 mb-3">
       <label for="validationCustom01">ユーザ名</label>
-      <input type="text" class="form-control" id="validationCustom01" name="userName" value="" required pattern="([^\x01-\x7E]|[a-zA-Z0-9]{4,8})">
+      <input type="text" class="form-control" id="validationCustom01" name="userName" value="" required pattern="(([^\x01-\x7E]|[a-zA-Z0-9]){1,8})">
       <div class="valid-feedback">
         入力済み!
       </div>
@@ -47,7 +57,7 @@
           正しく入力してください
       </div>
       <small id="passwordHelpInline" class="text-muted col-5">
-          　長さは4-8文字で、全角半角英数、ひらカタ漢字で入力してください
+          　長さは1-8文字で、全角半角英数、ひらカタ漢字で入力してください
       </small>
     </div>
   </div>
@@ -115,11 +125,11 @@
     </div>
 
     <div class="custom-control custom-radio">
-        <input id="customRadio1" name="sex" value="man" type="radio" class="custom-control-input" required>
+        <input id="customRadio1" name="sex" value="MAN" type="radio" class="custom-control-input" required>
         <label class="custom-control-label" for="customRadio1">男</label>
     </div>
     <div class="custom-control custom-radio">
-        <input id="customRadio2" name="sex" value="woman" type="radio" class="custom-control-input" required>
+        <input id="customRadio2" name="sex" value="WOMAN" type="radio" class="custom-control-input" required>
         <label class="custom-control-label" for="customRadio2">女</label>
     </div>
 
@@ -159,7 +169,7 @@
 
 
 
-  <a href="UserRegistServlet"><button type="submit" class="btn btn-primary my-5">フォームを送信</button></a>
+   <button type="submit" class="btn btn-primary my-5">フォームを送信</button>
 </form>
 
 </div>

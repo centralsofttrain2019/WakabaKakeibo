@@ -10,6 +10,7 @@ public class MessageListBean {
 
 
 
+
 	public List<MessageBean> getmBeanList() {
 		return mBeanList;
 	}

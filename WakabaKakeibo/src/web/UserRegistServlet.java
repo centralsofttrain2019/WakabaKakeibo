@@ -2,14 +2,19 @@ package web;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.UserRegistBean;
+import domain.UserSexEnum;
 import dto.UsersDto;
+import service.UsersService;
 
 /**
  * Servlet implementation class UserRegistServlet
@@ -37,10 +42,14 @@ public class UserRegistServlet extends HttpServlet {
 		LocalDate date = LocalDate.now();
 
 		//コメントのrequestがあれば
-		if(request.getParameter("formControlTextarea") != null) {
+		if(request.getParameter("password") != null) {
 			//コメントのインサート
-			insertUser(request, date);
+			insertUser(request, response, date);
 		}
+
+		//JSPに遷移する
+		RequestDispatcher disp = request.getRequestDispatcher("/ChatServlet");
+		disp.forward(request, response);
 	}
 
 	/**
@@ -51,15 +60,67 @@ public class UserRegistServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void insertUser(HttpServletRequest request, LocalDate date){
+	public void insertUser(HttpServletRequest request, HttpServletResponse response, LocalDate date) throws ServletException, IOException{
+
+		int userID = Integer.valueOf(request.getParameter("userID")).intValue();
+		String password = request.getParameter("password");
+
+		//サービスを取得
+		UsersService service = new UsersService();
+		if(service.getUserOnNew(userID, password).getUserID() != 0) {
+
+			UserRegistBean errorBean = new UserRegistBean();
+			errorBean.setError(true);
+
+			request.setAttribute("bean", errorBean);
+			System.out.println("null");
+			System.out.println(service.getUserOnNew(userID, password).toString());
+
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/userRegist.jsp");
+			disp.forward(request, response);
+
+		}else {
+			System.out.println("exitst");
 
 		UsersDto uDto = new UsersDto();
+		String monthString = String.format("%02d", Integer.valueOf(request.getParameter("month")).intValue());
+		String dayString = String.format("%02d", Integer.valueOf(request.getParameter("day")).intValue());
 
-		uDto.setUserID(Integer.valueOf(request.getParameter("userID")).intValue());
+		String honorific;
+		if(request.getParameter("sex").equals("MAN")) {
+			honorific = "さん";
+		}else {
+			honorific = "ちゃん";
+		}
+
+		String birthString = request.getParameter("year") + monthString + dayString;
+		LocalDate birth = convertToLocalDate(birthString, "yyyyMMdd");
+
+		uDto.setUserID(userID);
 		uDto.setUserName(request.getParameter("userName"));
 		uDto.setFeelingLevel(1);
-//		uDto.setSex(sex);
+		uDto.setSex(UserSexEnum.valueOf(request.getParameter("sex")));
+		uDto.setPassword(password);
+		uDto.setLastLogin(date);
+		uDto.setPresentAmount(Integer.valueOf(request.getParameter("presentAmount")).intValue());
+		uDto.setTargetAmount(Integer.valueOf(request.getParameter("targetAmount")).intValue());
+		uDto.setRunningDays(1);
+		uDto.setBirthday(birth);
+		uDto.setHonorific(honorific);
+
+		//UsersTableへinsert
+		service.insertUser(uDto);
+		}
 
 	}
+
+	// 文字列の日付をフォーマット(yyyyMMddやyyyy/mm/ddなど)をもとにLocalDate型に変換するメソッド
+	public static LocalDate convertToLocalDate(String date,String format) {
+
+	                // シンプルにLocalDate型に変換された日付を返却
+	        return LocalDate.parse(date, DateTimeFormatter.ofPattern(format));
+
+	    }
 
 }
