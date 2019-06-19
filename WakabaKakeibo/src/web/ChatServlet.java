@@ -100,7 +100,7 @@ public class ChatServlet extends HttpServlet {
 			if( !isLoginOK )
 			{
 				//JSPに遷移する
-				RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+				RequestDispatcher disp = request.getRequestDispatcher("/loginError.jsp");
 				disp.forward(request, response);
 				// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
 
