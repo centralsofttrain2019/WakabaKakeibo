@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.MoneyNoteTypeEnum;
 import service.MoneyNotesService;
 
 /**
@@ -44,7 +45,7 @@ public class RegistReconstructServlet extends HttpServlet {
 	            LocalDate date = LocalDate.parse(request.getParameter("date_" + name));
 	            int amount = Integer.parseInt(request.getParameter("amount_" + name));
 	            int number = Integer.parseInt(request.getParameter("num_" + name));
-	            service.insertMoneyNotes(1, name, number, amount, date);
+	            service.insertMoneyNotes(1, name, MoneyNoteTypeEnum.EXPENSE ,number, amount, date);
 	        }
         }
 

@@ -263,7 +263,7 @@ public class MoneyNotesDao {
 			return id;
 		}else
 		{
-			throw new RuntimeException();
+			return -1;
 		}
 	}
 
@@ -308,7 +308,7 @@ public class MoneyNotesDao {
 		}else
 		{
 			System.out.println("商品未登録");
-			throw new RuntimeException();
+			return -1;
 		}
 	}
 

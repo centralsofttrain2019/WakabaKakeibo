@@ -5,7 +5,17 @@
   		class="bean.ChatBean"
   		scope="request" />
 
-<%@ page import="bean.MessageBean" %>
+<%@ page
+	import="bean.MessageBean"
+	import="java.time.LocalDate"
+%>
+
+<%
+	int nowYear = LocalDate.now().getYear();
+	int nowMonth = LocalDate.now().getMonthValue();
+	int nowDay = LocalDate.now().getDayOfMonth();
+%>
+
 
 <!DOCTYPE html>
 <html>
@@ -89,44 +99,93 @@
               購入日
 		    </div>
             <div class="col-sm-3">
-		      <select class="custom-select" id="validationCustom04" required>
-		        <option selected disabled value="">年</option>
-		        <option>...</option>
+		      <select class="custom-select" name="purchase-year" id="purchase-year" required>
+			    <% for(int i=2019; i<=2022; i++ ){ %>
+			      <option <%= i==nowYear ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+			    <% } %>
 		      </select>
 		    </div>
 		    <div class="col-sm-3">
-		      <select class="custom-select" id="validationCustom04" required>
-		      <option selected disabled value="">月</option>
-		      <option>...</option>
+		      <select class="custom-select" name="purchase-month"  id="purchase-month" required>
+			    <% for(int i=1; i<=12; i++ ){ %>
+			      <option <%= i==nowMonth ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+			    <% } %>
 		      </select>
 		    </div>
             <div class="col-sm-3">
-		      <select class="custom-select" id="validationCustom04" required>
-		        <option selected disabled value="">日</option>
-		        <option>...</option>
+		      <select class="custom-select" name="purchase-day" id="purchase-day" required>
+			    <% for(int i=1; i<=31; i++ ){ %>
+			      <option <%= i==nowDay ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+			    <% } %>
 		      </select>
 		    </div>
 		  </div>
         </div>
-        <div class="container">
 
-          商品名
-          <input type="text" name="product-name" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              商品名
+            </div>
+            <div class="col-sm-8">
+              <input type="text" name="product-name" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
+            </div>
+          </div>
         </div>
-        <div>
-		  カテゴリ
-		  <input type="text" name="category-name" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              カテゴリ
+            </div>
+            <div class="col-sm-4">
+              <select class="custom-select"  name="category-id" id="category-id" required>
+		        <option selected disabled value="0">未選択</option>
+		          <optgroup label="支出">
+			      <option value="11">食費</option>
+			      <option value="12">日用品</option>
+			      <option value="13">交通費</option>
+			      <option value="14">衣服</option>
+			      <option value="19">その他</option>
+			    </optgroup>
+			      <optgroup label="収入">
+			      <option value="21">給与</option>
+			      <option value="22">おこづかい</option>
+			      <option value="29">その他</option>
+			      </optgroup>
+		      </select>
+            </div>
+          </div>
 		</div>
-		<div>
-		  個数
-		  <input type="text" name="number-of-purchase" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
-        </div>
-        <div>
-          価格
-          <input type="text" name="amount" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
+
+		<div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              個数
+            </div>
+            <div class="col-sm-2">
+              <select class="custom-select" name="number-of-purchase" id="number-of-purchase">
+		        <% for(int i=1; i<=10; i++ ){ %>
+		          <option value="<%= i %>"><%= i %></option>
+		        <% } %>
+		      </select>
+            </div>
+          </div>
+       </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              価格
+            </div>
+            <div class="col-sm-2">
+              <input type="number" name="amount" class="amount" placeholder="..." aria-label="..." aria-describedby="button-addon2">
+            </div>
+          </div>
         </div>
 
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
         <button type="submit" class="btn btn-primary" name="MoneyNoteSubmit" id="MoneyNoteSubmit">登録</button>

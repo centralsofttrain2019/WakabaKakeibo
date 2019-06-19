@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import bean.ChatBean;
+import domain.MoneyNoteTypeEnum;
+import domain.SqlOrderJudgement;
+import service.MoneyNotesService;
 
 /**
  * Servlet implementation class ChatCommentServlet
@@ -27,17 +33,23 @@ public class ChatCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//家計簿データの登録をした場合
-		if(request.getParameter("MoneyNoteSubmit") != null) {
-			System.out.println("MoneyNoteSubmit!!");
 
-			String productName = request.getParameter("product-name");
-
-
-
+		ChatBean session = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+		if(session == null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			return;
 		}
 
 		//家計簿データの登録をした場合
+		if(request.getParameter("MoneyNoteSubmit") != null) {
+			this.addMoneyNote(request,session);
+
+		}
+
+		//定型文送信場合
 		if(request.getParameter("ChatPhrase") != null) {
 			System.out.println("ChatPhrase!!");
 		}
@@ -45,6 +57,51 @@ public class ChatCommentServlet extends HttpServlet {
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/ChatServlet");
 		disp.forward(request, response);
+	}
+
+	private void addMoneyNote(HttpServletRequest request, ChatBean session)
+	{
+		try
+		{
+			String productName = request.getParameter("product-name");
+			int categoryID = Integer.parseInt(request.getParameter("category-id"));
+			//int categoryID = Integer.parseInt(request.getParameter("category-id"));
+			int year =  Integer.parseInt(request.getParameter("purchase-year"));
+			int month =  Integer.parseInt(request.getParameter("purchase-month"));
+			int day =  Integer.parseInt(request.getParameter("purchase-day"));
+			LocalDate purchaseDate = LocalDate.of(year, month, day);
+			int amount = Integer.parseInt(request.getParameter("amount"));
+			int numberOfPurchase = Integer.parseInt(request.getParameter("number-of-purchase"));
+
+			MoneyNoteTypeEnum type = null;
+			if(categoryID >= 10 && categoryID <= 19)
+			{
+				type = MoneyNoteTypeEnum.EXPENSE;
+			}
+			else if(categoryID >=20 && categoryID <= 29)
+			{
+				type = MoneyNoteTypeEnum.INCOME;
+			}
+
+			request.setAttribute("your_message",
+					year + "年" + month + "月" + day + "日に" +
+					productName + "を" + numberOfPurchase + "個" + amount + "円で買ったよ。");
+
+			MoneyNotesService service = new MoneyNotesService();
+			SqlOrderJudgement judge = service.insertMoneyNotes(session.getUserID(), productName, type, categoryID,numberOfPurchase, amount, purchaseDate);
+
+			if(judge == SqlOrderJudgement.SUCCESS) {
+				request.setAttribute("wakaba_message","家計簿に記録しておいたよ。");
+			}else if(judge == SqlOrderJudgement.FAILURE)
+			{
+				request.setAttribute("wakaba_message","家計簿に登録できなかったよ。商品データベースに商品が無いよ。");
+			}
+
+		}catch(NumberFormatException e)
+		{
+			request.setAttribute("wakaba_message", "記入に誤りがあるよ。");
+			return;
+		}
 	}
 
 	/**

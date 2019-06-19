@@ -73,8 +73,24 @@ public class ChatServlet extends HttpServlet {
 		LocalDateTime userBirthDay = LocalDateTime.now();
 
 
-		mList.add(getGreeting(service, ld, messageId));
-		mList.add(getBirth(service, ld, userBirthDay, userFeelingLevel));
+		String mes = (String)request.getAttribute("wakaba_message");
+
+		if(mes != null) {
+			String mesMe = (String)request.getAttribute("your_message");
+			if(mesMe != null)
+			{
+				MessageBean m = new MessageBean();
+				m.setMessageContent(mesMe);
+				mList.add(m);
+			}
+
+			MessageBean m = new MessageBean();
+			m.setMessageContent(mes);
+			mList.add(m);
+		}else {
+			mList.add(getGreeting(service, ld, messageId));
+			mList.add(getBirth(service, ld, userBirthDay, userFeelingLevel));
+		}
 
 		//MessageBeanのListをMessageListBeanへset
 		mListBean.setmBeanList(mList);

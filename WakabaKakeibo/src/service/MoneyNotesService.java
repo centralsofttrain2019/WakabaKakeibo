@@ -14,6 +14,7 @@ import dao.MoneyNotesDao;
 import dao.PurchasePatternsDao;
 import domain.DatePatternTypeEnum;
 import domain.MoneyNoteTypeEnum;
+import domain.SqlOrderJudgement;
 import dto.MoneyNotesDto;
 import dto.PurchasePatternsDto;
 
@@ -159,22 +160,25 @@ public class MoneyNotesService
 	}
 
 	//ユーザID、商品名、個数、価格から家計簿データを作成する
-	public void insertMoneyNotes(int userID ,String productName, int number, int amount, LocalDate purchaseDate)
+	public SqlOrderJudgement insertMoneyNotes(int userID ,String productName, MoneyNoteTypeEnum type ,int categoryID, int number, int amount, LocalDate purchaseDate)
 	{
 		MoneyNotesDto dto = new MoneyNotesDto();
 		dto.setUserID(userID);
 		dto.setPurchaseDate(purchaseDate);
-		dto.setType(MoneyNoteTypeEnum.EXPENSE);
-
+		dto.setType(type);
 		dto.setNumberOfPurchase(number);
 		dto.setAmount(amount);
+		dto.setCategoryID(categoryID);
 
 		try( Connection con= Dao.getConnection() )
 		{
 			MoneyNotesDao dao = new MoneyNotesDao(con);
 			int productID = dao.findProductID(productName);
+			if(productID == -1)
+			{
+				return SqlOrderJudgement.FAILURE;
+			}
 			dto.setProductID(productID);
-			dto.setCategoryID(dao.getCategoryID(productID));
 			dto.setPurchaseIntervalDays((int)ChronoUnit.DAYS.between(dao.getLastPurchaseDate(userID, productID), purchaseDate));
 			dao.insertMoneyNotes(dto);
 
@@ -185,7 +189,33 @@ public class MoneyNotesService
 			e.printStackTrace();
 			throw new RuntimeException( e );
 		}
+		return SqlOrderJudgement.SUCCESS;
 	}
+
+	public SqlOrderJudgement insertMoneyNotes(int userID ,String productName, MoneyNoteTypeEnum type, int number, int amount, LocalDate purchaseDate)
+	{
+		int categoryID = -1;
+		int productID = -1;
+		try( Connection con= Dao.getConnection() )
+		{
+			MoneyNotesDao dao = new MoneyNotesDao(con);
+			productID = dao.findProductID(productName);
+			categoryID = dao.getCategoryID(productID);
+			if(categoryID == -1 || productID == -1)
+			{
+				return SqlOrderJudgement.FAILURE;
+			}
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+		return insertMoneyNotes(userID ,productName,type,categoryID, number, amount, purchaseDate);
+	}
+
+
 
 	private void updatePatternTable(int userID, int productID, LocalDate lastPurchaseDate)
 	{
