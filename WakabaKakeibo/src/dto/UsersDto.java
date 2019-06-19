@@ -3,8 +3,6 @@ package dto;
 import java.time.LocalDate;
 import domain.UserSexEnum;
 
-import domain.UserSexEnum;
-
 public class UsersDto
 {
 	private int userID;

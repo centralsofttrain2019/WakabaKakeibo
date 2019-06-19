@@ -24,18 +24,32 @@
           data.addColumn('number', '');
           data.addColumn('number', 'シミュレーション');
 
+          //空列計算
+          <%
+          //
+          int number = bean.getSimList().size();
+
+          int start_balance = bean.getSimList().get(0).getBalance();			//初期貯金額
+          int last_balance  = bean.getSimList().get(number - 2).getBalance();	//現在の貯金額
+          int goal_balance  = bean.getSimList().get(number - 1).getBalance();	//目標金額
+
+          %>
+          //空列計算ここまで
+
+
+
           data.addRows([
-              ["<%=bean.getSimList().get(0).getDate()%>", <%=bean.getSimList().get(0).getBalance() %>, <%=bean.getSimList().get(0).getBalance() %>, null],
+              ["<%=bean.getSimList().get(0).getDate()%>", <%=start_balance %>, <%=start_balance %>, null],
               <% for(int i = 1; i < bean.getSimList().size() - 3 ; i++ )
               {%>
               ["<%=bean.getSimList().get(i).getDate() %>", <%=bean.getSimList().get(i).getBalance() %>, null, null],
               <% }%>
-              ["<%=bean.getSimList().get(bean.getSimList().size()-2).getDate()%>", <%=bean.getSimList().get(bean.getSimList().size()-2).getBalance() %>, <%=bean.getSimList().get(bean.getSimList().size()-2).getBalance() %>, <%=bean.getSimList().get(bean.getSimList().size()-2).getBalance() %>],
+              ["<%=bean.getSimList().get(bean.getSimList().size()-2).getDate()%>", <%=last_balance %>, <%=last_balance %>, <%=last_balance %>],
               <% for(int j = 0; j < 8 ; j++ )
               {%>
               [null, null, null, null],
               <% }%>
-              ["<%=bean.getSimList().get(bean.getSimList().size()-1).getDate()%>", <%=bean.getSimList().get(bean.getSimList().size()-1).getBalance() %>, null, <%=bean.getSimList().get(bean.getSimList().size()-1).getBalance() %>]
+              ["<%=bean.getSimList().get(bean.getSimList().size()-1).getDate()%>", <%=goal_balance %>, null, <%=goal_balance %>]
             ]);
 
         var options = {
@@ -65,7 +79,7 @@
 
 <h3 class="my-3">シミュレーション</h3>
 <div style="display:inline-flex">
-現在の目標金額：<strong><%=bean.getTargetAmount() %></strong>　　　目標金額の変更：
+現在の目標金額：<strong><%=bean.getTargetAmount()/10000 %>万円</strong>　　　目標金額の変更：
 <form action="UpdateSimulationListServlet" method="post">
 <input type="text" name="targetAmount" size="20"> 円
 <input type="submit" value="変更">
