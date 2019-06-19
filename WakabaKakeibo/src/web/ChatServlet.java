@@ -85,7 +85,12 @@ public class ChatServlet extends HttpServlet {
 		ChatBean chatBeanSession=(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
 
 		//ログイン画面からじゃない遷移の場合にログイン処理を行わない
-		if( chatBeanSession == null )
+
+		String userIDstr = request.getParameter("userID");
+		String password = request.getParameter("password");
+
+
+		if( userIDstr != null && password!=null)
 		{
 			System.out.println("セッションにユーザー情報が存在しないのでログイン処理を行う");
 
