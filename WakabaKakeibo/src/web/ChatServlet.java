@@ -84,11 +84,21 @@ public class ChatServlet extends HttpServlet {
 
 		ChatBean chatBeanSession=(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
 
-		//ログイン画面からじゃない遷移の場合にログイン処理を行わない
+		//sessionが切れたときの処理
+		if(chatBeanSession==null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
 
+			return;
+		}
+
+		//ログイン画面からじゃない遷移の場合にログイン処理を行わない
+		//ログインでuserID,passwordが間違っている場合の処理
 		String userIDstr = request.getParameter("userID");
 		String password = request.getParameter("password");
-
 
 		if( userIDstr != null && password!=null)
 		{
