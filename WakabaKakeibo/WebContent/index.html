@@ -1,24 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta   charset="UTF-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
- <link rel="stylesheet" type="text/css" href="history.css">
-<title>ログイン画面</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ログインページ</title>
+ <!-- 必要なメタタグ -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--   //cssファイルの設定など -->
 
-<!-- javascript読み込み -->
+	<style>
+	html,
+	body {
+	  height: 100%;
+	}
 
+	body {
+	  display: -ms-flexbox;
+	  display: flex;
+	  -ms-flex-align: center;
+	  align-items: center;
+	  padding-top: 40px;
+	  padding-bottom: 40px;
+	  background-color: #f5f5f5;
+	}
+
+	.form-signin {
+	  width: 100%;
+	  max-width: 330px;
+	  padding: 15px;
+	  margin: auto;
+	}
+	.form-signin .checkbox {
+	  font-weight: 400;
+	}
+	.form-signin .form-control {
+	  position: relative;
+	  box-sizing: border-box;
+	  height: auto;
+	  padding: 10px;
+	  font-size: 16px;
+	}
+	.form-signin .form-control:focus {
+	  z-index: 2;
+	}
+	.form-signin input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-right-radius: 0;
+	  border-bottom-left-radius: 0;
+	}
+	.form-signin input[type="password"] {
+	  margin-bottom: 10px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+	</style>
 </head>
-<body>
-ユーザ名とパスワードを入力してください<br>
-<form method ="POST" action ="ChatServlet">
-USER  ID<input name ="userID" type="text"><br>
-PASSWORD<input name="password" type="password" >
-<input type="submit" value="ログイン">
-</form>
 
-<form method ="POST" action ="userRegist.jsp">
-<input type="submit" value="新規登録">
-</form>
-<br>
+<body class="text-center">
+<div class="container">
+  <form class="form-signin" action="ChatServlet" method="POST">
+    <img class="mb-4" src="wakabaIcon.gif">
+    <h1 class="h3 mb-3 font-weight-normal" >サインインをどうぞ</h1>
+<!--     ユーザID -->
+    <label for="inputUserID" class="sr-only">ユーザID</label>
+    <input name ="userID" type="text" id="inputEmail" class="form-control" placeholder="ユーザID" required autofocus>
+<!--     パスワード -->
+    <label for="inputPassword" class="sr-only">パスワード</label>
+    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="パスワード" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">ログイン</button>
+  </form>
 
+	<a href="UserRegistServlet">新規登録</a>
 
+</div>
+  <!-- オプションのJavaScript -->
+  <!-- 最初にjQuery、次にPopper.js、次にBootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM crossorigin="anonymous"></script>
+</body>
+
+</html>
 </body>

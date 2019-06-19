@@ -83,12 +83,13 @@ function innerComment(user, content, commentBlogTagId){
 	c.innerHTML += commentCard;
 }
 
-function innerMainBlog(title, userName, category, date, content, likeNum, isChecked, thisId, replyId, mainBlogTagId, thumsUpIconID, likeFormName, blogID){
+function innerMainBlog(title, userName, category, date, content, likeNum, isChecked, thisId, replyId, mainBlogTagId, thumsUpIconID, likeFormName, blogID, editButtonID){
 	var mainBlogCard = "<div class=\"card my-3\">"
 		+	"<h5 class=\"card-header\">"
 		+		title
 		+		"<div class=\"float-right\">"
 		+			"<small class=\"text-muted\">" + date + "</small><br>"
+		+			"<a type=\"button\" href=\"MBEditServlet\" class=\"btn btn-info mt-1 \">リブログ</a>"
 		+		"</div>"
 		+		"<br>"
 		+		"<small>by" + userName + "</small>"
@@ -98,16 +99,21 @@ function innerMainBlog(title, userName, category, date, content, likeNum, isChec
 		+		content
 		+	"</div>"
 		+	"<div class=\"card-footer\">"
-		+		"<div class=\"row align-items-center\">"
+		+		"<div class=\"row align-items-center\" >"
 		+			"<button class=\"btn btn-primary col-3 \" data-toggle=\"modal\" data-target=\"#" + replyId + "\">コメント</button>"
 //		likeForm
-		+			"<form action=\"CommentServlet\" name=\"" + likeFormName + "\">"
+		+			"<form action=\"CommentServlet\" name=\"" + likeFormName + "\" >"
 		+			"<input type=\"hidden\" name=\"blogID\" value=\"" + blogID + "\">"
 		+ 			"<div class=\"col-1 \" id=\"" + thumsUpIconID + "\"></div>"
     	+			"</form>"
-
 //		+			"<div class=\"col-1 \" id=\"" + thumsUpIconID + "\"><i class=\"far fa-thumbs-up fa-2x \" style=\"color:skyblue\"></i></div>"
 		+   	    "<b class=\"col-1 \" style=\"color: skyblue; font-size: 2rem\">" + likeNum + "</b>"
+		+			"<form id=\""+editButtonID+"\" class=\"col-sm-3 offset-sm-3\">"
+		+				"<input type=\"hidden\" name=\"userName\" value=\"" + userName + "\">"
+		+				"<input type=\"hidden\" name=\"title\" value=\"" + title + "\">"
+		+				"<input type=\"hidden\" name=\"category\" value=\"" + category + "\">"
+		+				"<input type=\"hidden\" name=\"content\" value=\"" + content + "\">"
+		+			"</form>"
 		+		"</div>"
 		+	"</div>"
 		+"</div>";
@@ -138,5 +144,13 @@ function isCheckThumsUp(isChecked, thumsUpIconID){
 		icon.innerHTML = thumsUpOn;
 	}else{
 		icon.innerHTML = thumsUpOff;
+	}
+}
+
+function insertEditButton(blogWrittenUser, loginUser, editButtonID){
+
+	if(blogWrittenUser == loginUser){
+		var editButton = document.getElementById(editButtonID);
+		editButton.innerHTML += "<a type=\"button\" href=\"MBEditServlet\" class=\"btn btn-secondary \">編集</a>"
 	}
 }
