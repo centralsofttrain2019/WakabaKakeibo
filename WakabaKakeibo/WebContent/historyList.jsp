@@ -71,8 +71,7 @@
 <div id="header"></div>
 <script type="text/javascript">header("historyNav");</script>
 
-<h1 class="my-3"> 履歴</h1>
-<hr size="1">
+<h3 class="my-3 py-1 border-bottom "> 履歴</h3>
 
 <!-- 日付選択 -->
 <form name="selectDate" action="HistoryListServlet">
@@ -106,27 +105,56 @@
 </form>
 
 <!-- 円グラフ -->
-<div class="row">
+<div class="row my-3">
 	<div id="piechartIncome" class="col"></div>
 	<div id="piechartExpense" class="col"></div>
 </div>
-
-<h1>購入履歴</h1>
-
-<div class="flex_testkabu " id="historyList">
-<% System.out.println("month : " + bean.getHistory_month()); %>
-
-<% for( bean.HistoryBean hd : bean.getHistoryList() ) { %>
-   	<div class="flex_test-item1 bg-primary"style=width:100%;>
-       <%= hd.getPurchaseDate() %>
-       <%= hd.getProductName() %>
-       <%= hd.getAmount() %>
-       <%= hd.getCategoryName() %>
-       <%= hd.getType().toString() %>
-     </div>
- <% } %>
+<div>
+	<div class="row ">
+		<div class="col-sm-2"><strong>収入合計</strong></div>
+		<div class="col-sm-2"><%= bean.getIncomeSum() %>円</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-2"><strong>支出合計</strong></div>
+		<div class="col-sm-2"> <%= bean.getExpenseSum() %>円</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-2"><strong>差額</strong></div>
+		<div class="col-sm-2"> <%= bean.getIncomeSum() - bean.getExpenseSum()%>円</div>
+	</div>
 </div>
-</div>
+
+<h3 class="my-3 py-1 border-bottom ">購入履歴</h3>
+　
+<!-- indexの宣言 -->
+<% int index = 1; %>
+
+<table class="table table-bordered table-hover">
+<!--   <caption>テーブルの表題</caption> -->
+  <thead class="thead-light">
+    <tr>
+      <th>#</th>
+      <th scope="col">日付</th>
+      <th scope="col">品名</th>
+      <th scope="col">金額</th>
+      <th scope="col">カテゴリー</th>
+      <th scope="col">収支</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% for( bean.HistoryBean hd : bean.getHistoryList() ) { %>
+    <tr>
+      <th scope="row"><%= index %></th>
+      <td><%= hd.getPurchaseDate() %></td>
+      <td><%= hd.getProductName() %></td>
+      <td><%= hd.getAmount() %></td>
+      <td><%= hd.getCategoryName() %></td>
+      <td><%= hd.getType().toString() %></td>
+    </tr>
+    <% index++; %>
+   <% } %>
+  </tbody>
+</table>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

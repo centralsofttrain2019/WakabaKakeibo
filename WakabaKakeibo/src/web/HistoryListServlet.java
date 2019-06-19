@@ -67,6 +67,7 @@ public class HistoryListServlet extends HttpServlet {
 			setMap(bean, request);
 			//incomeとexpenseのtotalの計算
 			totalCalculation(bean);
+			//incomeとexpenseの合計
 
 			System.out.println("HistoryServlet");
 			request.setAttribute("bean",bean);
@@ -141,6 +142,9 @@ public class HistoryListServlet extends HttpServlet {
 
 	public void totalCalculation(HistoryListBean bean) {
 		int amountTotal = 0;
+		int sumIncome = 0;
+		int sumExpense = 0;
+
 		Map<String, Integer> incomeTotal = new HashMap<String, Integer>();
 		Map<String, Integer> expenseTotal = new HashMap<String, Integer>();
 
@@ -150,6 +154,7 @@ public class HistoryListServlet extends HttpServlet {
 				 amountTotal += hb.getAmount();
 			 }
 			 incomeTotal.put(key, amountTotal);
+			 sumIncome += amountTotal;
 			 amountTotal = 0;
     	}
 
@@ -159,11 +164,15 @@ public class HistoryListServlet extends HttpServlet {
 				 amountTotal += hb.getAmount();
 			 }
 			 incomeTotal.put(key, amountTotal);
+			 sumExpense += amountTotal;
 			 amountTotal = 0;
 		}
 
 		bean.setIncomeTotal(incomeTotal);
 		bean.setExpenseTotal(expenseTotal);
+
+		bean.setIncomeSum(sumIncome);
+		bean.setExpenseSum(sumExpense);
 
 	}
 
