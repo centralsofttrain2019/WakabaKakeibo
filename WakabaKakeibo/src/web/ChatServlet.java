@@ -82,7 +82,6 @@ public class ChatServlet extends HttpServlet {
 		bean.setMessageListBean( mListBean );
 
 
-		ChatBean chatBeanSession=(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
 
 
 
@@ -90,6 +89,7 @@ public class ChatServlet extends HttpServlet {
 		//ログインでuserID,passwordが間違っている場合の処理
 		String userIDstr = request.getParameter("userID");
 		String password = request.getParameter("password");
+
 
 		if( userIDstr != null && password!=null)
 		{
@@ -106,12 +106,17 @@ public class ChatServlet extends HttpServlet {
 
 				return;
 			}
-		}
-		else
-		{
-			System.out.println("セッションにユーザー情報が存在するのでログイン処理を行わない");
+
+			else
+			{
+				System.out.println("セッションにユーザー情報が存在するのでログイン処理を行わない");
+
+			}
 
 		}
+		request.setAttribute("bean", bean);
+		ChatBean chatBeanSession=(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+
 
 		//sessionが切れたときの処理
 		if(chatBeanSession==null)
@@ -124,7 +129,7 @@ public class ChatServlet extends HttpServlet {
 			return;
 		}
 
-		request.setAttribute("bean", bean);
+
 
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/chat.jsp");
@@ -187,7 +192,6 @@ public class ChatServlet extends HttpServlet {
 
 		bean.setUserID(userID);
 		bean.setPassword(password);
-
 		bean.setUsersDto(usersDto);
 
 
