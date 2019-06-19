@@ -45,11 +45,12 @@ public class UserRegistServlet extends HttpServlet {
 		if(request.getParameter("password") != null) {
 			//コメントのインサート
 			insertUser(request, response, date);
-		}
 
+		}else {
 		//JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher("/ChatServlet");
+		RequestDispatcher disp = request.getRequestDispatcher("/userRegist.jsp");
 		disp.forward(request, response);
+		}
 	}
 
 	/**
@@ -67,17 +68,17 @@ public class UserRegistServlet extends HttpServlet {
 
 		//サービスを取得
 		UsersService service = new UsersService();
-		if(service.getUserOnNew(userID, password).getUserID() != 0) {
+		if(service.getUserOnNew(userID) != null) {
 
 			UserRegistBean errorBean = new UserRegistBean();
 			errorBean.setError(true);
 
 			request.setAttribute("bean", errorBean);
-			System.out.println("null");
-			System.out.println(service.getUserOnNew(userID, password).toString());
+//			System.out.println("null");
+//			System.out.println(service.getUserOnNew(userID).toString());
 
 			//JSPに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/userRegist.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("/userRegist_error.jsp");
 			disp.forward(request, response);
 
 		}else {
@@ -111,6 +112,11 @@ public class UserRegistServlet extends HttpServlet {
 
 		//UsersTableへinsert
 		service.insertUser(uDto);
+
+		//JSPに遷移する
+		RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+		disp.forward(request, response);
+
 		}
 
 	}

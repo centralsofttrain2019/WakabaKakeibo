@@ -185,7 +185,7 @@ public class UsersService {
 	}
 
 	//ユーザの検索 新規登録
-	public UsersDto getUserOnNew(int userID, String password)
+	public UsersDto getUserOnNew(int userID)
 	{
 
 		UsersDto dto = null;

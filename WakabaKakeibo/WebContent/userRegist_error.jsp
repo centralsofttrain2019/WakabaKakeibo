@@ -16,6 +16,9 @@
 
 <script type="text/javascript" src="inner.js"></script>
 
+<script>
+	alert("入力されたユーザIDは既に使用されています。");
+</script>
 
 </head>
 <body>
