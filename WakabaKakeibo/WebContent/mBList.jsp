@@ -33,6 +33,8 @@
 <!-- sessionのIDを1として決め打ち -->
 <% int sessionUserID = 1 ;%>
 
+
+
 <div class="container " style="height: 500px; padding-top:4.5rem;">
 
 	<div id="header"></div>
@@ -86,6 +88,8 @@
 	//リプレイform
 	String replyFormId = "replyFormIdAll" + (b.getBlogID());
 	String replyFormId2 = "#replyFormIdAll" + (b.getBlogID());
+	//editButtonID
+	String editButtonID = "editButtonID" + b.getBlogID();
 
 	//thumsUpIconID
 	String thumsUpIconID = "iconAll" + b.getBlogID();
@@ -94,6 +98,7 @@
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
+	String nowUserName = "テスト太郎";
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -127,7 +132,8 @@
 									'<%= mainBlogTagId %>',
 									'<%= thumsUpIconID %>',
 									'<%= likeFormName %>',
-									'<%= b.getBlogID() %>');
+									'<%= b.getBlogID() %>',
+									'<%= editButtonID %>');
 
 							isCheckThumsUp('<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>', '<%= thumsUpIconID %>');
 							</script>
@@ -149,6 +155,8 @@
 					</div>
 				</div>
 			</div>
+
+<script>insertEditButton('<%= b.getUserName() %>', '<%= nowUserName %>', '<%= editButtonID %>')</script>
 
 <!-- 返信用モーダルの作成 -->
 <!-- 使い方：innerReplay(コメントするユーザー名、コメント先のブログID, 'このモーダルのID') -->
