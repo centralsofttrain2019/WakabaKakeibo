@@ -41,6 +41,14 @@ public class SimulationListServlet extends HttpServlet {
 		//セッション取得
 		ChatBean cBean =(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
 
+		if(cBean == null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			return;
+		}
+
 
 		SimulationListBean bean = new SimulationListBean();
 		DepositService service = new DepositService();

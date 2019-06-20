@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.BLMapBean;
+import bean.ChatBean;
 import bean.MBCommentBean;
 import bean.MBListBean;
 import service.BlogService;
@@ -38,6 +39,15 @@ public class MBListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		ChatBean session = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+		if(session == null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			return;
+		}
+
 
 		//CommentServletからのbeanを取得
 		Map<Integer, List<MBCommentBean>> map = (Map<Integer, List<MBCommentBean>>)request.getAttribute("bean");

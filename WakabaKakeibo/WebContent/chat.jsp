@@ -68,6 +68,11 @@
 					 家計簿データの追加
 				</button>
 			</div>
+			<div class="input-group-append">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalScrollable3">
+					 貯金データの追加
+				</button>
+			</div>
 	</div>
 </div>
 </form>
@@ -185,13 +190,11 @@
         </div>
 
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
         <button type="submit" class="btn btn-primary" name="MoneyNoteSubmit" id="MoneyNoteSubmit">登録</button>
       </div>
       </form>
-
     </div>
   </div>
 </div>
@@ -224,6 +227,45 @@
 </div>
 
 
+<!-- 貯金データ登録モーダルの設定 -->
+<div class="modal fade" id="exampleModalScrollable3" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    <form  action="ChatCommentServlet" id= "AddMoneyNote">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">貯金の登録</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              貯金額
+            </div>
+            <div class="col-sm-8">
+              <input type="text" name="product-name" class="form-control" placeholder="貯金額を入力してください" aria-label="..." aria-describedby="button-addon2" required pattern="[0-9]{1,7}">
+              <small id="passwordHelpInline" class="text-muted col-5">
+         		1～999万円で、半角整数で入力してください
+      			</small>
+            </div>
+            円
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <button type="submit" class="btn btn-primary" name="DepositSubmit" id="DepositSubmit">登録</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
 <script>setInterval(communicate, 200, strArray); </script>
 
 <!-- bootstrapのためのjqueryの読み込み -->
