@@ -71,34 +71,34 @@
 <div id="header"></div>
 <script type="text/javascript">header("historyNav");</script>
 
-<h3 class="my-3 py-1 border-bottom "> 履歴</h3>
+<h3 class="my-3 py-1 border-bottom" id="historyTitle">履歴</h3>
 
 <!-- 日付選択 -->
 <form name="selectDate" action="HistoryListServlet">
 
 <select name="year">
-<option value="">-</option>
-<option value="2016"  >2016</option>
-<option value="2017">2017</option>
-<option value="2018">2018</option>
-<option value="2019" selected>2019</option>
+<!-- <option value="0">-</option> -->
+<option value="2016" id="2016">2016</option>
+<option value="2017" id="2017">2017</option>
+<option value="2018" id="2018">2018</option>
+<option value="2019" id="2019">2019</option>
 
 </select>　年
 
 <select name="month">
-<option value="">-</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6" selected>6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
+<!-- <option value="0">-</option> -->
+<option value="1" id="1">1</option>
+<option value="2" id="2">2</option>
+<option value="3" id="3">3</option>
+<option value="4" id="4">4</option>
+<option value="5" id="5">5</option>
+<option value="6" id="6">6</option>
+<option value="7" id="7">7</option>
+<option value="8" id="8">8</option>
+<option value="9" id="9">9</option>
+<option value="10" id="10">10</option>
+<option value="11" id="11">11</option>
+<option value="12" id="12">12</option>
 </select>　月
 
 <input type="submit" id="update" value="更新">
@@ -120,7 +120,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-2"><strong>差額</strong></div>
-		<div class="col-sm-2"> <%= bean.getIncomeSum() - bean.getExpenseSum()%>円</div>
+		<div class="col-sm-2" id="total"><span id="total"><%= bean.getIncomeSum() - bean.getExpenseSum()%></span>円</div>
 	</div>
 </div>
 
@@ -156,6 +156,23 @@
   </tbody>
 </table>
 
+<script>
+var his = document.getElementById("historyTitle");
+
+if(<%= bean.getHistory_year()%> != 0){
+	his.innerHTML = "<%= bean.getHistory_year() %>" + "年" + "<%= bean.getHistory_month() %>" + "月の履歴";
+	document.getElementById('<%= bean.getHistory_year() %>').selected = true;
+	document.getElementById('<%= bean.getHistory_month() %>').selected = true;
+}else{
+	his.innerHTML = "すべての履歴";
+}
+
+var total = document.getElementById("total");
+
+if(<%= bean.getIncomeSum() - bean.getExpenseSum()%> < 0){
+	total.setAttribute("style", "color:red;");
+}
+</script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>

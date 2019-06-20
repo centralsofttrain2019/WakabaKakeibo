@@ -48,7 +48,7 @@ public class MBEditEditServlet extends HttpServlet {
 			updateBlog(request, timestamp);
 
 			//JSPに遷移
-			RequestDispatcher disp = request.getRequestDispatcher("CommentServlet");
+			RequestDispatcher disp = request.getRequestDispatcher("ChatServlet");
 			disp.forward(request, response);
 
 		}

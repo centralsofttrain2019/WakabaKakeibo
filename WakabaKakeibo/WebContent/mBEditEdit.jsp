@@ -88,7 +88,7 @@
 
 	<input type="hidden" name="blogIDUp" value="<%= bean.getBlogID() %>">
 	<div class="row justify-content-center my-4">
-		<button type="submit" class="btn btn-success col-2">投稿</button>
+		<button type="submit" class="btn btn-success col-2">変更</button>
 	</div>
 </form>
 

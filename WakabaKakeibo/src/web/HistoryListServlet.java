@@ -47,8 +47,6 @@ public class HistoryListServlet extends HttpServlet {
 
 //		年月の更新があればその月だけのデータを表示
 		if(request.getParameter("year") != null){
-			bean.setHistory_year(Integer.valueOf(request.getParameter("year")).intValue());
-			bean.setHistory_month(Integer.valueOf(request.getParameter("month")).intValue());
 
 			String year = request.getParameter("year");
 			int month = Integer.valueOf(request.getParameter("month")).intValue();
@@ -63,6 +61,9 @@ public class HistoryListServlet extends HttpServlet {
 
 //			ユーザID1で決め打ち
 			bean = service.getHistoryListBeanByDate(1, sinceLd, untilLd);
+
+			bean.setHistory_year(Integer.valueOf(request.getParameter("year")).intValue());
+			bean.setHistory_month(Integer.valueOf(request.getParameter("month")).intValue());
 
 //			incomeとexpenseの購入カテゴリでグルーピングしたマップを返す
 			setMap(bean, request);
