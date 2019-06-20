@@ -20,7 +20,7 @@ public class MoneyNotesDao {
 	}
 
 	//家計簿データの内容をdtoにコピーする
-	private void SetMoneyNotesResultSet(MoneyNotesDto dto, ResultSet rs)
+	private void setMoneyNotesResultSet(MoneyNotesDto dto, ResultSet rs)
 			throws SQLException
 	{
 		dto.setMoneyNoteID(rs.getInt("MoneyNoteID"));
@@ -47,7 +47,7 @@ public class MoneyNotesDao {
 		{
 			MoneyNotesDto mnd = new MoneyNotesDto();
 
-			this.SetMoneyNotesResultSet(mnd, rs);
+			this.setMoneyNotesResultSet(mnd, rs);
 
 			dtoList.add(mnd);
 		}
@@ -68,7 +68,7 @@ public class MoneyNotesDao {
 		while(rs.next())
 		{
 			MoneyNotesDto mnd = new MoneyNotesDto();
-			this.SetMoneyNotesResultSet(mnd, rs);
+			this.setMoneyNotesResultSet(mnd, rs);
 
 			dtoList.add(mnd);
 		}
@@ -93,7 +93,7 @@ public class MoneyNotesDao {
 		while(rs.next())
 		{
 			MoneyNotesDto mnd = new MoneyNotesDto();
-			this.SetMoneyNotesResultSet(mnd, rs);
+			this.setMoneyNotesResultSet(mnd, rs);
 			mnd.setProductName(rs.getString("Products.ProductName"));
 
 			mnd.setCategoryName(rs.getString("MoneyCategorys.CategoryName"));
@@ -161,7 +161,7 @@ public class MoneyNotesDao {
 		while(rs.next())
 		{
 			MoneyNotesDto mnd = new MoneyNotesDto();
-			this.SetMoneyNotesResultSet(mnd, rs);
+			this.setMoneyNotesResultSet(mnd, rs);
 			mnd.setProductName(rs.getString("Products.ProductName"));
 			mnd.setCategoryName(rs.getString("MoneyCategorys.CategoryName"));
 			dtoList.add(mnd);
@@ -189,7 +189,7 @@ public class MoneyNotesDao {
 		while(rs.next())
 		{
 			MoneyNotesDto mnd = new MoneyNotesDto();
-			this.SetMoneyNotesResultSet(mnd, rs);
+			this.setMoneyNotesResultSet(mnd, rs);
 			mnd.setProductName(rs.getString("Products.ProductName"));
 			mnd.setCategoryName(rs.getString("MoneyCategorys.CategoryName"));
 			dtoList.add(mnd);
@@ -243,7 +243,36 @@ public class MoneyNotesDao {
 			return date;
 		}else
 		{
-			throw new RuntimeException();
+			System.out.println("最終購入日なし");
+			return null;
+		}
+	}
+
+	private static final String GET_LAST_PURCHASE =
+			"SELECT * FROM MoneyNotes "
+			+ "INNER JOIN Products ON MoneyNotes.ProductID = Products.ProductID "
+			+ "INNER JOIN MoneyCategorys ON MoneyNotes.CategoryID = MoneyCategorys.MoneyCategorysID "
+			+ "WHERE MoneyNotes.UserID = ? AND Products.ProductID = ? "
+			+ "ORDER BY PurchaseDate DESC";
+	public MoneyNotesDto getLastPurchase(int userID, int productID) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement( GET_LAST_PURCHASE );
+		stmt.setInt(1, userID);
+		stmt.setInt(2, productID);
+		ResultSet rs = stmt.executeQuery();
+
+		if(rs.next())
+		{
+			MoneyNotesDto dto = new MoneyNotesDto();
+			this.setMoneyNotesResultSet(dto, rs);
+			dto.setProductName(rs.getString("Products.ProductName"));
+			dto.setCategoryName(rs.getString("MoneyCategorys.CategoryName"));
+
+			return dto;
+		}else
+		{
+			System.out.println("最終購入日なし");
+			return null;
 		}
 	}
 
@@ -283,7 +312,12 @@ public class MoneyNotesDao {
 		stmt.setInt(5, dto.getCategoryID());
 		stmt.setInt(6, dto.getNumberOfPurchase());
 		stmt.setInt(7, dto.getAmount());
-		stmt.setInt(8, dto.getPurchaseIntervalDays());
+		if(dto.getPurchaseIntervalDays() >= 0)
+		{
+			stmt.setInt(8, dto.getPurchaseIntervalDays());
+		}else
+		{	stmt.setObject(8, null);
+		}
 
 		int res = stmt.executeUpdate();
 		return res;

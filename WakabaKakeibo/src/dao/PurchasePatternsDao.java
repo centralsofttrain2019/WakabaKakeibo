@@ -62,7 +62,18 @@ public class PurchasePatternsDao
 		stmt.setDate(4, java.sql.Date.valueOf(dto.getLastPurchaseDate()));
 		stmt.setInt(5, dto.getNumberPattern());
 		stmt.setInt(6, dto.getAmountPattern());
-		int res = stmt.executeUpdate();
+		stmt.executeUpdate();
+	}
+	public void insertData(int userID, int productID, DatePatternTypeEnum pattern , LocalDate lastPurchaseDate, int amountPattern, int numberPattern) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement(INSERT_SQL);
+		stmt.setInt(1, userID);
+		stmt.setInt(2, productID);
+		stmt.setString(3, pattern.toString());
+		stmt.setDate(4, java.sql.Date.valueOf(lastPurchaseDate));
+		stmt.setInt(5, numberPattern);
+		stmt.setInt(6, amountPattern);
+		stmt.executeUpdate();
 	}
 
 	private static final String UPDATE_SQL_HEAD = "UPDATE PurchasePatterns ";
@@ -99,8 +110,12 @@ public class PurchasePatternsDao
 		stmt.setInt(1, userID);
 		stmt.setInt(2, productID);
 
-		System.out.println("Update Pattern Table :" + stmt);
-		stmt.executeUpdate();
+		int res = stmt.executeUpdate();
+
+		//更新が失敗したため、インサートする
+		if(res == 0) {
+			insertData(userID, productID, pattern , lastPurchaseDate, amountPattern, numberPattern);
+		}
 	}
 
 	private static final String DELETE_SQL =

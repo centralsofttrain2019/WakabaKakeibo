@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.ChatBean;
 import domain.MoneyNoteTypeEnum;
 import domain.SqlOrderJudgement;
+import dto.MoneyNotesDto;
 import service.MoneyNotesService;
 
 /**
@@ -46,13 +47,44 @@ public class ChatCommentServlet extends HttpServlet {
 		//家計簿データの登録をした場合
 		if(request.getParameter("MoneyNoteSubmit") != null) {
 			this.addMoneyNote(request,session);
-
 		}
 
 		//定型文送信場合
 		if(request.getParameter("ChatPhrase") != null) {
 			System.out.println("ChatPhrase!!");
 		}
+
+		//チャットメッセージ送信時
+		String messageTmp=request.getParameter("chatMessage");
+		if(messageTmp != null)
+		{
+			byte[] bi = messageTmp.getBytes("iso-8859-1");
+			String message = new String( bi, "UTF-8" );
+
+			request.setAttribute("your_message", message);
+
+			MoneyNotesService service = new MoneyNotesService();
+			MoneyNotesDto dto = service.getLastMoneyNoteData(session.getUserID(), message);
+
+			if(dto == null) {
+				request.setAttribute("wakaba_message", "「" + message + "」はよくわからないや。");
+			}
+			else
+			{
+				SqlOrderJudgement judge = service.insertMoneyNotes(session.getUserID(), dto.getProductName(), dto.getType(), dto.getCategoryID(),dto.getNumberOfPurchase(), dto.getAmount(), dto.getPurchaseDate());
+				if(judge == SqlOrderJudgement.SUCCESS)
+				{
+					request.setAttribute("wakaba_message",
+							"過去のデータから" +
+							dto.getProductName() + "を" + dto.getNumberOfPurchase() + "個" + dto.getAmount() + "円で記録しといたよ");
+				}else
+				{
+					request.setAttribute("wakaba_message",dto.getProductName() + "を家計簿に記録しようとしたけどできなかったよ。");
+				}
+			}
+		}
+
+
 
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/ChatServlet");
