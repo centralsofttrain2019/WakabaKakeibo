@@ -8,6 +8,7 @@
  <%@ page import="bean.MBCommentListBean" %>
  <%@ page import="bean.MBCommentBean" %>
 <%@ page import="domain.BlogCategoryEnum" %>
+<%@ page import="bean.ChatBean" %>
 
 <!DOCTYPE html>
 <html>
@@ -33,7 +34,9 @@
 </head>
 <body>
 <!-- sessionのIDを1として決め打ち -->
-<% int sessionUserID = 1 ;%>
+<% ChatBean se = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME); %>
+<% int sessionUserID = se.getUserID() ;%>
+<% String sessionName = se.getUsersDto().getUserName(); %>
 
 
 
@@ -100,7 +103,7 @@
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
-	String nowUserName = "テスト太郎";
+	String nowUserName = sessionName;
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -222,7 +225,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
-	String nowUserName = "テスト太郎";
+	String nowUserName = sessionName;
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -340,7 +343,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
-	String nowUserName = "テスト太郎";
+	String nowUserName = sessionName;
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -459,7 +462,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
-	String nowUserName = "テスト太郎";
+	String nowUserName = sessionName;
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -578,7 +581,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
-	String nowUserName = "テスト太郎";
+	String nowUserName = sessionName;
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -699,7 +702,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
-	String nowUserName = "テスト太郎";
+	String nowUserName = sessionName;
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >

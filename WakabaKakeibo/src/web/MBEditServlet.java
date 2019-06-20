@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.ChatBean;
 import domain.BlogCategoryEnum;
 import service.BlogService;
 
@@ -34,7 +35,14 @@ public class MBEditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		ChatBean session = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+		if(session == null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			return;
+		}
 
 		//時間の取得
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -42,7 +50,7 @@ public class MBEditServlet extends HttpServlet {
 		//コメントのrequestがあれば
 		if(request.getParameter("blogContent") != null) {
 			//コメントのインサート
-			insertBlog(request, timestamp);
+			insertBlog(request, timestamp, session);
 
 //			//JSPに遷移
 			RequestDispatcher disp = request.getRequestDispatcher("CommentServlet");
@@ -66,7 +74,7 @@ public class MBEditServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void insertBlog(HttpServletRequest request, Timestamp timestamp) {
+	public void insertBlog(HttpServletRequest request, Timestamp timestamp, ChatBean session) {
 
 		//contentの取得
 		String blogContent = request.getParameter("blogContent");
@@ -78,7 +86,7 @@ public class MBEditServlet extends HttpServlet {
 		BlogCategoryEnum category = BlogCategoryEnum.valueOf(request.getParameter("category"));
 
 		//sessionからユーザーIDの取得
-		int userID = 1;//テストです。
+		int userID = session.getUserID();//テストです。
 		//image1
 		String image1 = null;
 		//image2

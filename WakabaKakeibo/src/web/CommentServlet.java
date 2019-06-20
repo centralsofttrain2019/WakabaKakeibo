@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.ChatBean;
 import bean.MBCommentBean;
 import bean.MBCommentListBean;
 import service.BlogService;
@@ -38,6 +39,14 @@ public class CommentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		ChatBean session = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+		if(session == null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			return;
+		}
 
 		//時間の取得
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -45,13 +54,13 @@ public class CommentServlet extends HttpServlet {
 		//コメントのrequestがあれば
 		if(request.getParameter("formControlTextarea") != null) {
 			//コメントのインサート
-			insertComment(request, timestamp);
+			insertComment(request, timestamp, session);
 		}
 
 //		いいねのrequestがあれば
 		if(request.getParameter("like") != null) {
 			//いいねのDB更新
-			changeLike(request, timestamp);
+			changeLike(request, timestamp, session);
 		}
 
 //		全コメントの取得
@@ -72,14 +81,14 @@ public class CommentServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void insertComment(HttpServletRequest request, Timestamp timestamp) {
+	public void insertComment(HttpServletRequest request, Timestamp timestamp, ChatBean session) {
 		//blogIDの取得
 		int blogId = Integer.parseInt(request.getParameter("blogID"));
 		//contentの取得
 		String blogContent = request.getParameter("formControlTextarea");
 		blogContent = blogContent.replaceAll("\r\n", "<br>");
 		//sessionからユーザーIDの取得
-		int userId = 1;//テストです。
+		int userId = session.getUserID();//テストです。
 
 		//サービスを取得
 		BlogService service = new BlogService();
@@ -99,13 +108,13 @@ public class CommentServlet extends HttpServlet {
 		return map;
 	}
 
-	public void changeLike(HttpServletRequest request, Timestamp timestamp) {
+	public void changeLike(HttpServletRequest request, Timestamp timestamp, ChatBean session) {
 		//いいねデータの取得
 		String like = request.getParameter("like");
 		//blogIDの取得
 		int blogId = Integer.parseInt(request.getParameter("blogID"));
 		//sessionからユーザーIDの取得
-		int userId = 1;//テストです。
+		int userId = session.getUserID();;//テストです。
 		//サービスを取得
 		BlogService service = new BlogService();
 		//blogcomentsDBへinsert

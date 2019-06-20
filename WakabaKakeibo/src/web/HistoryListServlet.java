@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.ChatBean;
 import bean.HistoryBean;
 import bean.HistoryListBean;
 import domain.MoneyNoteTypeEnum;
@@ -39,6 +40,16 @@ public class HistoryListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		ChatBean session = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+		if(session == null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			return;
+		}
+
 		//サービスを取得
 		MoneyNotesService service = new MoneyNotesService();
 		HistoryListBean bean = null;
@@ -60,7 +71,7 @@ public class HistoryListServlet extends HttpServlet {
 			System.out.println(request.getParameter("year"));
 
 //			ユーザID1で決め打ち
-			bean = service.getHistoryListBeanByDate(1, sinceLd, untilLd);
+			bean = service.getHistoryListBeanByDate(session.getUserID(), sinceLd, untilLd);
 
 			bean.setHistory_year(Integer.valueOf(request.getParameter("year")).intValue());
 			bean.setHistory_month(Integer.valueOf(request.getParameter("month")).intValue());
@@ -82,7 +93,7 @@ public class HistoryListServlet extends HttpServlet {
 		}else {
 
 //			ユーザID1で決め打ち
-			bean = service.findAllHistoryList(1); //引数にユーザID
+			bean = service.findAllHistoryList(session.getUserID()); //引数にユーザID
 
 //			incomeとexpenseの購入カテゴリでグルーピングしたマップを返す
 			setMap(bean, request);
