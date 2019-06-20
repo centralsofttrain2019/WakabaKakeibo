@@ -43,7 +43,6 @@ public class DepositService {
 //			System.out.println(list.get(list.size()-1).getDate().toString());
 //			System.out.println(list.get(list.size()-1).getBalance());
 
-
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{

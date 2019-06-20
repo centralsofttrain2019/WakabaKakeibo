@@ -71,7 +71,7 @@ public class HistoryListServlet extends HttpServlet {
 			System.out.println(request.getParameter("year"));
 
 //			ユーザID1で決め打ち
-			bean = service.getHistoryListBeanByDate(1, sinceLd, untilLd);
+			bean = service.getHistoryListBeanByDate(session.getUserID(), sinceLd, untilLd);
 
 			bean.setHistory_year(Integer.valueOf(request.getParameter("year")).intValue());
 			bean.setHistory_month(Integer.valueOf(request.getParameter("month")).intValue());
@@ -93,7 +93,7 @@ public class HistoryListServlet extends HttpServlet {
 		}else {
 
 //			ユーザID1で決め打ち
-			bean = service.findAllHistoryList(1); //引数にユーザID
+			bean = service.findAllHistoryList(session.getUserID()); //引数にユーザID
 
 //			incomeとexpenseの購入カテゴリでグルーピングしたマップを返す
 			setMap(bean, request);

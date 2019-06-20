@@ -50,7 +50,7 @@ public class MBEditServlet extends HttpServlet {
 		//コメントのrequestがあれば
 		if(request.getParameter("blogContent") != null) {
 			//コメントのインサート
-			insertBlog(request, timestamp);
+			insertBlog(request, timestamp, session);
 
 //			//JSPに遷移
 			RequestDispatcher disp = request.getRequestDispatcher("CommentServlet");
@@ -74,7 +74,7 @@ public class MBEditServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void insertBlog(HttpServletRequest request, Timestamp timestamp) {
+	public void insertBlog(HttpServletRequest request, Timestamp timestamp, ChatBean session) {
 
 		//contentの取得
 		String blogContent = request.getParameter("blogContent");
@@ -86,7 +86,7 @@ public class MBEditServlet extends HttpServlet {
 		BlogCategoryEnum category = BlogCategoryEnum.valueOf(request.getParameter("category"));
 
 		//sessionからユーザーIDの取得
-		int userID = 1;//テストです。
+		int userID = session.getUserID();//テストです。
 		//image1
 		String image1 = null;
 		//image2

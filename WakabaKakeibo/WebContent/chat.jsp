@@ -47,7 +47,8 @@
 <!-- チャット画面 -->
 <form method = "POST" action = "ChatCommentServlet">
 <div class="fixed-bottom container">
-	<div class="mt-5" id="chat" style="height:20vh;background: rgba(92, 184, 92,0.5); font-weight:bold; color:white; -webkit-text-stroke: 1px black; font-size: 1.3rem">
+	<button class="btn btn-secondary col-sm-1 offset-sm-11">ログ</button>
+	<div class="" id="chat" style="height:20vh;background: rgba(92, 184, 92,0.5); font-weight:bold; color:white; -webkit-text-stroke: 1px black; font-size: 1.3rem">
 	</div>
 	<div id="select"></div>
 	 <!-- class="mt-5 h-10"></div> -->

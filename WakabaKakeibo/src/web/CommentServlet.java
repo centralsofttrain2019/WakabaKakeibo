@@ -54,13 +54,13 @@ public class CommentServlet extends HttpServlet {
 		//コメントのrequestがあれば
 		if(request.getParameter("formControlTextarea") != null) {
 			//コメントのインサート
-			insertComment(request, timestamp);
+			insertComment(request, timestamp, session);
 		}
 
 //		いいねのrequestがあれば
 		if(request.getParameter("like") != null) {
 			//いいねのDB更新
-			changeLike(request, timestamp);
+			changeLike(request, timestamp, session);
 		}
 
 //		全コメントの取得
@@ -81,14 +81,14 @@ public class CommentServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public void insertComment(HttpServletRequest request, Timestamp timestamp) {
+	public void insertComment(HttpServletRequest request, Timestamp timestamp, ChatBean session) {
 		//blogIDの取得
 		int blogId = Integer.parseInt(request.getParameter("blogID"));
 		//contentの取得
 		String blogContent = request.getParameter("formControlTextarea");
 		blogContent = blogContent.replaceAll("\r\n", "<br>");
 		//sessionからユーザーIDの取得
-		int userId = 1;//テストです。
+		int userId = session.getUserID();//テストです。
 
 		//サービスを取得
 		BlogService service = new BlogService();
@@ -108,13 +108,13 @@ public class CommentServlet extends HttpServlet {
 		return map;
 	}
 
-	public void changeLike(HttpServletRequest request, Timestamp timestamp) {
+	public void changeLike(HttpServletRequest request, Timestamp timestamp, ChatBean session) {
 		//いいねデータの取得
 		String like = request.getParameter("like");
 		//blogIDの取得
 		int blogId = Integer.parseInt(request.getParameter("blogID"));
 		//sessionからユーザーIDの取得
-		int userId = 1;//テストです。
+		int userId = session.getUserID();;//テストです。
 		//サービスを取得
 		BlogService service = new BlogService();
 		//blogcomentsDBへinsert
