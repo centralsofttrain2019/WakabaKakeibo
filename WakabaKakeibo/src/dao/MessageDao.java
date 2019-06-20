@@ -84,4 +84,39 @@ public class MessageDao {
 		return ret;
 	}
 
+	private static final String FIND_BY_TYPE =
+			"SELECT * FROM MESSAGES WHERE "
+			+ "MessageType = ? "
+			+ "EventType = ?";
+
+	public MessageDto findByType(EventTypeEnum eventType, MessageTypeEnum messageType) throws SQLException
+	{
+		MessageDto ret = new MessageDto();
+
+		// オートクローズ版
+		try( PreparedStatement stmt = con.prepareStatement( FIND_BY_TYPE ) )
+		{
+			stmt.setString( 1, messageType.toString() );
+			stmt.setString(2, eventType.toString());
+			ResultSet rs= stmt.executeQuery();
+
+			if( rs.next() )
+			{
+				//ret.setEmployeeID( rs.getInt( "EmployeeID" ) );
+
+				ret.setMessageId(rs.getInt("MessageID"));
+				ret.setMessageCount(rs.getString("MessageContent"));
+				ret.setMessageType(MessageTypeEnum.valueOf(rs.getString("MessageType")));
+				ret.setEventType(EventTypeEnum.valueOf(rs.getString("EventType")));
+			}
+			else
+			{
+				return null;
+			}
+		}
+
+		return ret;
+	}
+
+
 }

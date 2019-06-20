@@ -12,14 +12,11 @@ public class UsersDao
 {
 	private Connection con;
 
-
-
 	//コネクションをセットするコンストラクター
 	public UsersDao(Connection con) {
 		super();
 		this.con = con;
 	}
-
 
 	private static final String FIND_BY_USERID =
 			"SELECT * FROM Users WHERE UserID = ?";
@@ -56,6 +53,9 @@ public class UsersDao
 	private static final String UPDATE_TIME=
 			"UPDATE USERS SET LASTLOGIN = now()  WHERE USERID =?";
 
+	private static final String UPDATE_FEELING_LEVEL=
+			"UPDATE USERS SET FeelingLevel = ?  WHERE USERID = ?";
+
 	private static final String UPDATE_TARGET_AMOUNT = "UPDATE USERS SET TARGETAMOUNT = ?  WHERE USERID =?;" ;
 
 
@@ -84,38 +84,29 @@ public class UsersDao
 				ud.setRunningDays(	rs.getInt("runningDays"));
 				ud.setFeelingLevel(	rs.getInt("feelingLevel"));
 				ud.setHonorific(	rs.getString("honorific"));
-
 			}
-
 		}
-
-
 		return ud;
 	}
 
 	public void insertUser(UsersDto uDto) throws SQLException
 	{
-		System.out.println("hisdao-1");
-
-		// オートクローズ版
-				try( PreparedStatement stmt = con.prepareStatement( INSERT_USER ) )
-				{
-					stmt.setInt( 1, uDto.getUserID());
-					stmt.setString( 2, uDto.getPassword());
-					stmt.setString( 3, uDto.getUserName());
-					stmt.setString( 4, uDto.getSex().toString());
-					stmt.setDate( 5, java.sql.Date.valueOf(uDto.getBirthday()));
-					stmt.setInt( 6, uDto.getTargetAmount());
-					stmt.setInt( 7, uDto.getPresentAmount());
-					stmt.setDate( 8, java.sql.Date.valueOf(uDto.getLastLogin()));
-					stmt.setInt( 9, uDto.getRunningDays());
-					stmt.setInt( 10, uDto.getFeelingLevel());
-					stmt.setString( 11, uDto.getHonorific());
-					stmt.setString( 12, null);
-					stmt.executeUpdate();
-
-				}
-
+		try( PreparedStatement stmt = con.prepareStatement( INSERT_USER ) )
+		{
+			stmt.setInt( 1, uDto.getUserID());
+			stmt.setString( 2, uDto.getPassword());
+			stmt.setString( 3, uDto.getUserName());
+			stmt.setString( 4, uDto.getSex().toString());
+			stmt.setDate( 5, java.sql.Date.valueOf(uDto.getBirthday()));
+			stmt.setInt( 6, uDto.getTargetAmount());
+			stmt.setInt( 7, uDto.getPresentAmount());
+			stmt.setDate( 8, java.sql.Date.valueOf(uDto.getLastLogin()));
+			stmt.setInt( 9, uDto.getRunningDays());
+			stmt.setInt( 10, uDto.getFeelingLevel());
+			stmt.setString( 11, uDto.getHonorific());
+			stmt.setString( 12, null);
+			stmt.executeUpdate();
+		}
 	}
 
 
@@ -124,16 +115,18 @@ public class UsersDao
 		try(PreparedStatement stmt = con.prepareStatement(UPDATE_TIME))
 		{
 			stmt.setInt(1,userID);
-
 			stmt.executeUpdate();
-
-
-
 		}
+	}
 
-
-
-
+	public void updateFeelingLevel(int userID, int feelingLevel) throws SQLException
+	{
+		try(PreparedStatement stmt = con.prepareStatement(UPDATE_FEELING_LEVEL))
+		{
+			stmt.setInt(1,feelingLevel);
+			stmt.setInt(2,userID);
+			stmt.executeUpdate();
+		}
 	}
 
 	public void updateTargetAmount(UsersDto dto) throws SQLException

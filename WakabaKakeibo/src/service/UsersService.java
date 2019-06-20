@@ -2,6 +2,8 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,6 +16,8 @@ import dao.BlogsDao;
 import dao.MessageDao;
 import dao.UsersDao;
 import domain.BlogCategoryEnum;
+import domain.EventTypeEnum;
+import domain.MessageTypeEnum;
 import dto.MessageDto;
 import dto.UsersDto;
 
@@ -45,11 +49,10 @@ public class UsersService {
 		return bean;
 	}
 
-	//ブログの検索
-	public MessageBean findById(int id)
+	//メッセージの検索
+	public MessageBean findMessageById(int id)
 	{
 		MessageBean bean = new MessageBean();
-
 		//オートクローズ
 		try( Connection con= dao.Dao.getConnection() )
 		{
@@ -57,17 +60,33 @@ public class UsersService {
 			MessageDto mDto = mDao.findById(id);
 			bean.setDto(mDto);
 			//bean.setmDtoList(mList);
-
-
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
 			e.printStackTrace();
 			throw new RuntimeException( e );
 		}
-
 		return bean;
 	}
+	public MessageBean findMessageByType(EventTypeEnum eventType, MessageTypeEnum messageType)
+	{
+		MessageBean bean = new MessageBean();
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			MessageDao mDao = new MessageDao(con);
+			MessageDto mDto = mDao.findByType(eventType,messageType);
+			bean.setDto(mDto);
+			//bean.setmDtoList(mList);
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+		return bean;
+	}
+
 
 	//なんかmapを追加するしている
 	public MBListBean findAllBlog()
@@ -164,24 +183,40 @@ public class UsersService {
 	}
 
 
-	public void updateLoginDate(int userID)
+	public void updateLoginDate(UsersDto dto)
 	{
 		//オートクローズ
 		try( Connection con= dao.Dao.getConnection() )
 		{
 			UsersDao usersDao = new UsersDao(con);
-			usersDao.updateLoginDate( userID );
 
+			LocalDate today = LocalDate.now();
 
+			//好感度レベルの更新
+			int feelLevel = dto.getFeelingLevel();
+			int intervalDays = (int)ChronoUnit.DAYS.between(dto.getLastLogin(), today);
+			if( intervalDays == 0 )
+			{
+				return;
+			}else if( intervalDays == 1 )
+			{
+				feelLevel++;
+				if(feelLevel >7) feelLevel =7;
+			}else if( intervalDays >= 3)
+			{
+				feelLevel--;
+				if(feelLevel<0) feelLevel =0;
+			}
+			usersDao.updateFeelingLevel(dto.getUserID(), feelLevel);
+
+			//最終ログイン日を今日に
+			usersDao.updateLoginDate( dto.getUserID() );
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
 			e.printStackTrace();
 			throw new RuntimeException( e );
 		}
-
-
-
 	}
 
 	//ユーザの検索 新規登録

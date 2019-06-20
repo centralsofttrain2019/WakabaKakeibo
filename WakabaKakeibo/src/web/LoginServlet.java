@@ -32,14 +32,13 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ChatBean bean = new ChatBean();
 		//ログインでuserID,passwordが間違っている場合の処理
 		String userIDstr = request.getParameter("userID");
 		String password = request.getParameter("password");
 		if( userIDstr != null && password!=null)
 		{
 			//ログイン処理
-			boolean isLoginOK = logIn(request,response,bean);
+			boolean isLoginOK = logIn(request);
 			if( !isLoginOK )
 			{
 				RequestDispatcher disp = request.getRequestDispatcher("/loginError.jsp");
@@ -60,9 +59,7 @@ public class LoginServlet extends HttpServlet {
 
 	//-------------------------------------------------------------------
 	private boolean logIn(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			ChatBean bean
+			HttpServletRequest request
 			)
 					throws ServletException, IOException
 	{
@@ -81,26 +78,22 @@ public class LoginServlet extends HttpServlet {
 			return false;
 		}
 
-		//Beanの中身をDtoにセット
-		UsersDto usersDto;
-
 		//ログインIDとパスワードを渡して、ユーザDTOを検索し、取得する
-		usersDto = service.getUser(userID, password );
-
+		UsersDto usersDto = service.getUser(userID, password );
 		if( usersDto == null )
 		{
 			//ログインエラー画面に飛ぶ
 			return false;
 		}
 
-		service.updateLoginDate(userID);
+		service.updateLoginDate(usersDto);
 
 		//ログイン情報をセッションに保存する
-		request.getSession().setAttribute( ChatBean.USERINFO_SESSION_SAVE_NAME, bean );
-
+		ChatBean bean = new ChatBean();
 		bean.setUserID(userID);
 		bean.setPassword(password);
 		bean.setUsersDto(usersDto);
+		request.getSession().setAttribute( ChatBean.USERINFO_SESSION_SAVE_NAME, bean );
 
 		return true;
 	}

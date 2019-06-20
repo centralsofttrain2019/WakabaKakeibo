@@ -84,8 +84,6 @@ public class ChatCommentServlet extends HttpServlet {
 			}
 		}
 
-
-
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/ChatServlet");
 		disp.forward(request, response);
