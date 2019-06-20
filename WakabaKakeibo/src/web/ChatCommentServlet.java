@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.ChatBean;
+import domain.EventTypeEnum;
 import domain.MoneyNoteTypeEnum;
 import domain.SqlOrderJudgement;
 import dto.MoneyNotesDto;
@@ -51,8 +52,10 @@ public class ChatCommentServlet extends HttpServlet {
 		}
 
 		//定型文送信場合
-		if(request.getParameter("ChatPhrase") != null) {
-			System.out.println("ChatPhrase!!");
+		String chatValue = request.getParameter("greeting");
+		if(chatValue != null) {
+			System.out.println(chatValue);
+			request.setAttribute("greeting_message", EventTypeEnum.valueOf(chatValue));
 		}
 
 		//チャットメッセージ送信時

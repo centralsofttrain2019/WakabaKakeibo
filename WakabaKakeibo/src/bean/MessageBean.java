@@ -7,6 +7,7 @@ import dto.MessageDto;
 public class MessageBean {
 
 	private int MessageId;
+	private String SpeakerName;
 	private String MessageContent;
 	private MessageTypeEnum MessageType;
 	private EventTypeEnum EventType;
@@ -29,6 +30,19 @@ public class MessageBean {
 		this.MessageContent = mDto.getMessageCount();
 		this.MessageType = mDto.getMessageType();
 		this.EventType = mDto.getEventType();
+		this.SpeakerName = "わかば";
+	}
+
+
+
+	public String getSpeakerName()
+	{
+		return SpeakerName;
+	}
+
+	public void setSpeakerName(String speakerName)
+	{
+		SpeakerName = speakerName;
 	}
 
 	public MessageBean() {
@@ -70,7 +84,7 @@ public class MessageBean {
 	@Override
 	public String toString() {
 		return "MessageBean [MessageId=" + MessageId + ", MessageContent=" + MessageContent + ", MessageType=" + MessageType
-				+ ", EventType=" + EventType + "]";
+				+ ", EventType=" + EventType + ", SpeakerName=" + SpeakerName + "]";
 	}
 
 

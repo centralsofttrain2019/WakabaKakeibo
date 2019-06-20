@@ -1,15 +1,21 @@
 var button = "<a class=\"btn btn-primary  mx-3 \" href=\"RestoreConfirmation.jsp\">はい</a>" +
 				"<a class=\"btn btn-danger  mx-3 \" onclick=\" clearData() \" style=\" color:white; \">いいえ</a>";
 var strArray = [];
+var nameArray = [];
 var conversationList = [];
 var wakabaChat =  "わかば：";
-var conversation = wakabaChat + "";
+var conversation = "";
 var count = 0;
 var arrayIndex = 0;
 
-var communicate = function(array){
+var communicate = function(array, name){
     //function communicate(s){
     var chatDiv = document.getElementById("chat");
+
+    if(count == 0){
+    	conversation += name[arrayIndex] + "：";
+    }
+
     //var chatSelectDiv = document.getElementById("select");
 
     conversation += array[arrayIndex].charAt(count);
@@ -29,13 +35,13 @@ var communicate = function(array){
     if(count == (array[arrayIndex].length)){
         //chatDiv.innerHTML +="<br>";
         count = 0;
+        conversation += "<br>"
         conversationList.push(conversation);
-        conversation += "<br>わかば：";
         arrayIndex++;
         console.log(conversationList);
 
-        if(arrayIndex == array.length - 1){
-            clearInterval(chat);
+        if(arrayIndex == array.length){
+            clearInterval(communicate);
         }
     }
 
