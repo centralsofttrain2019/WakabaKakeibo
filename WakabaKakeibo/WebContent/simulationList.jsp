@@ -103,20 +103,16 @@
 
 <h3 class="my-3">シミュレーション</h3>
 
-現在の目標金額：<strong><%=bean.getTargetAmount()/10000 %>万円</strong><br>
+現在の目標金額：<strong><%=bean.getTargetAmount()/10000 %>万円</strong><br><br>
 <div style="display:inline-flex">
-
 <form class="needs-validation" action="UpdateSimulationListServlet" method="post" novalidate>
-<div class="form-row">
-    <div class="col-md-7 mb-3">
-      <label for="validationCustom00">目標金額の変更</label>
-	<input type="number" class="form-control" name="targetAmount" required min="<%=last_balance/10000 %>" max="1000">万円
-	<input type="submit" class="form-control" value="変更">
-      <div class="invalid-feedback">
-          入力エラー！ <%=last_balance/10000 %>～1000万円の間で入力してください
-      </div>
-    </div>
-  </div>
+	<label for="targetAmount">目標金額の変更</label>
+		<input type="number" class="form-control" name="targetAmount" id="targetAmount" required min="<%=last_balance/10000 %>" max="1000">　　　　　　　　　　　　　万円
+		<input type="submit" class="form-control" value="変更" >
+	<div class="invalid-feedback">
+	入力エラー！ <br>
+	<%=last_balance/10000 %>～1000万円の間で入力してください
+	</div>
 </form>
 
 </div>
