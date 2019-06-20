@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import bean.ChatBean;
 import bean.MessageBean;
 import bean.MessageListBean;
-import dto.UsersDto;
 import service.UsersService;
 
 
@@ -41,7 +40,17 @@ public class ChatServlet extends HttpServlet {
 			HttpServletResponse response)
 					throws ServletException, IOException
 	{
+		ChatBean chatBeanSession=(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+		//sessionが切れたときの処理
+		if(chatBeanSession==null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
 
+			return;
+		}
 
 
 		//UserID,Passwordをbeanにセット
@@ -73,6 +82,7 @@ public class ChatServlet extends HttpServlet {
 		LocalDateTime userBirthDay = LocalDateTime.now();
 
 
+		//チャットメッセージの処理から遷移してきた場合のチャットメッセージ
 		String mes = (String)request.getAttribute("wakaba_message");
 
 		if(mes != null) {
@@ -94,58 +104,9 @@ public class ChatServlet extends HttpServlet {
 
 		//MessageBeanのListをMessageListBeanへset
 		mListBean.setmBeanList(mList);
-
 		bean.setMessageListBean( mListBean );
 
-
-
-
-
-		//ログイン画面からじゃない遷移の場合にログイン処理を行わない
-		//ログインでuserID,passwordが間違っている場合の処理
-		String userIDstr = request.getParameter("userID");
-		String password = request.getParameter("password");
-
-
-		if( userIDstr != null && password!=null)
-		{
-			System.out.println("セッションにユーザー情報が存在しないのでログイン処理を行う");
-
-			//ログイン処理
-			boolean isLoginOK = logIn(request,response,bean);
-			if( !isLoginOK )
-			{
-				//JSPに遷移する
-				RequestDispatcher disp = request.getRequestDispatcher("/loginError.jsp");
-				disp.forward(request, response);
-				// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
-
-				return;
-			}
-
-			else
-			{
-				System.out.println("セッションにユーザー情報が存在するのでログイン処理を行わない");
-
-			}
-
-		}
 		request.setAttribute("bean", bean);
-		ChatBean chatBeanSession=(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
-
-
-		//sessionが切れたときの処理
-		if(chatBeanSession==null)
-		{
-			//JSPに遷移する
-			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
-			disp.forward(request, response);
-			// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
-
-			return;
-		}
-
-
 
 		//JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher("/chat.jsp");
@@ -158,62 +119,6 @@ public class ChatServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}
-
-	//-------------------------------------------------------------------
-	private boolean logIn(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			ChatBean bean
-			)
-					throws ServletException, IOException
-	{
-		UsersService service = new UsersService();
-
-		String userIDstr = request.getParameter("userID");
-		String password = request.getParameter("password");
-
-		int userID = Integer.MAX_VALUE ;
-		try {
-			userID = Integer.parseInt(userIDstr);
-		}
-		catch( NumberFormatException e )
-		{
-
-			// あとで、ログイオン画面にエラー表示を行う。あるいはそのまま（ログインできないだけ）
-			return false;
-		}
-
-		//Beanの中身をDtoにセット
-		UsersDto usersDto;
-
-
-		//ログインIDとパスワードを渡して、ユーザDTOを検索し、取得する
-		usersDto = service.getUser(userID, password );
-
-
-
-		if( usersDto == null )
-		{
-			//ログインエラー画面に飛ぶ
-			return false;
-
-		}
-
-		service.updateLoginDate(userID);
-
-
-		//ログイン情報をセッションに保存する
-		request.getSession().setAttribute( ChatBean.USERINFO_SESSION_SAVE_NAME, bean );
-
-		bean.setUserID(userID);
-		bean.setPassword(password);
-		bean.setUsersDto(usersDto);
-
-
-
-		return true;
-
 	}
 
 	//-------------------------------------------------------------------
