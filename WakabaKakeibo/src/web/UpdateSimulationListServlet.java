@@ -9,11 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import bean.ChatBean;
 import bean.SimulationListBean;
-import bean.UpdateSimulationListBean;
 import dto.DepositDto;
 import dto.UsersDto;
 import service.DepositService;
@@ -36,43 +34,29 @@ public class UpdateSimulationListServlet extends HttpServlet {
 
 		System.out.println("ta-01");
 
-		UpdateSimulationListBean updateBean = new UpdateSimulationListBean();
-		updateBean.setTargetAmount(Integer.parseInt(request.getParameter("targetAmount")) * 10000);
-
-		UsersDto dto = new UsersDto();
-		dto.setTargetAmount(updateBean.getTargetAmount());
-
-		//session  修正
-		HttpSession session;
-		ChatBean cBean = new ChatBean();
-		//cBean = (ChatBean)session.getAttribute("UserInfo");
+		SimulationListBean bean = new SimulationListBean();
+		bean.setTargetAmount(Integer.parseInt(request.getParameter("targetAmount")) * 10000);
 
 
-		//あとで削除
-		UsersDto ud = new UsersDto();
-		ud.setTargetAmount(dto.getTargetAmount());
-		ud.setUserID(1);
-		//ここまで
+
+
+		//セッション取得
+		ChatBean cBean =(ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+
+		UsersDto dto = cBean.getUsersDto();
+		dto.setTargetAmount(bean.getTargetAmount());
 
 		DepositService service = new DepositService();
-		service.updateTargetAmount(ud);					//修正 udをcBean
+		service.updateTargetAmount(cBean.getUsersDto());
 
 
-		SimulationListBean bean = new SimulationListBean();
-
-
-
-
-
-		List<DepositDto> list = service.getDepositandSimulation( ud );  //後でセッションから取り出す
+		List<DepositDto> list = service.getDepositandSimulation(cBean.getUsersDto() );
 
 		for(int i = 0; i < list.size(); i++) {
 
 			bean.add(list.get(i), "Deposit" + i);
 
 		}
-
-		bean.setTargetAmount(updateBean.getTargetAmount());
 
 		//beanをリクエストにセット キー名は「bean」とする
 		request.setAttribute("bean", bean);
