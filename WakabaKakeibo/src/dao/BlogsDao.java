@@ -43,6 +43,17 @@ public class BlogsDao {
 	private static final String INSERT_BLOG = "INSERT INTO blogs(UserID, CreateDate, Title, Content, Category, image1, image2, ReblogID) VALUES\r\n" +
 			"(?, ?, ?, ?, ?, ?, ?, ?);";
 
+	private static final String UPDATE_BLOG = "UPDATE `wakaba_schema`.`blogs`\r\n" +
+			"SET\r\n" +
+			"`CreateDate` = ?,\r\n" +
+			"`Title` = ?,\r\n" +
+			"`Content` = ?,\r\n" +
+			"`Category` = ?,\r\n" +
+			"`Image1` = ?,\r\n" +
+			"`Image2` = ?,\r\n" +
+			"`ReblogID` = ?\r\n" +
+			"WHERE `blogID` = ?;";
+
 	private Connection con = null;
 
 	public BlogsDao(Connection con)
@@ -127,6 +138,7 @@ public class BlogsDao {
 		// オートクローズ版
 				try( PreparedStatement stmt = con.prepareStatement( INSERT_BLOG ) )
 				{
+
 					stmt.setInt( 1, UserID);
 					stmt.setTimestamp( 2, CreateDate);
 					stmt.setString( 3, Title);
@@ -140,11 +152,35 @@ public class BlogsDao {
 				}
 	}
 
+	public void updateBlog(Timestamp CreateDate, String Title, String Content, BlogCategoryEnum Category, String image1, String image2, int ReblogID, int blogID) throws SQLException
+	{
+//		PreparedStatement stmt = con.prepareStatement(INSERT_COMMENT);
+
+		System.out.println("hisdao-1");
+
+		// オートクローズ版
+				try( PreparedStatement stmt = con.prepareStatement( UPDATE_BLOG ) )
+				{
+					stmt.setTimestamp( 1, CreateDate);
+					stmt.setString( 2, Title);
+					stmt.setString( 3, Content);
+					stmt.setString( 4, Category.toString());
+					stmt.setString( 5, image1);
+					stmt.setString( 6, image2);
+					stmt.setInt( 7, ReblogID);
+					stmt.setInt( 8, blogID);
+					stmt.executeUpdate();
+
+				}
+	}
+
 
 
 	public static LocalDate date2LocalDate(Date date) {
 		  return date.toLocalDate();
 		}
+
+
 
 
 

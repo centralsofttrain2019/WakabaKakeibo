@@ -18,7 +18,7 @@
 
 
 </head>
-<body>
+<body class="bg-light">
 
 <div class="container w-75">
 <h1 class="my-4">新規登録</h1>

@@ -7,7 +7,7 @@ var navigation = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-success fi
                    +    "<div class=\"navbar-nav\">"
                    +     "<a class=\"nav-item nav-link\" id=\"indexNav\" href=\"ChatServlet\">チャット<span class=\"sr-only\">(現位置)</span></a>"
                    +     "<a class=\"nav-item nav-link\" id=\"reconstructNav\" href=\"ReconstructListServlet\">復元確認</a>"
-                   +     "<a class=\"nav-item nav-link\" id=\"settingNav\" href=\"#\">設定</a>"
+//                   +     "<a class=\"nav-item nav-link\" id=\"settingNav\" href=\"#\">設定</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"mBListNav\" href=\"CommentServlet\">ミニブログ一覧</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"mBListEditNav\" href=\"MBEditServlet\">ミニブログ編集</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"simulationNav\" href=\"SimulationListServlet\">シミュレーション</a>"
@@ -108,11 +108,12 @@ function innerMainBlog(title, userName, category, date, content, likeNum, isChec
     	+			"</form>"
 //		+			"<div class=\"col-1 \" id=\"" + thumsUpIconID + "\"><i class=\"far fa-thumbs-up fa-2x \" style=\"color:skyblue\"></i></div>"
 		+   	    "<b class=\"col-1 \" style=\"color: skyblue; font-size: 2rem\">" + likeNum + "</b>"
-		+			"<form id=\""+editButtonID+"\" class=\"col-sm-3 offset-sm-3\">"
+		+			"<form id=\""+editButtonID+"\" action=\"MBEditEditServlet\" class=\"col-sm-3 offset-sm-3\" method=\"POST\">"
 		+				"<input type=\"hidden\" name=\"userName\" value=\"" + userName + "\">"
 		+				"<input type=\"hidden\" name=\"title\" value=\"" + title + "\">"
 		+				"<input type=\"hidden\" name=\"category\" value=\"" + category + "\">"
 		+				"<input type=\"hidden\" name=\"content\" value=\"" + content + "\">"
+		+				"<input type=\"hidden\" name=\"blogID\" value=\"" + blogID + "\">"
 		+			"</form>"
 		+		"</div>"
 		+	"</div>"
@@ -151,6 +152,6 @@ function insertEditButton(blogWrittenUser, loginUser, editButtonID){
 
 	if(blogWrittenUser == loginUser){
 		var editButton = document.getElementById(editButtonID);
-		editButton.innerHTML += "<a type=\"button\" href=\"MBEditServlet\" class=\"btn btn-secondary \">編集</a>"
+		editButton.innerHTML += "<input type=\"submit\" class=\"btn btn-secondary \" value=\"編集\">"
 	}
 }

@@ -27,7 +27,7 @@ public class BlogService {
 		{
 			BlogCommentsDao bDao = new BlogCommentsDao(con);
 			List<MBCommentBean> bList = bDao.selectAll();
-			
+
 			bean.setMbCList(bList);
 
 			//bean.setEmpList(eList);
@@ -114,6 +114,23 @@ public class BlogService {
 		{
 			BlogsDao bLDao = new BlogsDao(con);
 			bLDao.insertBlog(UserID, CreateDate, Title, Content, Category, image1, image2, ReblogID);
+
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+	}
+
+	public void updateBlog(Timestamp CreateDate, String Title, String Content, BlogCategoryEnum Category, String image1, String image2, int ReblogID, int blogID)
+	{
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			BlogsDao bLDao = new BlogsDao(con);
+			bLDao.updateBlog( CreateDate, Title, Content, Category, image1, image2, ReblogID, blogID);
 
 		}
 		catch( SQLException | ClassNotFoundException e )

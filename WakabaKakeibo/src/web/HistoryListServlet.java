@@ -47,8 +47,9 @@ public class HistoryListServlet extends HttpServlet {
 
 //		年月の更新があればその月だけのデータを表示
 		if(request.getParameter("year") != null){
-//			bean.setHistory_year(Integer.valueOf(request.getParameter("year")).intValue());
-//			bean.setHistory_month(Integer.valueOf(request.getParameter("month")).intValue());
+			bean.setHistory_year(Integer.valueOf(request.getParameter("year")).intValue());
+			bean.setHistory_month(Integer.valueOf(request.getParameter("month")).intValue());
+
 			String year = request.getParameter("year");
 			int month = Integer.valueOf(request.getParameter("month")).intValue();
 			int nextMonth = month + 1;
