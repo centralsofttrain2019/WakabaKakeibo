@@ -50,6 +50,7 @@ public class UsersDao
 			" ?);";
 
 
+
 	private static final String UPDATE_TIME=
 			"UPDATE USERS SET LASTLOGIN = ?  WHERE USERID =?";
 
