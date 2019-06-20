@@ -179,7 +179,15 @@ public class MoneyNotesService
 				return SqlOrderJudgement.FAILURE;
 			}
 			dto.setProductID(productID);
-			dto.setPurchaseIntervalDays((int)ChronoUnit.DAYS.between(dao.getLastPurchaseDate(userID, productID), purchaseDate));
+			LocalDate lastPurchaseDate = dao.getLastPurchaseDate(userID, productID);
+			if(lastPurchaseDate != null)
+			{
+				dto.setPurchaseIntervalDays((int)ChronoUnit.DAYS.between(lastPurchaseDate, purchaseDate));
+			}
+			else
+			{
+				dto.setPurchaseIntervalDays(-1);
+			}
 			dao.insertMoneyNotes(dto);
 
 			updatePatternTable(userID, productID,purchaseDate );
@@ -265,6 +273,23 @@ public class MoneyNotesService
 			{
 				insertPurchasePattern(dto);
 			}
+		}
+	}
+
+	public MoneyNotesDto getLastMoneyNoteData(int userID, String productName)
+	{
+		MoneyNotesDto dto;
+		try( Connection con= Dao.getConnection() )
+		{
+			MoneyNotesDao mnDao = new MoneyNotesDao(con);
+			int productID = mnDao.findProductID(productName);
+			dto = mnDao.getLastPurchase(userID, productID);
+			return dto;
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
 		}
 	}
 
