@@ -52,7 +52,7 @@ public class UsersDao
 
 
 	private static final String UPDATE_TIME=
-			"UPDATE USERS SET LASTLOGIN = ?  WHERE USERID =?";
+			"UPDATE USERS SET LASTLOGIN = now()  WHERE USERID =?";
 
 	private static final String UPDATE_FEELING_LEVEL=
 			"UPDATE USERS SET FeelingLevel = ?  WHERE USERID = ?";

@@ -197,7 +197,7 @@ public class UsersService {
 			int intervalDays = (int)ChronoUnit.DAYS.between(dto.getLastLogin(), today);
 			if( intervalDays == 0 )
 			{
-				return;
+
 			}else if( intervalDays == 1 )
 			{
 				feelLevel++;
@@ -207,6 +207,7 @@ public class UsersService {
 				feelLevel--;
 				if(feelLevel<0) feelLevel =0;
 			}
+			System.out.println(feelLevel);
 			usersDao.updateFeelingLevel(dto.getUserID(), feelLevel);
 
 			//最終ログイン日を今日に
