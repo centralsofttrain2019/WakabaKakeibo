@@ -35,7 +35,7 @@ public class MBEditServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		
+
 		//時間の取得
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
@@ -43,6 +43,11 @@ public class MBEditServlet extends HttpServlet {
 		if(request.getParameter("blogContent") != null) {
 			//コメントのインサート
 			insertBlog(request, timestamp);
+
+//			//JSPに遷移
+			RequestDispatcher disp = request.getRequestDispatcher("CommentServlet");
+			disp.forward(request, response);
+			return ;
 
 		}
 
@@ -65,6 +70,8 @@ public class MBEditServlet extends HttpServlet {
 
 		//contentの取得
 		String blogContent = request.getParameter("blogContent");
+		System.out.println(blogContent);
+		blogContent = blogContent.replaceAll("\r\n", "<br>");
 		//contentの取得
 		String title = request.getParameter("title");
 		//contentの取得

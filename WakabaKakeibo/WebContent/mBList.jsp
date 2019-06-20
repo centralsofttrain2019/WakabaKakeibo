@@ -91,7 +91,7 @@
 	String replyFormId = "replyFormIdAll" + (b.getBlogID());
 	String replyFormId2 = "#replyFormIdAll" + (b.getBlogID());
 	//editButtonID
-	String editButtonID = "editButtonID" + b.getBlogID();
+	String editButtonID = "editButtonIDAll" + b.getBlogID();
 
 	//thumsUpIconID
 	String thumsUpIconID = "iconAll" + b.getBlogID();
@@ -197,29 +197,32 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 <!-- 	セッションのユーザIDとブログのユーザIDが同じじゃなかったらcontinue -->
 <% if(b.getUserId() != sessionUserID) continue; %>
-<%  String blogModalIdTo = "#blogModalMy" + (b.getBlogID());
-	String blogModalId = "blogModalMy" + (b.getBlogID());
-	String mainBlogId = "mainBlogMy" + (b.getBlogID());
-	String replyModalId = "replyModalMy" + (b.getBlogID());
-	String mainBlogTagId = "mainBlogMy" + (b.getBlogID());
-	String commentBlogTagId = "commentBlogTagIdMy" + (b.getBlogID());
+<% String blogModalIdTo = "#blogModalMY" + (b.getBlogID());
+	String blogModalId = "blogModalMY" + (b.getBlogID());
+	String mainBlogId = "mainBlogMY" + (b.getBlogID());
+	String replyModalId = "replyModalMY" + (b.getBlogID());
+	String mainBlogTagId = "mainBlogMY" + (b.getBlogID());
+	String commentBlogTagId = "commentBlogTagIdMY" + (b.getBlogID());
 
 	//リプレイモーダルのID
-	String replyModalTagId = "replyModalTagMy" + (b.getBlogID());
+	String replyModalTagId = "replyModalTagMY" + (b.getBlogID());
 	//リプレイsubmit
-	String replySubmitId = "replySubmitIdMy" + (b.getBlogID());
-	String replySubmitId2 = "#replySubmitIdMy" + (b.getBlogID());
+	String replySubmitId = "replySubmitIdMY" + (b.getBlogID());
+	String replySubmitId2 = "#replySubmitIdMY" + (b.getBlogID());
 	//リプレイform
-	String replyFormId = "replyFormIdMy" + (b.getBlogID());
-	String replyFormId2 = "#replyFormIdMy" + (b.getBlogID());
+	String replyFormId = "replyFormIdMY" + (b.getBlogID());
+	String replyFormId2 = "#replyFormIdMY" + (b.getBlogID());
+	//editButtonID
+	String editButtonID = "editButtonIDMY" + b.getBlogID();
 
 	//thumsUpIconID
-	String thumsUpIconID = "iconMy" + b.getBlogID();
+	String thumsUpIconID = "iconMY" + b.getBlogID();
 	//likeFormName
-	String likeFormName = "likeFormMy" + b.getBlogID();
+	String likeFormName = "likeFormMY" + b.getBlogID();
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
+	String nowUserName = "テスト太郎";
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -253,7 +256,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 									'<%= mainBlogTagId %>',
 									'<%= thumsUpIconID %>',
 									'<%= likeFormName %>',
-									'<%= b.getBlogID() %>');
+									'<%= b.getBlogID() %>',
+									'<%= editButtonID %>');
 
 							isCheckThumsUp('<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>', '<%= thumsUpIconID %>');
 							</script>
@@ -275,6 +279,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 					</div>
 				</div>
 			</div>
+
+<script>insertEditButton('<%= b.getUserName() %>', '<%= nowUserName %>', '<%= editButtonID %>')</script>
 
 <!-- 返信用モーダルの作成 -->
 <!-- 使い方：innerReplay(コメントするユーザー名、コメント先のブログID, 'このモーダルのID') -->
@@ -324,6 +330,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 	//リプレイform
 	String replyFormId = "replyFormIdOUTDOOR" + (b.getBlogID());
 	String replyFormId2 = "#replyFormIdOUTDOOR" + (b.getBlogID());
+	//editButtonID
+	String editButtonID = "editButtonIDOUTDOOR" + b.getBlogID();
 
 	//thumsUpIconID
 	String thumsUpIconID = "iconOUTDOOR" + b.getBlogID();
@@ -332,6 +340,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
+	String nowUserName = "テスト太郎";
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -365,7 +374,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 									'<%= mainBlogTagId %>',
 									'<%= thumsUpIconID %>',
 									'<%= likeFormName %>',
-									'<%= b.getBlogID() %>');
+									'<%= b.getBlogID() %>',
+									'<%= editButtonID %>');
 
 							isCheckThumsUp('<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>', '<%= thumsUpIconID %>');
 							</script>
@@ -387,6 +397,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 					</div>
 				</div>
 			</div>
+
+<script>insertEditButton('<%= b.getUserName() %>', '<%= nowUserName %>', '<%= editButtonID %>')</script>
 
 <!-- 返信用モーダルの作成 -->
 <!-- 使い方：innerReplay(コメントするユーザー名、コメント先のブログID, 'このモーダルのID') -->
@@ -437,6 +449,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 	//リプレイform
 	String replyFormId = "replyFormIdBUSINESS" + (b.getBlogID());
 	String replyFormId2 = "#replyFormIdBUSINESS" + (b.getBlogID());
+	//editButtonID
+	String editButtonID = "editButtonIDBUSINESS" + b.getBlogID();
 
 	//thumsUpIconID
 	String thumsUpIconID = "iconBUSINESS" + b.getBlogID();
@@ -445,6 +459,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
+	String nowUserName = "テスト太郎";
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -478,7 +493,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 									'<%= mainBlogTagId %>',
 									'<%= thumsUpIconID %>',
 									'<%= likeFormName %>',
-									'<%= b.getBlogID() %>');
+									'<%= b.getBlogID() %>',
+									'<%= editButtonID %>');
 
 							isCheckThumsUp('<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>', '<%= thumsUpIconID %>');
 							</script>
@@ -500,6 +516,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 					</div>
 				</div>
 			</div>
+
+<script>insertEditButton('<%= b.getUserName() %>', '<%= nowUserName %>', '<%= editButtonID %>')</script>
 
 <!-- 返信用モーダルの作成 -->
 <!-- 使い方：innerReplay(コメントするユーザー名、コメント先のブログID, 'このモーダルのID') -->
@@ -550,6 +568,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 	//リプレイform
 	String replyFormId = "replyFormIdFOODS" + (b.getBlogID());
 	String replyFormId2 = "#replyFormIdFOODS" + (b.getBlogID());
+	//editButtonID
+	String editButtonID = "editButtonIDFOODS" + b.getBlogID();
 
 	//thumsUpIconID
 	String thumsUpIconID = "iconFOODS" + b.getBlogID();
@@ -558,6 +578,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
+	String nowUserName = "テスト太郎";
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -591,7 +612,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 									'<%= mainBlogTagId %>',
 									'<%= thumsUpIconID %>',
 									'<%= likeFormName %>',
-									'<%= b.getBlogID() %>');
+									'<%= b.getBlogID() %>',
+									'<%= editButtonID %>');
 
 							isCheckThumsUp('<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>', '<%= thumsUpIconID %>');
 							</script>
@@ -613,6 +635,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 					</div>
 				</div>
 			</div>
+
+<script>insertEditButton('<%= b.getUserName() %>', '<%= nowUserName %>', '<%= editButtonID %>')</script>
 
 <!-- 返信用モーダルの作成 -->
 <!-- 使い方：innerReplay(コメントするユーザー名、コメント先のブログID, 'このモーダルのID') -->
@@ -650,7 +674,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 <!-- 	likeBeanが同じじゃなかったらcontinue -->
 <% if(!bean.getBlMap().isCheckedLike(b.getBlogID(),sessionUserID)) continue; %>
 
-<%  String blogModalIdTo = "#blogModalLIKE" + (b.getBlogID());
+<% String blogModalIdTo = "#blogModalLIKE" + (b.getBlogID());
 	String blogModalId = "blogModalLIKE" + (b.getBlogID());
 	String mainBlogId = "mainBlogLIKE" + (b.getBlogID());
 	String replyModalId = "replyModalLIKE" + (b.getBlogID());
@@ -665,6 +689,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 	//リプレイform
 	String replyFormId = "replyFormIdLIKE" + (b.getBlogID());
 	String replyFormId2 = "#replyFormIdLIKE" + (b.getBlogID());
+	//editButtonID
+	String editButtonID = "editButtonIDLIKE" + b.getBlogID();
 
 	//thumsUpIconID
 	String thumsUpIconID = "iconLIKE" + b.getBlogID();
@@ -673,6 +699,7 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 
 	//ログインしているユーザのID ここでは決め打ちで1 本来はsession
 	int nowUserID = sessionUserID;
+	String nowUserName = "テスト太郎";
 	%>
 
 <button type="button" class="btn" data-toggle="modal" data-target=<%= blogModalIdTo %> >
@@ -706,7 +733,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 									'<%= mainBlogTagId %>',
 									'<%= thumsUpIconID %>',
 									'<%= likeFormName %>',
-									'<%= b.getBlogID() %>');
+									'<%= b.getBlogID() %>',
+									'<%= editButtonID %>');
 
 							isCheckThumsUp('<%= bean.getBlMap().isCheckedLike(b.getBlogID(), nowUserID) %>', '<%= thumsUpIconID %>');
 							</script>
@@ -728,6 +756,8 @@ $('<%=replySubmitId2%>').click(function() { $('<%=replyFormId2%>').submit(); });
 					</div>
 				</div>
 			</div>
+
+<script>insertEditButton('<%= b.getUserName() %>', '<%= nowUserName %>', '<%= editButtonID %>')</script>
 
 <!-- 返信用モーダルの作成 -->
 <!-- 使い方：innerReplay(コメントするユーザー名、コメント先のブログID, 'このモーダルのID') -->

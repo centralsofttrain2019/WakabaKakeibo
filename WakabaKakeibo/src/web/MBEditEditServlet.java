@@ -48,8 +48,9 @@ public class MBEditEditServlet extends HttpServlet {
 			updateBlog(request, timestamp);
 
 			//JSPに遷移
-			RequestDispatcher disp = request.getRequestDispatcher("ChatServlet");
+			RequestDispatcher disp = request.getRequestDispatcher("CommentServlet");
 			disp.forward(request, response);
+			return;
 
 		}
 
@@ -87,7 +88,9 @@ public class MBEditEditServlet extends HttpServlet {
 
 	public void updateBlog(HttpServletRequest request, Timestamp timestamp) {
 		//contentの取得
-		String Content = "<pre>" + request.getParameter("ContentUp") + "</pre>";
+		String Content = request.getParameter("ContentUp");
+		Content = Content.replaceAll("\r\n", "<br>");
+
 		//contentの取得
 		String title = request.getParameter("titleUp");
 		//contentの取得

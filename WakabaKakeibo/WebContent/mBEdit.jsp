@@ -33,10 +33,10 @@
 <div id="header"></div>
 <script type="text/javascript">header("mBListEditNav");</script>
 
-<h1>ミニグログ編集画面</h1>
+<h1>ミニグログ作成画面</h1>
 
 
-<form>
+<form action="MBEditServlet" method="post">
 	<!--タイトル-->
 	<div class="form-group">
 		<label for="exampleInputEmail1">タイトル</label>
@@ -82,7 +82,7 @@
 	</div>
 
 	<div class="row justify-content-center my-4">
-		<button type="submit" class="btn btn-success col-2">投稿</button>
+		<button type="submit" class="btn btn-success col-2">新規投稿</button>
 	</div>
 </form>
 

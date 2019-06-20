@@ -51,7 +51,7 @@
   	<!--コンテンツ-->
 	<div class="form-group">
 		<label for="exampleFormControlTextarea1">コンテンツ</label>
-		<textarea class="form-control"  name="ContentUp" id="exampleFormControlTextarea1" rows="7" placeholder=""><%= bean.getContent() %></textarea>
+		<textarea class="form-control"  name="ContentUp" id="exampleFormControlTextarea1" rows="7" placeholder="" wrap="hard" cols="400"><%= bean.getContent() %></textarea>
 		<div class="col">
 			<div class="imagePreview" id="preview1"></div>
 		</div>

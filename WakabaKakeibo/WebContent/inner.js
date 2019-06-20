@@ -9,7 +9,7 @@ var navigation = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-success fi
                    +     "<a class=\"nav-item nav-link\" id=\"reconstructNav\" href=\"ReconstructListServlet\">復元確認</a>"
 //                   +     "<a class=\"nav-item nav-link\" id=\"settingNav\" href=\"#\">設定</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"mBListNav\" href=\"CommentServlet\">ミニブログ一覧</a>"
-                   +     "<a class=\"nav-link nav-link\" id=\"mBListEditNav\" href=\"MBEditServlet\">ミニブログ編集</a>"
+                   +     "<a class=\"nav-link nav-link\" id=\"mBListEditNav\" href=\"MBEditServlet\">ミニブログ作成・新規</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"simulationNav\" href=\"SimulationListServlet\">シミュレーション</a>"
                    +     "<a class=\"nav-link nav-link\" id=\"historyNav\" href=\"HistoryListServlet\">グラフ・履歴</a>"
                    +     "</div>"

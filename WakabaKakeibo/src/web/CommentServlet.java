@@ -77,6 +77,7 @@ public class CommentServlet extends HttpServlet {
 		int blogId = Integer.parseInt(request.getParameter("blogID"));
 		//contentの取得
 		String blogContent = request.getParameter("formControlTextarea");
+		blogContent = blogContent.replaceAll("\r\n", "<br>");
 		//sessionからユーザーIDの取得
 		int userId = 1;//テストです。
 
