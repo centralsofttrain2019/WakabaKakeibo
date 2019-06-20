@@ -16,14 +16,13 @@
 	int nowDay = LocalDate.now().getDayOfMonth();
 %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/bootstrap-arrows.css" data-angle="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<title>Insert title here</title>
+<title>わかばカケイボ</title>
 
 <!-- javascriptの読み込み -->
 <script type="text/javascript" src="chat.js"></script>
@@ -31,7 +30,6 @@
 </head>
 <body class="bg-light">
 <div class="container" style="padding-top:4.5rem;padding-bottom:4.5rem; height:70vh ">
-
 <!-- ヘッダー部 -->
 <div id="header"></div>
 <script type="text/javascript">header("indexNav");</script>
@@ -43,11 +41,18 @@
 	</video>
 </div>
 
+<% for(MessageBean b : bean.getMessageListBean().getmBeanList() ){ %>
+		<script>
+			strArray.push("<%= b.getMessageContent() %>");
+			nameArray.push("<%= b.getSpeakerName() %>");
+		</script>
+<% } %>
 
 <!-- チャット画面 -->
 <form method = "POST" action = "ChatCommentServlet">
 <div class="fixed-bottom container">
-	<div class="mt-5" id="chat" style="height:20vh;background: rgba(92, 184, 92,0.5); font-weight:bold; color:white; -webkit-text-stroke: 1px black; font-size: 1.3rem">
+	<button class="btn btn-secondary col-sm-1 offset-sm-11">ログ</button>
+	<div class="" id="chat" style="height:20vh;background: rgba(92, 184, 92,0.5); font-weight:bold; color:white; -webkit-text-stroke: 1px black; font-size: 1.3rem">
 	</div>
 	<div id="select"></div>
 	 <!-- class="mt-5 h-10"></div> -->
@@ -68,18 +73,14 @@
 					 家計簿データの追加
 				</button>
 			</div>
+			<div class="input-group-append">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalScrollable3">
+					 貯金データの追加
+				</button>
+			</div>
 	</div>
 </div>
 </form>
-
-<% for(MessageBean b : bean.getMessageListBean().getmBeanList() ){ %>
-		<script>
-<%-- 			setInterval(communicate, 200, '<%= b.getMessageContent() %>'); --%>
-		</script>
-		<script>
-			strArray.push('<%= b.getMessageContent() %>');
-		</script>
-<% } %>
 
 <!-- 家計簿データ登録モーダルの設定 -->
 <div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -209,9 +210,9 @@
       </div>
       <div class="modal-body">
         <div>
-          <input type="radio" name="greeting" value="goodmorning">おはよう<br>
-		  <input type="radio" name="greeting" value="hello" checked>こんにちは<br>
-          <input type="radio" name="greeting" value="goodevening">こんばんは
+          <input type="radio" name="greeting" value="MORNING">おはよう<br>
+		  <input type="radio" name="greeting" value="NOON" checked>こんにちは<br>
+          <input type="radio" name="greeting" value="NIGHT">こんばんは
         </div>
       </div>
       <div class="modal-footer">
@@ -223,8 +224,47 @@
   </div>
 </div>
 
+<!-- 貯金データ登録モーダルの設定 -->
+<div class="modal fade" id="exampleModalScrollable3" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle3" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    <form  action="ChatCommentServlet" id= "AddMoneyNote">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">貯金の登録</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
 
-<script>setInterval(communicate, 200, strArray); </script>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              貯金額
+            </div>
+            <div class="col-sm-8">
+              <input type="text" name="amount" class="form-control" placeholder="貯金額を入力してください" aria-label="..." aria-describedby="button-addon2" required pattern="[0-9]{1,7}">
+              <small id="passwordHelpInline" class="text-muted col-5">
+         		1～999万円で、半角整数で入力してください
+      			</small>
+            </div>
+            円
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <button type="submit" class="btn btn-primary" name="DepositSubmit" id="DepositSubmit">登録</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>setInterval(communicate, 200, strArray, nameArray); </script>
 
 <!-- bootstrapのためのjqueryの読み込み -->
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>

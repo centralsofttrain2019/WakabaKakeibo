@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.ChatBean;
+import domain.EventTypeEnum;
 import domain.MoneyNoteTypeEnum;
 import domain.SqlOrderJudgement;
 import dto.MoneyNotesDto;
 import service.MoneyNotesService;
+import service.UsersService;
 
 /**
  * Servlet implementation class ChatCommentServlet
@@ -50,8 +52,10 @@ public class ChatCommentServlet extends HttpServlet {
 		}
 
 		//定型文送信場合
-		if(request.getParameter("ChatPhrase") != null) {
-			System.out.println("ChatPhrase!!");
+		String chatValue = request.getParameter("greeting");
+		if(chatValue != null) {
+			System.out.println(chatValue);
+			request.setAttribute("greeting_message", EventTypeEnum.valueOf(chatValue));
 		}
 
 		//チャットメッセージ送信時
@@ -82,6 +86,11 @@ public class ChatCommentServlet extends HttpServlet {
 					request.setAttribute("wakaba_message",dto.getProductName() + "を家計簿に記録しようとしたけどできなかったよ。");
 				}
 			}
+		}
+
+		//貯金データの登録をした場合
+		if(request.getParameter("DepositSubmit") != null) {
+			this.addDeposit(request,session);
 		}
 
 		//JSPに遷移する
@@ -132,6 +141,15 @@ public class ChatCommentServlet extends HttpServlet {
 			request.setAttribute("wakaba_message", "記入に誤りがあるよ。");
 			return;
 		}
+	}
+
+	private void addDeposit(HttpServletRequest request, ChatBean session)
+	{
+		int amount = Integer.parseInt(request.getParameter("amount"));
+
+		UsersService service = new UsersService();
+		service.updatePresentAmount(session.getUserID(), amount);
+
 	}
 
 	/**

@@ -83,24 +83,51 @@ public class ChatServlet extends HttpServlet {
 		//Message用のListの生成
 		List<MessageBean> mList = new ArrayList<MessageBean>();
 
+
+		//定型文の処理
+		EventTypeEnum greetingMessage = (EventTypeEnum)request.getAttribute("greeting_message");
 		//チャットメッセージの処理から遷移してきた場合のチャットメッセージ
 		String mes = (String)request.getAttribute("wakaba_message");
+		if(greetingMessage != null)
+		{
+			MessageBean yourMes = new MessageBean();
+			if(greetingMessage == EventTypeEnum.MORNING)
+			{
+				yourMes.setMessageContent("おはよう");
+			}
+			else if(greetingMessage == EventTypeEnum.NOON)
+			{
+				yourMes.setMessageContent("こんにちは");
+			}
+			else if(greetingMessage == EventTypeEnum.NIGHT)
+			{
+				yourMes.setMessageContent("こんばんは");
+			}
+			yourMes.setSpeakerName(session.getUsersDto().getUserName());
+			mList.add(yourMes);
 
-		if(mes != null) {
+			MessageBean wakabaMes = this.getGreeting(service, greetingMessage, mesType);
+			mList.add(wakabaMes);
+		}else if(mes != null) {
 			String mesMe = (String)request.getAttribute("your_message");
 			if(mesMe != null)
 			{
 				MessageBean yourMes = new MessageBean();
 				yourMes.setMessageContent(mesMe);
+				yourMes.setSpeakerName(session.getUsersDto().getUserName());
 				mList.add(yourMes);
 			}
 
 			MessageBean wakabaMes = new MessageBean();
 			wakabaMes.setMessageContent(mes);
+			wakabaMes.setSpeakerName("わかば");
 			mList.add(wakabaMes);
 		}else {
+			//挨拶メッセージの生成
 			MessageBean greetingMes = getGreeting(service, nowTime, mesType);
 			if(greetingMes != null) mList.add(greetingMes);
+
+			//誕生日の際に誕生日メッセージを出す
 			MessageBean birthMes = getBirth(service, userBirthDay, mesType);
 			if(birthMes != null) mList.add(birthMes);
 		}
@@ -112,6 +139,7 @@ public class ChatServlet extends HttpServlet {
 		ChatBean bean = new ChatBean();
 		bean.setMessageListBean( mListBean );
 
+		System.out.println(bean.getMessageListBean());
 		request.setAttribute("bean", bean);
 
 		//JSPに遷移する
@@ -139,13 +167,15 @@ public class ChatServlet extends HttpServlet {
 			eventType = EventTypeEnum.NOON;
 		}else{
 			eventType = EventTypeEnum.NIGHT;
-		};
+		}
 
-		//挨拶メッセージの取得
 		MessageBean beanGreeting = service.findMessageByType(eventType, messageType);
-
 		return beanGreeting;
+	}
 
+	public MessageBean getGreeting(UsersService service, EventTypeEnum eventType, MessageTypeEnum messageType) {
+		MessageBean beanGreeting = service.findMessageByType(eventType, messageType);
+		return beanGreeting;
 	}
 
 	//誕生日メッセージの取得
