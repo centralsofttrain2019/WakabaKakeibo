@@ -94,13 +94,6 @@
 <div id="header"></div>
 <script type="text/javascript">header("simulationNav");</script>
 
-<%
-	String str = "[9-9][0-9][0-9]";
-
-	if(last_balance < 9)		{	str = "["+ (last_balance+1) + "-9]";}
-	else if(last_balance < 99)	{	str = (int)(last_balance / 10) + "[" + (int)(last_balance % 10) +"-9]|[0-9]";} //切り捨ての関数を使う
-%>
-
 <h3 class="my-3">シミュレーション</h3>
 
 現在の目標金額：<strong><%=bean.getTargetAmount()/10000 %>万円</strong><br><br>
