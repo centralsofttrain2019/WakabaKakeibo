@@ -47,7 +47,7 @@
 <!-- チャット画面 -->
 <form method = "POST" action = "ChatCommentServlet">
 <div class="fixed-bottom container">
-	<button class="btn btn-secondary col-sm-1 offset-sm-11">ログ</button>
+		<button type="button" class="btn btn-secondary col-sm-1 offset-sm-11" data-toggle="modal" data-target="#exampleModalLong">ログ</button>
 	<div class="" id="chat" style="height:20vh;background: rgba(92, 184, 92,0.5); font-weight:bold; color:white; -webkit-text-stroke: 1px black; font-size: 1.3rem">
 	</div>
 	<div id="select"></div>
@@ -266,6 +266,29 @@
   </div>
 </div>
 
+<!-- ログモーダルの設定 -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">チャットログ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!--       ここにチャットログを書く -->
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </div>
 <script>setInterval(communicate, 200, strArray); </script>
 
@@ -274,6 +297,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 
 <!-- <script type="text/javascript">header("index");</script> -->
 </body>
