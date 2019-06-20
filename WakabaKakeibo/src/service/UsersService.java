@@ -242,6 +242,24 @@ public class UsersService {
 
 	}
 
+//	presentamountの更新
+	public void updatePresentAmount(int userID, int amount)
+	{
+		//オートクローズ
+		try( Connection con= dao.Dao.getConnection() )
+		{
+			UsersDao uDao = new UsersDao(con);
+			uDao.updatePresentAmount( userID, amount);
+
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+	}
+
 
 
 

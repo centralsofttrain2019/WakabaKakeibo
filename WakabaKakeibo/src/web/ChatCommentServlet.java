@@ -15,6 +15,7 @@ import domain.MoneyNoteTypeEnum;
 import domain.SqlOrderJudgement;
 import dto.MoneyNotesDto;
 import service.MoneyNotesService;
+import service.UsersService;
 
 /**
  * Servlet implementation class ChatCommentServlet
@@ -85,7 +86,7 @@ public class ChatCommentServlet extends HttpServlet {
 		}
 
 		//貯金データの登録をした場合
-		if(request.getParameter("MoneyNoteSubmit") != null) {
+		if(request.getParameter("DepositSubmit") != null) {
 			this.addDeposit(request,session);
 		}
 
@@ -141,47 +142,11 @@ public class ChatCommentServlet extends HttpServlet {
 
 	private void addDeposit(HttpServletRequest request, ChatBean session)
 	{
-		try
-		{
-			String productName = request.getParameter("product-name");
-			int categoryID = Integer.parseInt(request.getParameter("category-id"));
-			//int categoryID = Integer.parseInt(request.getParameter("category-id"));
-			int year =  Integer.parseInt(request.getParameter("purchase-year"));
-			int month =  Integer.parseInt(request.getParameter("purchase-month"));
-			int day =  Integer.parseInt(request.getParameter("purchase-day"));
-			LocalDate purchaseDate = LocalDate.of(year, month, day);
-			int amount = Integer.parseInt(request.getParameter("amount"));
-			int numberOfPurchase = Integer.parseInt(request.getParameter("number-of-purchase"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
 
-			MoneyNoteTypeEnum type = null;
-			if(categoryID >= 10 && categoryID <= 19)
-			{
-				type = MoneyNoteTypeEnum.EXPENSE;
-			}
-			else if(categoryID >=20 && categoryID <= 29)
-			{
-				type = MoneyNoteTypeEnum.INCOME;
-			}
+		UsersService service = new UsersService();
+		service.updatePresentAmount(session.getUserID(), amount);
 
-			request.setAttribute("your_message",
-					year + "年" + month + "月" + day + "日に" +
-					productName + "を" + numberOfPurchase + "個" + amount + "円で買ったよ。");
-
-			MoneyNotesService service = new MoneyNotesService();
-			SqlOrderJudgement judge = service.insertMoneyNotes(session.getUserID(), productName, type, categoryID,numberOfPurchase, amount, purchaseDate);
-
-			if(judge == SqlOrderJudgement.SUCCESS) {
-				request.setAttribute("wakaba_message","家計簿に記録しておいたよ。");
-			}else if(judge == SqlOrderJudgement.FAILURE)
-			{
-				request.setAttribute("wakaba_message","家計簿に登録できなかったよ。商品データベースに商品が無いよ。");
-			}
-
-		}catch(NumberFormatException e)
-		{
-			request.setAttribute("wakaba_message", "記入に誤りがあるよ。");
-			return;
-		}
 	}
 
 	/**

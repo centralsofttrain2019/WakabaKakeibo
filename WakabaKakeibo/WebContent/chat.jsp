@@ -246,7 +246,7 @@
               貯金額
             </div>
             <div class="col-sm-8">
-              <input type="text" name="product-name" class="form-control" placeholder="貯金額を入力してください" aria-label="..." aria-describedby="button-addon2" required pattern="[0-9]{1,7}">
+              <input type="text" name="amount" class="form-control" placeholder="貯金額を入力してください" aria-label="..." aria-describedby="button-addon2" required pattern="[0-9]{1,7}">
               <small id="passwordHelpInline" class="text-muted col-5">
          		1～999万円で、半角整数で入力してください
       			</small>

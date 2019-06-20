@@ -51,12 +51,14 @@ public class UsersDao
 
 
 	private static final String UPDATE_TIME=
-			"UPDATE USERS SET LASTLOGIN = now()  WHERE USERID =?";
+			"UPDATE USERS SET LASTLOGIN = ?  WHERE USERID =?";
 
 	private static final String UPDATE_FEELING_LEVEL=
 			"UPDATE USERS SET FeelingLevel = ?  WHERE USERID = ?";
 
 	private static final String UPDATE_TARGET_AMOUNT = "UPDATE USERS SET TARGETAMOUNT = ?  WHERE USERID =?;" ;
+
+	private static final String UPDATE_PRESENT_AMOUNT = "UPDATE USERS SET PRESENTAMOUNT = ?  WHERE USERID =?;" ;
 
 
 
@@ -119,6 +121,7 @@ public class UsersDao
 		}
 	}
 
+
 	public void updateFeelingLevel(int userID, int feelingLevel) throws SQLException
 	{
 		try(PreparedStatement stmt = con.prepareStatement(UPDATE_FEELING_LEVEL))
@@ -127,6 +130,22 @@ public class UsersDao
 			stmt.setInt(2,userID);
 			stmt.executeUpdate();
 		}
+	}
+
+	public void updatePresentAmount(int userID, int amount) throws SQLException
+	{
+		System.out.println("ta-02");
+
+		// オートクローズ版
+				try( PreparedStatement stmt = con.prepareStatement( UPDATE_PRESENT_AMOUNT ) )
+				{
+
+					stmt.setInt( 1, amount);
+					stmt.setInt( 2, userID);
+					stmt.executeUpdate();
+
+				}
+
 	}
 
 	public void updateTargetAmount(UsersDto dto) throws SQLException
