@@ -87,7 +87,7 @@ public class MBEditEditServlet extends HttpServlet {
 
 	public void updateBlog(HttpServletRequest request, Timestamp timestamp) {
 		//contentの取得
-		String Content = request.getParameter("ContentUp");
+		String Content = "<pre>" + request.getParameter("ContentUp") + "</pre>";
 		//contentの取得
 		String title = request.getParameter("titleUp");
 		//contentの取得

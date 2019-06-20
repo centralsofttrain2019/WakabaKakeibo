@@ -29,8 +29,8 @@
 <script type="text/javascript" src="chat.js"></script>
 <script type="text/javascript" src="inner.js"></script>
 </head>
-<body>
-<div class="container" style="padding-top:4.5rem;padding-bottom:4.5rem; height:70vh">
+<body class="bg-light">
+<div class="container" style="padding-top:4.5rem;padding-bottom:4.5rem; height:70vh ">
 
 <!-- ヘッダー部 -->
 <div id="header"></div>
@@ -47,7 +47,7 @@
 <!-- チャット画面 -->
 <form method = "POST" action = "ChatMessageServlet">
 <div class="fixed-bottom container">
-	<div class="mt-5" id="chat" style="height:10vh;background: rgba(230,200,200,0.5); font-weight:bold;">
+	<div class="mt-5" id="chat" style="height:20vh;background: rgba(230,200,200,0.5); font-weight:bold; color:white; -webkit-text-stroke: 1px green;">
 	</div>
 	<div id="select"></div>
 	 <!-- class="mt-5 h-10"></div> -->
