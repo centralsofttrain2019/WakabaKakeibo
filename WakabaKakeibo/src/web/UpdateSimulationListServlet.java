@@ -37,7 +37,7 @@ public class UpdateSimulationListServlet extends HttpServlet {
 		System.out.println("ta-01");
 
 		UpdateSimulationListBean updateBean = new UpdateSimulationListBean();
-		updateBean.setTargetAmount(Integer.parseInt(request.getParameter("targetAmount")));
+		updateBean.setTargetAmount(Integer.parseInt(request.getParameter("targetAmount")) * 10000);
 
 		UsersDto dto = new UsersDto();
 		dto.setTargetAmount(updateBean.getTargetAmount());

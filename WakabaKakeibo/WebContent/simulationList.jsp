@@ -94,14 +94,31 @@
 <div id="header"></div>
 <script type="text/javascript">header("simulationNav");</script>
 
+<%
+	String str = "[9-9][0-9][0-9]";
+
+	if(last_balance < 9)		{	str = "["+ (last_balance+1) + "-9]";}
+	else if(last_balance < 99)	{	str = (int)(last_balance / 10) + "[" + (int)(last_balance % 10) +"-9]|[0-9]";} //切り捨ての関数を使う
+%>
 
 <h3 class="my-3">シミュレーション</h3>
+
+現在の目標金額：<strong><%=bean.getTargetAmount()/10000 %>万円</strong><br>
 <div style="display:inline-flex">
-現在の目標金額：<strong><%=bean.getTargetAmount()/10000 %>万円</strong>　　　目標金額の変更：
-<form action="UpdateSimulationListServlet" method="post">
-<input type="text" name="targetAmount" size="20"> 円
-<input type="submit" value="変更">
+
+<form class="needs-validation" action="UpdateSimulationListServlet" method="post" novalidate>
+<div class="form-row">
+    <div class="col-md-7 mb-3">
+      <label for="validationCustom00">目標金額の変更</label>
+	<input type="number" class="form-control" name="targetAmount" required min="<%=last_balance/10000 %>" max="1000">万円
+	<input type="submit" class="form-control" value="変更">
+      <div class="invalid-feedback">
+          入力エラー！ <%=last_balance/10000 %>～1000万円の間で入力してください
+      </div>
+    </div>
+  </div>
 </form>
+
 </div>
 
 <br><br>
