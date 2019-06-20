@@ -123,7 +123,6 @@ public class BlogService {
 		}
 
 	}
-
 	public void updateBlog(Timestamp CreateDate, String Title, String Content, BlogCategoryEnum Category, String image1, String image2, int ReblogID, int blogID)
 	{
 		//オートクローズ
@@ -140,5 +139,6 @@ public class BlogService {
 		}
 
 	}
+
 
 }
