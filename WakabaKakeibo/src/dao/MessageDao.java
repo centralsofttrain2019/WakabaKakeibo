@@ -86,7 +86,7 @@ public class MessageDao {
 
 	private static final String FIND_BY_TYPE =
 			"SELECT * FROM MESSAGES WHERE "
-			+ "MessageType = ? "
+			+ "MessageType = ? AND "
 			+ "EventType = ?";
 
 	public MessageDto findByType(EventTypeEnum eventType, MessageTypeEnum messageType) throws SQLException
