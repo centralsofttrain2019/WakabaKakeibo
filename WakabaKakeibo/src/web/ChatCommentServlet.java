@@ -15,6 +15,7 @@ import domain.EventTypeEnum;
 import domain.MoneyNoteTypeEnum;
 import domain.SqlOrderJudgement;
 import dto.MoneyNotesDto;
+import service.DepositService;
 import service.MoneyNotesService;
 import service.UsersService;
 
@@ -91,6 +92,7 @@ public class ChatCommentServlet extends HttpServlet {
 		//貯金データの登録をした場合
 		if(request.getParameter("DepositSubmit") != null) {
 			this.addDeposit(request,session);
+
 		}
 
 		//JSPに遷移する
@@ -149,6 +151,9 @@ public class ChatCommentServlet extends HttpServlet {
 
 		UsersService service = new UsersService();
 		service.updatePresentAmount(session.getUserID(), amount);
+
+		DepositService ds = new DepositService();
+		ds.insertDeposit(amount, session.getUserID());
 
 	}
 
