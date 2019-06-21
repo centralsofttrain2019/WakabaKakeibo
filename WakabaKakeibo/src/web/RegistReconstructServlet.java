@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.ChatBean;
 import domain.MoneyNoteTypeEnum;
 import service.MoneyNotesService;
 
@@ -32,6 +33,15 @@ public class RegistReconstructServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		ChatBean chatSession = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
+		if(chatSession == null)
+		{
+			//JSPに遷移する
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
+			disp.forward(request, response);
+			return;
+		}
+
         request.setCharacterEncoding("UTF-8");
         String isRegist = request.getParameter("regist");
 
@@ -45,7 +55,7 @@ public class RegistReconstructServlet extends HttpServlet {
 	            LocalDate date = LocalDate.parse(request.getParameter("date_" + name));
 	            int amount = Integer.parseInt(request.getParameter("amount_" + name));
 	            int number = Integer.parseInt(request.getParameter("num_" + name));
-	            service.insertMoneyNotes(1, name, MoneyNoteTypeEnum.EXPENSE ,number, amount, date);
+	            service.insertMoneyNotes(chatSession.getUserID(), name, MoneyNoteTypeEnum.EXPENSE ,number, amount, date);
 	        }
         }
 

@@ -32,10 +32,10 @@ public class ReconstructListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ChatBean session = (ChatBean)request.getSession().getAttribute("UserInfo");
+		ChatBean session = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);
 		//セッション切れ
 		if(session == null) {
-			RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+			RequestDispatcher disp = request.getRequestDispatcher("/index.html");
 			disp.forward(request, response);
 			return;
 		}

@@ -90,7 +90,8 @@ public class ReconstructListBean
 			bean.setValueFromDto(dto);
 
 			purchaseList.add(bean);
-			purchaseCalendar.get(dto.getPurchaseDate()).add(bean);
+			if(purchaseCalendar.get(dto.getPurchaseDate()) != null)
+				purchaseCalendar.get(dto.getPurchaseDate()).add(bean);
 		}
 
 		for(MoneyNotesDto dto: reconsList)
@@ -99,7 +100,8 @@ public class ReconstructListBean
 			bean.setValueFromDto(dto);
 
 			reconstructList.add(bean);
-			reconstructCalendar.get(dto.getPurchaseDate()).add(bean);
+			if(reconstructCalendar.get(dto.getPurchaseDate()) != null)
+				reconstructCalendar.get(dto.getPurchaseDate()).add(bean);
 		}
 
 

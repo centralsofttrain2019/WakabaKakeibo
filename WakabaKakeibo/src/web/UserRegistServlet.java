@@ -38,6 +38,9 @@ public class UserRegistServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		 response.setContentType("text/html;charset=UTF-8");
+		 request.setCharacterEncoding("UTF-8");
+
 		// 現在日付
 		LocalDate date = LocalDate.now();
 

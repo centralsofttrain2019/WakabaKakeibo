@@ -11,6 +11,7 @@ import dao.UsersDao;
 import dto.DepositDto;
 import dto.UsersDto;
 
+
 public class DepositService {
 
 	public List<DepositDto> getDepositandSimulation(UsersDto cBean){ //修正：UsersDtoをChatBean

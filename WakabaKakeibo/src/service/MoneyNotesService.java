@@ -3,6 +3,7 @@ package service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class MoneyNotesService
 		try( Connection con= Dao.getConnection() )
 		{
 			//今日の日付を取得
-			LocalDate today = LocalDate.now();
+			LocalDate today = LocalDate.now(ZoneId.of("Asia/Tokyo"));
 
 			//家計簿（全部の）データをテーブルから取得
 			MoneyNotesDao mnDao = new MoneyNotesDao(con);
