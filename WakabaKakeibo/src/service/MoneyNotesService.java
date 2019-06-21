@@ -174,24 +174,35 @@ public class MoneyNotesService
 		try( Connection con= Dao.getConnection() )
 		{
 			MoneyNotesDao dao = new MoneyNotesDao(con);
-			int productID = dao.findProductID(productName);
-			if(productID == -1)
-			{
-				return SqlOrderJudgement.FAILURE;
-			}
-			dto.setProductID(productID);
-			LocalDate lastPurchaseDate = dao.getLastPurchaseDate(userID, productID);
-			if(lastPurchaseDate != null)
-			{
-				dto.setPurchaseIntervalDays((int)ChronoUnit.DAYS.between(lastPurchaseDate, purchaseDate));
-			}
-			else
-			{
-				dto.setPurchaseIntervalDays(-1);
-			}
-			dao.insertMoneyNotes(dto);
+			if(type == MoneyNoteTypeEnum.EXPENSE) {
+				int productID = dao.findProductID(productName);
+				if(productID == -1)
+				{
+					return SqlOrderJudgement.FAILURE;
+				}
+				dto.setProductID(productID);
+				LocalDate lastPurchaseDate = dao.getLastPurchaseDate(userID, productID);
+				if(lastPurchaseDate != null)
+				{
+					dto.setPurchaseIntervalDays((int)ChronoUnit.DAYS.between(lastPurchaseDate, purchaseDate));
+				}
+				else
+				{
+					dto.setPurchaseIntervalDays(-1);
+				}
 
-			updatePatternTable(userID, productID,purchaseDate );
+				dao.insertMoneyNotes(dto);
+
+				updatePatternTable(userID, productID,purchaseDate );
+			}
+			else if(type == MoneyNoteTypeEnum.INCOME)
+			{
+				dto.setProductID(-1);
+				dto.setPurchaseIntervalDays(-1);
+				dao.insertMoneyNotes(dto);
+			}
+
+
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{

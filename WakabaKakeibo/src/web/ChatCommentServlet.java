@@ -77,6 +77,7 @@ public class ChatCommentServlet extends HttpServlet {
 			}
 			else
 			{
+				dto.setPurchaseDate(LocalDate.now());
 				SqlOrderJudgement judge = service.insertMoneyNotes(session.getUserID(), dto.getProductName(), dto.getType(), dto.getCategoryID(),dto.getNumberOfPurchase(), dto.getAmount(), dto.getPurchaseDate());
 				if(judge == SqlOrderJudgement.SUCCESS)
 				{
@@ -119,15 +120,20 @@ public class ChatCommentServlet extends HttpServlet {
 			if(categoryID >= 10 && categoryID <= 19)
 			{
 				type = MoneyNoteTypeEnum.EXPENSE;
+				request.setAttribute("your_message",
+						year + "年" + month + "月" + day + "日に" +
+						productName + "を" + numberOfPurchase + "個" + amount + "円で買ったよ。");
+
 			}
 			else if(categoryID >=20 && categoryID <= 29)
 			{
 				type = MoneyNoteTypeEnum.INCOME;
+				request.setAttribute("your_message",
+						year + "年" + month + "月" + day + "日に" +
+						amount + "円の収入があったよ。");
+				productName = null;
 			}
 
-			request.setAttribute("your_message",
-					year + "年" + month + "月" + day + "日に" +
-					productName + "を" + numberOfPurchase + "個" + amount + "円で買ったよ。");
 
 			MoneyNotesService service = new MoneyNotesService();
 			SqlOrderJudgement judge = service.insertMoneyNotes(session.getUserID(), productName, type, categoryID,numberOfPurchase, amount, purchaseDate);

@@ -308,15 +308,26 @@ public class MoneyNotesDao {
 		stmt.setInt(1, dto.getUserID());
 		stmt.setDate(2, java.sql.Date.valueOf(dto.getPurchaseDate()));
 		stmt.setString(3,  dto.getType().toString());
-		stmt.setInt(4, dto.getProductID());
+
+		if(dto.getProductID() >= 0)
+		{
+			stmt.setInt(4, dto.getProductID());
+		}
+		else
+		{
+			stmt.setObject(4, null);
+		}
+
 		stmt.setInt(5, dto.getCategoryID());
 		stmt.setInt(6, dto.getNumberOfPurchase());
 		stmt.setInt(7, dto.getAmount());
 		if(dto.getPurchaseIntervalDays() >= 0)
 		{
 			stmt.setInt(8, dto.getPurchaseIntervalDays());
-		}else
-		{	stmt.setObject(8, null);
+		}
+		else
+		{
+			stmt.setObject(8, null);
 		}
 
 		int res = stmt.executeUpdate();

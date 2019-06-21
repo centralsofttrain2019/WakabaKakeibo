@@ -1,5 +1,7 @@
 package bean;
 
+import java.util.List;
+
 import dto.UsersDto;
 
 public class ChatBean
@@ -8,12 +10,23 @@ public class ChatBean
 	private String password;
 	private MessageListBean messageListBean;
 	private UsersDto usersDto;
+	private List<String> log;
 
 	public final static String USERINFO_SESSION_SAVE_NAME= "UserInfo";
 
 	public int getUserID()
 	{
 		return userID;
+	}
+
+	public List<String> getLog() {
+		return log;
+	}
+
+	public void setLog(String name, String content) {
+
+		this.log.add(name + " : " + content);
+
 	}
 
 	public void setUserID(int userID)

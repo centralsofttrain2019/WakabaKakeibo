@@ -107,8 +107,8 @@ public class UserRegistServlet extends HttpServlet {
 		uDto.setSex(UserSexEnum.valueOf(request.getParameter("sex")));
 		uDto.setPassword(password);
 		uDto.setLastLogin(date);
-		uDto.setPresentAmount(Integer.valueOf(request.getParameter("presentAmount")).intValue());
-		uDto.setTargetAmount(Integer.valueOf(request.getParameter("targetAmount")).intValue());
+		uDto.setPresentAmount(Integer.valueOf(request.getParameter("presentAmount")).intValue() * 10000 );
+		uDto.setTargetAmount(Integer.valueOf(request.getParameter("targetAmount")).intValue() * 10000);
 		uDto.setRunningDays(1);
 		uDto.setBirthday(birth);
 		uDto.setHonorific(honorific);

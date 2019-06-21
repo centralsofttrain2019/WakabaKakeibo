@@ -31,7 +31,7 @@
   <div class="form-row">
     <div class="col-md-7 mb-3">
       <label for="validationCustom00">ユーザID</label>
-      <input type="text" class="form-control" id="validationCustom00" name="userID" value="" required pattern="([0-9]{2,8})">
+      <input type="text" class="form-control" id="validationCustom00" name="userID" value="" required pattern="([0-9]{2,16})">
       <div class="valid-feedback">
         入力済み!
       </div>
@@ -39,7 +39,7 @@
           正しく入力してください
       </div>
       <small id="passwordHelpInline" class="text-muted col-5">
-          　長さは4-8文字で、全角半角整数で入力してください
+          　長さは2-16文字で、全角半角整数で入力してください
       </small>
     </div>
   </div>
