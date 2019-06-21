@@ -37,7 +37,7 @@
 <!-- 動画画面 -->
 <div class="embed-responsive embed-responsive-16by9">
 	<video autoplay class="h-100" loop>
-		<source src="logIn1.mp4">
+		<source src="hello.mp4">
 	</video>
 </div>
 
