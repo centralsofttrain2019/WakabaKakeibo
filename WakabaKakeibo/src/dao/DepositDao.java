@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import dto.DepositDto;
+import dto.UsersDto;
 
 public class DepositDao {
 
@@ -21,6 +23,12 @@ public class DepositDao {
 			+ "UserID = ? "
 			+ "ORDER BY "
 			+ "Date ";
+
+	private static final String INSERT_DEPOSIT = "insert into wakaba_schema.deposits(Date,Balance,UserID)\r\n"
+			+"values("
+			+"?,"
+			+"?,"
+			+"?);";
 
 	public DepositDao(Connection con) {
 		super();
@@ -48,6 +56,22 @@ public class DepositDao {
 		return list;
 
 	}
+	public void indertRecord(UsersDto uDto) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement(INSERT_DEPOSIT);
 
+		System.out.println("local:");
+		LocalDate local = LocalDate.now();
+		//Date date = new Date();
+
+		System.out.println("local:"+local);
+
+		stmt.setDate( 1, (java.sql.Date.valueOf(local)) );
+		stmt.setInt( 2, uDto.getPresentAmount());
+		stmt.setInt( 3, uDto.getUserID());
+		stmt.executeUpdate();
+
+
+	}
 
 }

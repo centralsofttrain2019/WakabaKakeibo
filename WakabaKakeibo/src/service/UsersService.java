@@ -13,6 +13,7 @@ import bean.MBListBean;
 import bean.MessageBean;
 import bean.MessageListBean;
 import dao.BlogsDao;
+import dao.DepositDao;
 import dao.MessageDao;
 import dao.UsersDao;
 import domain.BlogCategoryEnum;
@@ -123,7 +124,10 @@ public class UsersService {
 		{
 			UsersDao uDao = new UsersDao(con);
 			uDao.insertUser(uDto);
+			System.out.println("新規追加：DIPOSIT");
 
+			DepositDao dDao = new DepositDao(con);
+			dDao.indertRecord(uDto);
 		}
 		catch( SQLException | ClassNotFoundException e )
 		{
