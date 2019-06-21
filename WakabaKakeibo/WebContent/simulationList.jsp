@@ -114,7 +114,7 @@
 <h5><center>シミュレーショングラフ</center></h5>
 </div>
 
-<div id="chart_div" style="width: 1200px; height: 600px;"></div>
+<div id="chart_div" style="width: 1200px; height: 600px; margin: auto;"></div>
 
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
