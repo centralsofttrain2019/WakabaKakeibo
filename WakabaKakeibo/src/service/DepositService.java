@@ -101,4 +101,20 @@ public class DepositService {
 
 	}
 
+	public void insertDeposit(int amount, int userID) {
+		try ( Connection con= Dao.getConnection() ){
+
+			DepositDao dao = new DepositDao(con);
+
+			dao.insertDeposit(amount, userID);
+
+		}
+		catch( SQLException | ClassNotFoundException e )
+		{
+			e.printStackTrace();
+			throw new RuntimeException( e );
+		}
+
+	}
+
 }

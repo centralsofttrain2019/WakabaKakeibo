@@ -56,6 +56,7 @@ public class DepositDao {
 		return list;
 
 	}
+
 	public void indertRecord(UsersDto uDto) throws SQLException
 	{
 		PreparedStatement stmt = con.prepareStatement(INSERT_DEPOSIT);
@@ -69,6 +70,24 @@ public class DepositDao {
 		stmt.setDate( 1, (java.sql.Date.valueOf(local)) );
 		stmt.setInt( 2, uDto.getPresentAmount());
 		stmt.setInt( 3, uDto.getUserID());
+		stmt.executeUpdate();
+
+
+	}
+
+	public void insertDeposit(int amount, int userID) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement(INSERT_DEPOSIT);
+
+		System.out.println("local:");
+		LocalDate local = LocalDate.now();
+		//Date date = new Date();
+
+		System.out.println("local:"+local);
+
+		stmt.setDate( 1, (java.sql.Date.valueOf(local)) );
+		stmt.setInt( 2, amount);
+		stmt.setInt( 3, userID);
 		stmt.executeUpdate();
 
 
