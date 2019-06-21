@@ -38,7 +38,7 @@
 <!-- 動画画面 -->
 <div class="embed-responsive embed-responsive-16by9">
 	<video autoplay class="h-100" loop>
-		<source src="hello.mp4">
+		<source src="logIn1.mp4">
 	</video>
 </div>
 <% ChatBean se = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);%>
@@ -49,7 +49,7 @@
 			strArray.push("<%= b.getMessageContent() %>");
 			nameArray.push("<%= b.getSpeakerName() %>");
 		</script>
-<%-- 		<%  se.setLog(b.getMessageContent(), b.getSpeakerName()); %> --%>
+		<% se.setLog(b.getSpeakerName(), b.getMessageContent()); %>
 <% } %>
 
 <!-- チャット画面 -->
@@ -133,7 +133,7 @@
               商品名
             </div>
             <div class="col-sm-8">
-              <input type="text" name="product-name" class="form-control" placeholder="収入の場合は不要" aria-label="..." aria-describedby="button-addon2">
+              <input type="text" name="product-name" class="form-control" placeholder="..." aria-label="..." aria-describedby="button-addon2">
             </div>
           </div>
         </div>
@@ -276,9 +276,9 @@
       </div>
       <div class="modal-body">
 <!--       ここにチャットログを書く -->
-<%--         <% for(String str : se.getLog()) { %> --%>
-<%--         	<%= str  %> <br> --%>
-<%--         <% } %> --%>
+        <% for(String str : se.getLog()) { %>
+        	<%= str  %> <br>
+        <% } %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
@@ -290,6 +290,10 @@
 
 
 </div>
+<%-- <% ChatBean se = (ChatBean)request.getSession().getAttribute(ChatBean.USERINFO_SESSION_SAVE_NAME);%> --%>
+
+<script>console.log(strArray);
+console.log(nameArray);</script>
 
 <script>setInterval(communicate, 200, strArray, nameArray); </script>
 

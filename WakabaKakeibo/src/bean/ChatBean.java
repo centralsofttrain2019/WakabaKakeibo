@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dto.UsersDto;
@@ -10,7 +11,7 @@ public class ChatBean
 	private String password;
 	private MessageListBean messageListBean;
 	private UsersDto usersDto;
-	private List<String> log;
+	private List<String> log = new  ArrayList<>();
 
 	public final static String USERINFO_SESSION_SAVE_NAME= "UserInfo";
 
