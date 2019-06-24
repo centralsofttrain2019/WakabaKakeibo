@@ -59,7 +59,7 @@ public class MoneyNotesService
 			List<PurchasePatternsDto> ppList = ppDao.findByUserID(userID);
 
 
-			List<MoneyNotesDto> reconsList = createReconstructList(mnList,ppList,today);
+			List<MoneyNotesDto> reconsList = createReconstructList(mnList,ppList,today,mnDao);
 
 			bean.setValueFromDto(mnList, reconsList, today);
 		}
@@ -98,7 +98,7 @@ public class MoneyNotesService
 	}
 
 	//家計簿の復元予想した後のデータを作成する
-	private List<MoneyNotesDto> createReconstructList(List<MoneyNotesDto> mnList, List<PurchasePatternsDto> ppList, LocalDate today)
+	private List<MoneyNotesDto> createReconstructList(List<MoneyNotesDto> mnList, List<PurchasePatternsDto> ppList, LocalDate today, MoneyNotesDao dao) throws SQLException
 	{
 		//復元すべき商品リスト
 		List<MoneyNotesDto> reconsList = new ArrayList<MoneyNotesDto>();
@@ -141,6 +141,8 @@ public class MoneyNotesService
 
 			if(nextDay.isAfter(today.minusDays(7)) && nextDay.isBefore(today.plusDays(1)))
 			{
+				int categoryID = dao.getCategoryID(pp.getProductID());
+
 				MoneyNotesDto reconsData = new MoneyNotesDto(
 						0,  //インサート時に自動採番させる
 						pp.getUserID(),
@@ -148,7 +150,7 @@ public class MoneyNotesService
 						MoneyNoteTypeEnum.EXPENSE,
 						pp.getProductID(),
 						pp.getProductName(), //商品名は必要ない
-						pp.getProductID()/100 ,
+						categoryID ,
 						pp.getNumberPattern(),
 						pp.getAmountPattern(),
 						intervalDays,
@@ -178,7 +180,8 @@ public class MoneyNotesService
 				int productID = dao.findProductID(productName);
 				if(productID == -1)
 				{
-					return SqlOrderJudgement.FAILURE;
+					dao.insertProduct(productName);
+					productID = dao.findProductID(productName);
 				}
 				dto.setProductID(productID);
 				LocalDate lastPurchaseDate = dao.getLastPurchaseDate(userID, productID);
@@ -322,6 +325,7 @@ public class MoneyNotesService
 
 		int maxIntervalDate =0;
 		int count =0;
+		LocalDate prePurchaseDate = LocalDate.now();
 
 		//最初はパターン外として設定
 		PurchasePatternsDto dto = new PurchasePatternsDto();
@@ -337,6 +341,7 @@ public class MoneyNotesService
 				dto.setLastPurchaseDate(mnd.getPurchaseDate());
 				dto.setNumberPattern(mnd.getNumberOfPurchase());
 				dto.setAmountPattern(mnd.getAmount());
+				prePurchaseDate = mnd.getPurchaseDate();
 			}
 			else if(count==3) {
 				if(maxIntervalDate <=7)
@@ -352,8 +357,10 @@ public class MoneyNotesService
 					dto.setDatePatternType(DatePatternTypeEnum.THREEWEEKS);
 				}
 			}
-			maxIntervalDate = mnd.getPurchaseIntervalDays() > maxIntervalDate
-					? mnd.getPurchaseIntervalDays() : maxIntervalDate;
+			maxIntervalDate =  (int)ChronoUnit.DAYS.between(prePurchaseDate, mnd.getPurchaseDate())  > maxIntervalDate
+					? (int)ChronoUnit.DAYS.between(prePurchaseDate, mnd.getPurchaseDate()) : maxIntervalDate;
+
+			prePurchaseDate = mnd.getPurchaseDate();
 		}
 		return dto;
 	}

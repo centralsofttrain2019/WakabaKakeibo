@@ -357,6 +357,40 @@ public class MoneyNotesDao {
 		}
 	}
 
+	//商品IDから商品名を検索
+	private static final String GET_PRODUCT_NAME =
+			"SELECT ProductNAME FROM Products "
+			+ "WHERE ProductID = ?";
+	public String findProductName(int id) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement( GET_PRODUCT_NAME );
+		stmt.setInt(1,id);
+		System.out.println(stmt.toString());
+
+		ResultSet rs = stmt.executeQuery();
+
+		if(rs.next())
+		{
+			String name = rs.getString("ProductName");
+			return name;
+		}else
+		{
+			System.out.println("商品未登録");
+			return "";
+		}
+	}
+
+	//商品名から商品IDを検索
+	private static final String INSERT_PRODUCT =
+			"INSERT INTO Products "
+			+ "(ProductName) VALUES (?)";
+	public void insertProduct(String productName) throws SQLException
+	{
+		PreparedStatement stmt = con.prepareStatement( INSERT_PRODUCT );
+		stmt.setString(1,productName);
+
+		stmt.executeUpdate();
+	}
 
 }
 
