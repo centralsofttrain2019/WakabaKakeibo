@@ -56,7 +56,7 @@
 <form method = "POST" action = "ChatCommentServlet">
 <div class="fixed-bottom container">
 		<button type="button" class="btn btn-secondary col-sm-1 offset-sm-11" data-toggle="modal" data-target="#exampleModalLong">ログ</button>
-	<div class="" id="chat" style="height:20vh;background: rgba(92, 184, 92,0.5); font-weight:bold; color:white; -webkit-text-stroke: 1px black; font-size: 1.3rem">
+	<div class="" id="chat" style="height:20vh;background: rgba(92, 184, 92,0.5); font-weight:bold; color:white; -webkit-text-stroke: 1px black; font-size: 36px; padding: 15px">
 	</div>
 	<div id="select"></div>
 	 <!-- class="mt-5 h-10"></div> -->

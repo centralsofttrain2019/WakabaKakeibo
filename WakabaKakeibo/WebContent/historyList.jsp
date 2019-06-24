@@ -111,16 +111,16 @@
 </div>
 <div>
 	<div class="row ">
-		<div class="col-sm-2"><strong>収入合計</strong></div>
-		<div class="col-sm-2"><%= bean.getIncomeSum() %>円</div>
+		<div class="col-sm-2" style="font-size: 24px; color: blue;"><strong>収入合計</strong></div>
+		<div class="col-sm-2" style="font-size: 24px;"><%= bean.getIncomeSum() %>円</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-2"><strong>支出合計</strong></div>
-		<div class="col-sm-2"> <%= bean.getExpenseSum() %>円</div>
+		<div class="col-sm-2" style="font-size: 24px; color: red;"><strong>支出合計</strong></div>
+		<div class="col-sm-2" style="font-size: 24px; color: red"> <%= bean.getExpenseSum() %>円</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-2"><strong>差額</strong></div>
-		<div class="col-sm-2" id="total"><span id="total"><%= bean.getIncomeSum() - bean.getExpenseSum()%></span>円</div>
+		<div class="col-sm-2" style="font-size: 24px;"><strong>差額</strong></div>
+		<div class="col-sm-2" id="total" style="font-size: 24px;"><span id="total" style="font-size: 24px;"><%= bean.getIncomeSum() - bean.getExpenseSum()%></span><span style="font-size: 24px;">円</span></div>
 	</div>
 </div>
 
