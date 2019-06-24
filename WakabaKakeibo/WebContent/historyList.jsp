@@ -15,7 +15,7 @@
 <meta   charset="UTF-8">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
  <link rel="stylesheet" type="text/css" href="history.css">
-<title>円グラフと履歴</title>
+<title>収支履歴</title>
 
 
 <!-- javascript読み込み -->
