@@ -36,7 +36,11 @@
     ]);
 
     var options = {
-      title: '支出'
+      title: '支出',
+      titleTextStyle:{
+    	  color:'red',
+    	  fontSize: 24
+      }
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechartIncome'));
@@ -54,7 +58,11 @@
 	    ]);
 
 	    var options = {
-	      title: '収入'
+	      title: '収入',
+	      titleTextStyle:{
+	    	  color:'blue',
+	    	  fontSize: 24
+	      }
 	    };
 
 	    var chart = new google.visualization.PieChart(document.getElementById('piechartExpense'));
